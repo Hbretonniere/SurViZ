@@ -5,6 +5,8 @@ from astropy.io import fits
 import streamlit as st
 
 def plot_bands(info, telescopes, instruments, bands):
+    log = st.checkbox('logarithmic scale')
+
     plt.rcParams.update({"font.size": 22})
 
     fig, ax = plt.subplots(figsize=(15, 10))
@@ -24,16 +26,22 @@ def plot_bands(info, telescopes, instruments, bands):
                 plt.plot([max_-steep, max_+steep], [10-j-k/10, 0], color=info[telescope]['color'], ls=info[telescope]['instruments'][instrument]['ls'], alpha=0.7)
                 ax.hlines(10-j-k/10, min_+steep, max_-steep, color=info[telescope]['color'], ls=info[telescope]['instruments'][instrument]['ls'], alpha=0.7)
 
-                plt.text((max_+min_)/2, 10-j+((10-j)/30)-k/30, band, c=info[telescope]['color'], rotation=90, size=10)
+                plt.text((max_+min_)/2, 10-j-k/10+0.2, band, c=info[telescope]['color'], rotation=90, size=10)  #10-j+((10-j)/30)-k/30
     ax.set_ylim([-1, 10])
     min_ = ax.get_xticks()[0]
     max_ = ax.get_xticks()[-1]
     # ax.set_xticks(list(ax.get_xticklabels()))
     # ax.set_xticklabels(list(ax.get_xticklabels()), fontsize=15)
     ax.set_yticks([])
+    if log:
+        ax.set_xscale('log')
+    else:
+        ax.set_xscale('linear')
     ax.set_xlabel('Wavelength (nm)', fontsize=20)
-    plt.legend(bbox_to_anchor = (1, -0.1), ncol=len(instruments), fontsize=20)
-
+    if len(telescopes) < 3:
+        plt.legend(bbox_to_anchor = (0.5, -0.1), ncol=len(instruments), fontsize=20)
+    else:
+        plt.legend(bbox_to_anchor = (1.1, -0.1), ncol=len(instruments), fontsize=20)
     return fig
 
 def plot_mirrors(info, telescopes):

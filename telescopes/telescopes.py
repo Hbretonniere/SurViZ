@@ -2,7 +2,7 @@ from telescopes.surveys import Euclid_Wide, Euclid_Deep
 from telescopes.surveys import JWST_Jades, JWST_Cosmos_Web
 from telescopes.surveys import HST_Cosmos
 from telescopes.surveys import LSST
-from telescopes.instruments import Euclid_VIS, Euclid_NIR, JWST_NIRCAM, HST_ACS, Rubin_Wide_field_image
+from telescopes.instruments import Euclid_VIS, Euclid_NIR, JWST_NIRCAM, JWST_MIRI, HST_ACS, Rubin_Wide_field_image
 
 Euclid = {"marker":'o',
           "fov": [34, 34],
@@ -21,7 +21,8 @@ JWST = {"marker":'X',
           "mirror": 6.5,
           "surveys":{"Jades":JWST_Jades,
                      "Cosmos-Web":JWST_Cosmos_Web},
-          'instruments':{'NIRCAM':JWST_NIRCAM}}
+          'instruments':{'NIRCAM':JWST_NIRCAM,
+                        'MIRI':JWST_MIRI}}
 
 HST = {"marker":'x',
         "fov": [3.3, 3.3],

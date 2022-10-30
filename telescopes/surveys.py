@@ -24,7 +24,7 @@ JWST_Cosmos_Web = {'depth':28.2,
              }
 
 HST_Cosmos = {'depth':25.2,
-              'instruments':{"WCS":HST_ACS}
+              'instruments':{"ACS":HST_ACS}
              }
 
 LSST = {'depth':25.2,
