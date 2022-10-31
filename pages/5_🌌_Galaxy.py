@@ -19,22 +19,12 @@ for telescope in telescopes:
 
     # SELECTION OF THE SURVEY
     st.sidebar.markdown(f'# {telescope}')
-    telescope_survey = st.sidebar.multiselect(
-                "Select the Surveys",
-                list(info[telescope]['surveys'].keys()),
-                default=list(info[telescope]['surveys'].keys())[0]
-                )
-    selected_surveys[telescope] = telescope_survey
-    cols = st.sidebar.columns(len(selected_surveys[telescope]))
+    telescope_instrument =  st.sidebar.multiselect(
+            f" {telescope}",
+            list(info[telescope]['instruments'].keys()),
+            default=list(info[telescope]['instruments'].keys())[0])
+    selected_instruments[telescope] = telescope_instrument
+    nb_to_plot += len(telescope_instrument)
 
-    for i, survey in enumerate(selected_surveys[telescope]):
-        with cols[i]:
-            survey_instrument =  st.multiselect(
-                    f" {survey}",
-                    list(info[telescope]['surveys'][survey]['instruments'].keys()),
-                    default=list(info[telescope]['surveys'][survey]['instruments'].keys())[0])
-            selected_instruments[telescope][survey] = survey_instrument
-            nb_to_plot += len(survey_instrument)
-
-fig = plot_galaxies(info, telescopes, selected_surveys, selected_instruments, nb_to_plot)
+fig = plot_galaxies(info, telescopes, selected_instruments, nb_to_plot)
 st.pyplot(fig)

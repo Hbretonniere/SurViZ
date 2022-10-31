@@ -174,7 +174,7 @@ def plot_fields(telescopes, surveys, instruments, nb_to_plot, bands=None):
     return fig
 
 
-def plot_galaxies(info, telescopes, surveys, instruments, nb_to_plot, bands=None):
+def plot_galaxies(info, telescopes, instruments, nb_to_plot, bands=None):
     same_size = st.checkbox('Same size image')
     plt.rcParams.update({"font.size": 10})
 
@@ -187,30 +187,27 @@ def plot_galaxies(info, telescopes, surveys, instruments, nb_to_plot, bands=None
     images = {}
     for telescope in telescopes:
         images[telescope] = {}
-        for survey in surveys[telescope]:
-            images[telescope][survey] = {}
-            for instrument in instruments[telescope][survey]:
+        for instrument in instruments[telescope]:
                 try:
-                    images[telescope][survey][instrument] = np.load(f'./data/gal_{telescope}_{instrument}_{survey}.npy', allow_pickle=True)
-                    sizes.append(237 * 0.03/info[telescope]['surveys'][survey]['instruments'][instrument]['pix_scale'])
+                    images[telescope][instrument] = np.load(f'./data/gal_{telescope}_{instrument}.npy', allow_pickle=True)
+                    sizes.append(237 * 0.03/info[telescope]['instruments'][instrument]['pix_scale'])
                 except OSError:
-                    st.write(f'Sorry, {telescope} {survey} {instrument} is not implemented yet!')
-                    images[telescope][survey][instrument] = np.diag(np.ones(128))
-                    images[telescope][survey][instrument] += np.fliplr(images[telescope][survey][instrument])
+                    st.write(f'Sorry, {telescope} {instrument} is not implemented yet!')
+                    images[telescope][instrument] = np.diag(np.ones(128))
+                    images[telescope][instrument] += np.fliplr(images[telescope][instrument])
                     # st.write(np.max(images[telescope][survey][instrument]))
                 
     max_size = np.max(sizes)
     for telescope in telescopes:
-        for survey in surveys[telescope]:
-            for instrument in instruments[telescope][survey]:
-                img = images[telescope][survey][instrument]
+            for instrument in instruments[telescope]:
+                img = images[telescope][instrument]
                 # st.write(f'./data/gal_{telescope}_{instrument}_{survey}.npy')
                 if same_size:
                     padding = int((max_size - np.shape(img)[0])/2)
                     img = np.pad(img, ((padding, padding), (padding, padding)), constant_values=0)
 
                 ax[k].imshow(img, cmap='bone')
-                ax[k].set_title(f'{telescope}, {survey}, {instrument}', fontsize=10)
+                ax[k].set_title(f'{telescope}, {instrument}', fontsize=10)
                 k += 1
     if nb_to_plot % 2 != 0:
         ax[-1].set_visible(False)
