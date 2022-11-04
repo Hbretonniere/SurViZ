@@ -42,8 +42,8 @@ Rubin = {"marker":"D",
         }
 
 SDSS = {"marker":".",
-        "fov": [210, 210],
-        "mirror": 8.4,
+        "fov": [150, 150],
+        "mirror": 2.5,
         "color": "purple",
         "surveys":{"SDSS-I":SDSS_I},
         "instruments":{"Imaging_camera":SDSS_imaging_camera},

@@ -7,8 +7,8 @@ from utils.plots import plot_fields
 st.markdown('# 🎨 Filters visualisation \n You can see here the filters of the different instruments. Note that for now, the shape and sensitivity are not correct: the y-axis is arbitrary, and the differences are just here for a better visualisation ')
 telescopes = st.sidebar.multiselect(
         "Select the telescopes",
-        ["Euclid", "JWST", "HST", "Rubin"],
-        default=["Euclid", 'JWST']#, "HST"]
+        list(info.keys()),
+        default=["Euclid", 'JWST', 'SDSS']#, "HST"]
     )
 
 nb_to_plot = 0

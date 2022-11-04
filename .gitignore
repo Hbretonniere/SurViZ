@@ -1,2 +1,4 @@
 telescopes/__pycache__/*
 *.pyc
+*.key
+*.DS_Sore*

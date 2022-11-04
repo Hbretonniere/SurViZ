@@ -120,8 +120,13 @@ def plot_fovs(info, telescope):
 
     moon_axes.set_xticks([])
     moon_axes.set_yticks([])
-    ax.set_xticks([])
-    ax.set_yticks([])
+    # ax.set_xticks([])
+    # ax.set_yticks([])
+    # xrange = ax.get_xlim()
+    # yrange = ax.get_ylim()
+    # print(xrange, yrange)
+    ax.errorbar([-31/2, 31/2], [0, 0], yerr=[2, 2], c='darkred')
+    ax.text(-2.2, 1, "31'", color='darkred')
 
     plt.title("Field Of View")
 
@@ -156,8 +161,18 @@ def plot_fields(telescopes, surveys, instruments, nb_to_plot, bands=None):
                     images[telescope][survey] += np.fliplr(images[telescope][survey])
 
                     st.write(f'Sorry, {telescope} {survey} {instrument} is not implemented yet!')
+                    # st.write(f'Sorry, ./data/fields/{telescope}_{instrument}_{survey}.fits is not implemented yet!')
 
     min_v, max_v = np.min(mins), np.max(maxs)
+    # print(mins, min_v)
+    mins.remove(min_v)
+    maxs.remove(max_v)
+    # print(mins)
+    min_2, max_2 = np.min(mins), np.max(maxs)
+    contrast2 = st.checkbox('Other Contrast')
+    if contrast2:
+        min_v, max_v = min_2, max_2
+    # (min_v, max_v) = st.slider('contrast', min_v - min_v/2, max_v+ max_v/2, (min_v, max_v), step=min_v/10)
     for telescope in telescopes:
         for survey in surveys[telescope]:
             for instrument in instruments[telescope][survey]:

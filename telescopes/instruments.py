@@ -6,7 +6,7 @@ Euclid_VIS = {
     "major_band":"VIS",
     "bands":{
         "VIS": {
-            "zp":25.2, "min_max":[550, 900], 'fwhm':0.17}
+            "zp":25.9, "min_max":[550, 900], 'fwhm':0.17}
             }
              }
 
@@ -18,11 +18,11 @@ Euclid_NIR = {
     "major_band":"J",
     "bands":{
         "Y": {
-            "zp":24, "min_max":[920, 1046], 'fwhm':0.2},
+            "zp":25.04, "min_max":[920, 1046], 'fwhm':0.2}, # http://arxiv.org/abs/2203.01650
         "J": {
-            "zp":24, "min_max":[1146, 1372], 'fwhm':0.2},
+            "zp":25.26, "min_max":[1146, 1372], 'fwhm':0.2},
         "H": {
-            "zp":24, "min_max":[1372, 2000], 'fwhm':0.2}
+            "zp":25.21, "min_max":[1372, 2000], 'fwhm':0.2}
             }
             }
 
@@ -164,13 +164,13 @@ Rubin_Wide_field_imager = {
 
 SDSS_imaging_camera = {
     'pix_scale':0.4, #verified
-    "noise_level":0.001,
+    "noise_level":0.025,  #std estimated on a SDSS dowload image filter r (dr 12)
     'ls':'-',
     'depth':24.5,
     'fwhm':1.2, #median verified
     'bands':{"u '":{"zp":23.39, "min_max":[354-57/2, 354+57/2], 'fwhm':1.35},  # fwhm aprrox from https://arxiv.org/abs/1111.6619
             "g '":{"zp":24.51, "min_max":[477-137/2, 477+137/2], 'fwhm':1.3}, #filters shapes from https://www.astro.princeton.edu/PBOOK/camera/camera.htm
-            "r '":{"zp":24.49, "min_max":[623-137/2, 623+137/2], 'fwhm':0.15},
+            "r '":{"zp":24.8, "min_max":[623-137/2, 623+137/2], 'fwhm':1.15}, # zero points https://www.sdss.org/dr12/algorithms/magnitudes/
             "i '":{"zp":24.37, "min_max":[763-153/2, 763+153/2], 'fwhm':1.08},
             "z '":{"zp":24.21, "min_max":[913-95/3, 913+95/2], 'fwhm':1.15},
             }
