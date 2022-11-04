@@ -5,34 +5,31 @@ from telescopes.instruments import Rubin_Wide_field_imager
 from telescopes.instruments import SDSS_imaging_camera
 
 
-Euclid_Wide = {'depth':25.2,
-               'zp':25.91,
+Euclid_Wide = {
                'instruments':{"VIS":Euclid_VIS,
                               "NIR":Euclid_NIR}}
 
-Euclid_Deep = {'depth':27.2,
-                'zp':21.58,
+Euclid_Deep = {
                'instruments':{"VIS":Euclid_VIS,
                               "NIR":Euclid_NIR}}
 
-JWST_Jades = {'depth':28.2, #VERIFY
-              'zp':29.8,
+JWST_Jades = {
               'instruments':{"NIRCAM":JWST_NIRCAM}
              }
 
-JWST_Cosmos_Web = {'depth':28.2, #VERIFY
+JWST_Cosmos_Web = {
               'instruments':{"NIRCAM":JWST_NIRCAM,
                             "MIRI":JWST_MIRI}
              }
 
-HST_Cosmos = {'depth':None,
+HST_Cosmos = {
               'instruments':{"ACS":HST_ACS}
              }
 
-LSST = {'depth':None,
+LSST = {
               'instruments':{"Wide-field-imager":Rubin_Wide_field_imager}
              }
 
-SDSS_I = {'depth':None,
+SDSS_I = {
               'instruments':{"Imaging_camera":SDSS_imaging_camera}
              }
