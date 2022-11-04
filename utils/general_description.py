@@ -7,30 +7,30 @@ description = {'Euclid':{'general_description':
 },
 'JWST':{'general_description':
  "JWST is a space telescope developed by the NASA, with ESA and CSA collaboration. \n The satellite is at the L2 lagrangian point. \n JWST's main objective are about galaxy evolution, namely constraining the models of galaxy formation in the early ages of the universe, looking in the infrared.",
- 'Instruments':{'NIRCAM':"NearInfrared CAMera (NIRCAM): NIRCAM is JWST's main imager, looking at the near infrared lights.",
+ 'Instruments (Non exhaustive list)':{'NIRCAM':"NearInfrared CAMera (NIRCAM): NIRCAM is JWST's main imager, looking at the near infrared lights.",
                 'NIRSpec':"Near Infrared Spectrometer (NIRSPEC): NIRSPEC is JWST's spectrometer, to estimate galaxy redshifts.",
                 'MIRI':'The Mid-Infrared Instrument (MIRI):'},
-  'Surveys':{'Cosmos-Web':'Cosmos-Web: ',
-             'Jades': 'Jades'}
+  'Surveys (Non exhaustive list)':{'Cosmos-Web':'Cosmos-Web: deep field in the famous cosmos field observed for example by the HST',
+             'Jades': 'Jades: deep field.'}
 },
 'HST':{'general_description':
  "The Hubble Space Telescope (HST) is space telescope developed by the NASA, with ESA collaboration. \n The satellite has a low earth geocentric orbit.",
- 'Instruments':{'ACS':"Advance Camera for Survey (ACS): ACS is HST's main imager",
+ 'Instruments (Non exhaustive list)':{'ACS':"Advance Camera for Survey (ACS): ACS is HST's main imager",
                 'WFC3':"Wide Field Camera 3 (WFC3):"},
-  'Surveys':{'Cosmos':'Cosmos: ',
+  'Surveys (Non exhaustive list)':{'Cosmos':'Cosmos: Largest continuous field, ~1.5 square degrees.',
              'CANDELS': 'CANDELS'}
 },
 'Rubin':{'general_description':
  "The Rubin Observatory (Rubin/LSST) is a ground-based mission developed by the NASA, with ESA collaboration. \n The telescope is located in the Coquimbo Region, northern Chile.",
- 'Instruments':{'Wide field instrument':"Wide field instrument",
+ 'Instruments (Non exhaustive list)':{'Wide field instrument':"Wide field instrument",
                 },
-  'Surveys':{'LSST':'Legacy Survey for Space and Time (LSST): ',
+  'Surveys (Non exhaustive list)':{'LSST':'Legacy Survey for Space and Time (LSST): ',
             }
 },
 'SDSS':{'general_description':
  "The Sloan Digital Sky Surveys (SDSS) is a ground-based survey, within an international collaboration, which conducted the fist large galaxy surveys both \n in imaging and spectroscopy from the late 90. It is made of different phases, from I to V. \n The facilities are located in the Apache POint Observatory in New Mexico",
- 'Instruments':{'Imaging Camera':"Imaging Camera",
+ 'Instruments (Non exhaustive list)':{'Imaging Camera':"Imaging Camera",
                 },
-  'Surveys':{'SDSS-I':'First phase from 2000 to 2005.',
+  'Surveys (Non exhaustive list)':{'SDSS-I':'First phase from 2000 to 2005.',
             }
 }}
