@@ -2,7 +2,8 @@ from telescopes.surveys import Euclid_Wide, Euclid_Deep
 from telescopes.surveys import JWST_Jades, JWST_Cosmos_Web
 from telescopes.surveys import HST_Cosmos
 from telescopes.surveys import LSST
-from telescopes.instruments import Euclid_VIS, Euclid_NIR, JWST_NIRCAM, JWST_MIRI, HST_ACS, Rubin_Wide_field_image
+from telescopes.surveys import SDSS_I
+from telescopes.instruments import Euclid_VIS, Euclid_NIR, JWST_NIRCAM, JWST_MIRI, HST_ACS, Rubin_Wide_field_imager, SDSS_imaging_camera
 
 Euclid = {"marker":'o',
           "fov": [34, 34],
@@ -37,7 +38,15 @@ Rubin = {"marker":"D",
         "color": "green",
         "major_band":"z",
         "surveys":{"LSST":LSST},
-        "instruments":{"Rubin_Wide_field_image":Rubin_Wide_field_image},
+        "instruments":{"Wide_field_imager":Rubin_Wide_field_imager},
+        }
+
+SDSS = {"marker":".",
+        "fov": [210, 210],
+        "mirror": 8.4,
+        "color": "purple",
+        "surveys":{"SDSS-I":SDSS_I},
+        "instruments":{"Imaging_camera":SDSS_imaging_camera},
         }
         # "HST": {"marker":'x',
 #                 "fov": [3.3, 3.3],

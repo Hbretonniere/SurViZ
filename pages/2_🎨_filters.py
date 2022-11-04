@@ -6,8 +6,8 @@ from utils.plots import plot_bands
 
 st.markdown('# 🎨 Filters visualisation \n You can see here the filters of the different instruments. Note that for now, the shape and sensitivity are not correct: the y-axis is arbitrary, and the differences are just here for a better visualisation ')
 telescopes = st.sidebar.multiselect(
-        "Select telescopes to display",
-        ["Euclid", "JWST", "HST", "Rubin"],
+        "Select the telescopes",
+        ["Euclid", "JWST", "HST", "Rubin", "SDSS"],
         default=["Euclid"]#, "HST"]
     )
 
@@ -26,7 +26,7 @@ for telescope in telescopes:
 
     for instrument in selected_instruments[telescope]:
         instrument_bands =  st.sidebar.multiselect(
-                f" Select Bands to display ({instrument})",
+                f" Select the filters ({instrument})",
                 list(info[telescope]['instruments'][instrument]['bands'].keys()),
                 default=list(info[telescope]['instruments'][instrument]['bands'].keys()))
         selected_bands[telescope][instrument] = instrument_bands

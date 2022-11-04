@@ -13,8 +13,6 @@ telescopes = st.sidebar.multiselect(
         default=["Euclid"]#, "HST"]
     )
 
-st.markdown('## Here are some general information about the telescope you want to explore')
-
 for telescope in telescopes:
     fig = plt.figure()#figsize=(15, 15))
     fig.patch.set_facecolor('0E1116')

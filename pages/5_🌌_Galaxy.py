@@ -7,8 +7,8 @@ from utils.plots import plot_galaxies
 st.markdown('# 🌌 Galaxy visualisation \n')
 telescopes = st.sidebar.multiselect(
         "Select telescopes to display",
-        ["Euclid", "JWST", "HST", "Rubin"],
-        default=["Euclid"]#, "HST"]
+        list(info.keys()),
+        default=["Euclid", 'JWST', 'SDSS']#, "HST"]
     )
 
 nb_to_plot = 0
@@ -18,7 +18,7 @@ for telescope in telescopes:
     selected_instruments[telescope] = {}
 
     # SELECTION OF THE SURVEY
-    st.sidebar.markdown(f'# {telescope}')
+    # st.sidebar.markdown(f'# {telescope}')
     telescope_instrument =  st.sidebar.multiselect(
             f" {telescope}",
             list(info[telescope]['instruments'].keys()),

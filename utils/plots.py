@@ -30,18 +30,14 @@ def plot_bands(info, telescopes, instruments, bands):
     ax.set_ylim([-1, 10])
     min_ = ax.get_xticks()[0]
     max_ = ax.get_xticks()[-1]
-    # ax.set_xticks(list(ax.get_xticklabels()))
-    # ax.set_xticklabels(list(ax.get_xticklabels()), fontsize=15)
+
     ax.set_yticks([])
     if log:
         ax.set_xscale('log')
     else:
         ax.set_xscale('linear')
     ax.set_xlabel('Wavelength (nm)', fontsize=20)
-    if len(telescopes) < 3:
-        plt.legend(bbox_to_anchor = (0.5, -0.1), ncol=len(instruments), fontsize=20)
-    else:
-        plt.legend(bbox_to_anchor = (1.1, -0.1), ncol=len(instruments), fontsize=20)
+    plt.legend(bbox_to_anchor = (1, -0.1), ncol=len(instruments)//2, fontsize=20)
     return fig
 
 def plot_mirrors(info, telescopes):
@@ -150,7 +146,7 @@ def plot_fields(telescopes, surveys, instruments, nb_to_plot, bands=None):
             images[telescope][survey] = {}
             for instrument in instruments[telescope][survey]:
                 try:
-                    images[telescope][survey] = fits.open(f'./data/{telescope}_{instrument}_{survey}.fits')[0].data
+                    images[telescope][survey] = fits.open(f'./data/fields/{telescope}_{instrument}_{survey}.fits')[0].data
                     interval = ZScaleInterval()
                     a = interval.get_limits(images[telescope][survey])
                     mins.append(a[0])
@@ -189,10 +185,12 @@ def plot_galaxies(info, telescopes, instruments, nb_to_plot, bands=None):
         images[telescope] = {}
         for instrument in instruments[telescope]:
                 try:
-                    images[telescope][instrument] = np.load(f'./data/gal_{telescope}_{instrument}.npy', allow_pickle=True)
+                    images[telescope][instrument] = np.load(f'./data/individual_galaxies/gal_{telescope}_{instrument}.npy', allow_pickle=True)
                     sizes.append(237 * 0.03/info[telescope]['instruments'][instrument]['pix_scale'])
                 except OSError:
                     st.write(f'Sorry, {telescope} {instrument} is not implemented yet!')
+                    st.write(f'Sorry, ./data/individual_galaxies/gal_{telescope}_{instrument}.npy is not implemented yet!')
+
                     images[telescope][instrument] = np.diag(np.ones(128))
                     images[telescope][instrument] += np.fliplr(images[telescope][instrument])
                     # st.write(np.max(images[telescope][survey][instrument]))

@@ -6,9 +6,9 @@ from utils.plots import plot_fields
 
 st.markdown('# 🎨 Filters visualisation \n You can see here the filters of the different instruments. Note that for now, the shape and sensitivity are not correct: the y-axis is arbitrary, and the differences are just here for a better visualisation ')
 telescopes = st.sidebar.multiselect(
-        "Select telescopes to display",
+        "Select the telescopes",
         ["Euclid", "JWST", "HST", "Rubin"],
-        default=["Euclid"]#, "HST"]
+        default=["Euclid", 'JWST']#, "HST"]
     )
 
 nb_to_plot = 0
@@ -25,8 +25,9 @@ for telescope in telescopes:
                 default=list(info[telescope]['surveys'].keys())[0]
                 )
     selected_surveys[telescope] = telescope_survey
-    cols = st.sidebar.columns(len(selected_surveys[telescope]))
+    st.sidebar.markdown('Select the instruments for each survey')
 
+    cols = st.sidebar.columns(len(selected_surveys[telescope]))
     for i, survey in enumerate(selected_surveys[telescope]):
         with cols[i]:
             survey_instrument =  st.multiselect(

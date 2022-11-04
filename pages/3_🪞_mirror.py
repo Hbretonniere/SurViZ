@@ -8,7 +8,7 @@ from utils.plots import plot_mirrors, plot_fovs
 
 st.markdown('# 🪞 Mirrors and Filed of View visualisation \n Is shown the primary mirror size. Note that the particular shapes are not respected. \n ### Scroll for the FoV plot')
 telescopes_mirrors = st.sidebar.multiselect(
-        " Select telescopes for display",
+        " Select telescopes",
         ["Euclid", "JWST", "HST", "Rubin"],
         default=["Euclid"]#, "HST"]
     )

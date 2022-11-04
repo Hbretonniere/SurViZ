@@ -13,6 +13,8 @@ st.markdown(
     """
     ### Select on the left panel what you want to explore:
 
+    - With 🔭 General info, you will have a short description of the telescopes, their scientific goals, instruments and surveys.
+    
     - With 🎨 Bands, you will explore the bands of each telescopes' instruments.
 
     - With 🪞 Mirror , you will explore the size of the telescopes' primary mirror, and there field of view.
