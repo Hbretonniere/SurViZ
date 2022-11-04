@@ -18,9 +18,10 @@ for telescope in telescopes:
     selected_instruments[telescope] = {}
 
     # SELECTION OF THE SURVEY
-    # st.sidebar.markdown(f'# {telescope}')
+    st.sidebar.markdown(f'## {telescope}')
+
     telescope_instrument =  st.sidebar.multiselect(
-            f" {telescope}",
+            f"Select instruments",
             list(info[telescope]['instruments'].keys()),
             default=list(info[telescope]['instruments'].keys())[0])
     selected_instruments[telescope] = telescope_instrument

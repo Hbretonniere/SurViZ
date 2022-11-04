@@ -25,13 +25,14 @@ for telescope in telescopes:
                 default=list(info[telescope]['surveys'].keys())[0]
                 )
     selected_surveys[telescope] = telescope_survey
-    st.sidebar.markdown('Select the instruments for each survey')
+    # st.sidebar.markdown('Select the instruments for each survey')
 
     cols = st.sidebar.columns(len(selected_surveys[telescope]))
     for i, survey in enumerate(selected_surveys[telescope]):
         with cols[i]:
+            st.markdown(f'{survey}')
             survey_instrument =  st.multiselect(
-                    f" {survey}",
+                    f" Select the instruments {i*' '} ",
                     list(info[telescope]['surveys'][survey]['instruments'].keys()),
                     default=list(info[telescope]['surveys'][survey]['instruments'].keys())[0])
             selected_instruments[telescope][survey] = survey_instrument
