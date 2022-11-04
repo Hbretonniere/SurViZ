@@ -8,7 +8,7 @@ st.markdown('# 🎨 Filters visualisation \n You can see here the filters of the
 telescopes = st.sidebar.multiselect(
         "Select the telescopes",
         list(info.keys()),
-        default=["Euclid", 'JWST', 'SDSS']#, "HST"]
+        default=["Euclid", 'JWST']#, "HST"]
     )
 
 nb_to_plot = 0

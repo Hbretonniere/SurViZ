@@ -20,8 +20,9 @@ JWST = {"marker":'X',
           "fov": [2.2, 2.2],
           "color": "red",
           "mirror": 6.5,
-          "surveys":{"Jades":JWST_Jades,
-                     "Cosmos-Web":JWST_Cosmos_Web},
+          "surveys":{"Cosmos-Web":JWST_Cosmos_Web,
+                     "Jades":JWST_Jades,
+                     },
           'instruments':{'NIRCAM':JWST_NIRCAM,
                         'MIRI':JWST_MIRI}}
 
