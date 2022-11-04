@@ -20,9 +20,13 @@ for telescope in telescopes:
     plt.axis('off')
     st.pyplot(fig)
     st.markdown(description[telescope]['general_description'])
-    st.markdown('### Instruments:')
+    if telescope != 'Euclid':
+        complete="Non exhaustive list"
+    else:
+        complete=""
+    st.markdown('### Instruments ('+complete+'):')
     for instrument in list(description[telescope]['Instruments'].keys()):
         st.markdown("- " + description[telescope]['Instruments'][instrument])
-    st.markdown('### Surveys:')
+    st.markdown('### Surveys ('+complete+'):')
     for survey in list(description[telescope]['Surveys'].keys()):
         st.markdown("- " + description[telescope]['Surveys'][survey])
