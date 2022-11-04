@@ -37,7 +37,7 @@ def plot_bands(info, telescopes, instruments, bands):
     else:
         ax.set_xscale('linear')
     ax.set_xlabel('Wavelength (nm)', fontsize=20)
-    plt.legend(bbox_to_anchor = (1, -0.1), ncol=len(instruments)//2, fontsize=20)
+    plt.legend(bbox_to_anchor = (1, -0.1), ncol=max(1, len(instruments)//2), fontsize=20)
     return fig
 
 def plot_mirrors(info, telescopes):
