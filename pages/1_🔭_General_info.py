@@ -2,14 +2,14 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import sys
-
+from telescopes.main_info import info
 # sys.path.append('../utils')
 from utils.general_description import description
 
 
 telescopes = st.sidebar.multiselect(
         "Select telescopes to display",
-        ["Euclid", "JWST", "HST", "Rubin"],
+        list(info.keys()),
         default=["Euclid"]#, "HST"]
     )
 

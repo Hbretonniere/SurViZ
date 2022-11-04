@@ -26,6 +26,6 @@ st.markdown(
 )
 
 fig = plt.figure()#figsize=(15, 15))
-plt.imshow(mpimg.imread("data/logos/logos.jpg"))#), aspect="auto")
+plt.imshow(mpimg.imread("data/logos/logos.jpeg"))#), aspect="auto")
 plt.axis('off')
 st.pyplot(fig)
