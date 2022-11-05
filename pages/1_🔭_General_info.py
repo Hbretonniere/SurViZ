@@ -21,12 +21,12 @@ for telescope in telescopes:
     st.pyplot(fig)
     st.markdown(description[telescope]['general_description'])
     if telescope != 'Euclid':
-        complete="Non exhaustive list"
+        complete="(Non exhaustive list)"
     else:
         complete=""
-    st.markdown('### Instruments ('+complete+'):')
+    st.markdown('### Instruments '+complete+':')
     for instrument in list(description[telescope]['Instruments'].keys()):
         st.markdown("- " + description[telescope]['Instruments'][instrument])
-    st.markdown('### Surveys ('+complete+'):')
+    st.markdown('### Surveys '+complete+':')
     for survey in list(description[telescope]['Surveys'].keys()):
         st.markdown("- " + description[telescope]['Surveys'][survey])
