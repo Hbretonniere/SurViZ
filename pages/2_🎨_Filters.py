@@ -13,6 +13,11 @@ telescopes = st.sidebar.multiselect(
 
 selected_bands = {}
 selected_instruments = {}
+col1, col2 = st.columns(2)
+with col1:
+    fill = st.checkbox('Filled style')
+with col2:
+    log = st.checkbox('Logarithmic scale')
 
 for telescope in telescopes:
     selected_bands[telescope] = {}
@@ -31,5 +36,5 @@ for telescope in telescopes:
                 default=list(info[telescope]['instruments'][instrument]['bands'].keys()))
         selected_bands[telescope][instrument] = instrument_bands
 
-fig = plot_bands(info, telescopes, selected_instruments, selected_bands)
+fig = plot_bands(info, telescopes, selected_instruments, selected_bands, fill, log)
 st.pyplot(fig)
