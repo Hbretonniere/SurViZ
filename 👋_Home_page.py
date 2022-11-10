@@ -22,6 +22,8 @@ st.markdown(
     - With ✨ Fields Of galaxies, you will explore the surveys and instruments' depths in a simulated galaxy field.
 
     - With 🌌 Galaxy, you will explore the the surveys and instruments'image quality (resolution and PSF) in a TNG galaxy.
+
+    - With 🗺️ Surveys, you will visualise the sizes and positions of the various surveys.
     \n  """
 )
 
