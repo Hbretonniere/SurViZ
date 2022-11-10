@@ -173,8 +173,9 @@ def plot_fields(telescopes, surveys, instruments, nb_to_plot, bands=None):
 
     min_v, max_v = np.min(mins), np.max(maxs)
     # print(mins, min_v)
-    mins.remove(min_v)
-    maxs.remove(max_v)
+    if len(mins) >= 2:
+        mins.remove(min_v)
+        maxs.remove(max_v)
     # print(mins)
     min_2, max_2 = np.min(mins), np.max(maxs)
     contrast2 = st.checkbox('Other Contrast')
