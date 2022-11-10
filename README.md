@@ -1,11 +1,14 @@
 # Welcome to SurViZ, a platform to compare qualitatively various astrophysical missions! 
 
-The platform is hosted with streamlit, and you can visit it here: [https://github.com/Hbretonniere/SurViZ](https://github.com/Hbretonniere/SurViZ)
+The platform is hosted with streamlit, and you can visit it here: [https://hbretonniere-surviz--home-page-9r8djm.streamlit.app/](https://hbretonniere-surviz--home-page-9r8djm.streamlit.app/)
 
 The project is under construction, feel free to make comments, remarks, or help us adding new missions or features! 
 
+<br/><br/>
 
 For now, you can use SuViZ for 6 tasks, each one available by clicking in the top left buttons of the main page:
+
+<br/><br/>
 
 - General infos about the missions (need to be more complete...)
 - Explore the filters of the telescopes and instruments
