@@ -10,7 +10,7 @@ from utils.general_description import description
 telescopes = st.sidebar.multiselect(
         "Select telescopes to display",
         list(info.keys()),
-        default=["Euclid"]#, "HST"]
+        default=list(info.keys())#, "HST"]
     )
 
 for telescope in telescopes:
