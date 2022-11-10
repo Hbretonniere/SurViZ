@@ -4,6 +4,11 @@ import matplotlib.image as mpimg
 from astropy.io import fits
 import streamlit as st
 
+import sys
+sys.path.append('../utils/')
+from utils.plot_surveys import *
+
+
 def plot_bands(info, telescopes, instruments, bands):
     log = st.checkbox('logarithmic scale')
 
@@ -224,4 +229,41 @@ def plot_galaxies(info, telescopes, instruments, nb_to_plot, bands=None):
                 k += 1
     if nb_to_plot % 2 != 0:
         ax[-1].set_visible(False)
+    return fig
+
+# import proplot
+
+def plot_surveys(telescopes, selected_surveys):
+
+    # Ecliptic plane
+    lon_ecl = np.linspace(0, 360, 100)
+    lat_ecl = np.zeros(100)
+
+    fig= plt.figure(figsize=(14,7))
+    ax = plt.subplot(111, projection='aitoff')
+    # plt.xticks(ticks=np.radians([-150, -120, -90, -60, -30, 0, \
+    #                          30, 60, 90, 120, 150]),
+    #        labels=['150°', '120°', '90°', '60°', '30°', '0°', \
+    #                '330°', '300°', '270°', '240°', '210°'])
+
+    plt.grid()
+    nb_to_plot = 0
+    for telescope in telescopes:
+        for survey in selected_surveys[telescope]:
+            print(f'{telescope}-{survey}')
+            if f'{telescope}-{survey}' == 'Euclid-Deep-Survey':
+                ax = plot_Euclid_Deep_Survey(fig, ax)
+            elif f'{telescope}-{survey}' == 'Euclid-Wide-Survey':
+                ax = plot_Euclid_Wide_Survey(fig, ax)
+            elif f'{telescope}-{survey}' == 'HST-HST-Cosmos':
+                ax = plot_HST_cosmos_Survey(fig, ax)
+            elif f'{telescope}-{survey}' == 'Rubin-LSST':
+                ax = plot_Rubin_LSST_Survey(fig, ax)
+
+            nb_to_plot += 1
+    if 'HST' in telescopes:
+        zoom = st.checkbox('Zoom in Cosmos')
+        if zoom:
+            ax.set_xlim(rad(270), rad(240))
+    plt.legend()
     return fig
