@@ -261,9 +261,9 @@ def plot_surveys(telescopes, selected_surveys):
                 ax = plot_Rubin_LSST_Survey(fig, ax)
 
             nb_to_plot += 1
-    if 'HST' in telescopes:
-        zoom = st.checkbox('Zoom in Cosmos')
-        if zoom:
-            ax.set_xlim(rad(270), rad(240))
+    # if 'HST' in telescopes:
+    #     zoom = st.checkbox('Zoom in Cosmos')
+    #     if zoom:
+            # ax.set_xlim(rad(270), rad(240))
     plt.legend()
     return fig
