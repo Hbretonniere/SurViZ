@@ -169,7 +169,7 @@ def plot_fields(telescopes, surveys, instruments, nb_to_plot, bands=None):
                     images[telescope][survey] += np.fliplr(images[telescope][survey])
 
                     st.write(f'Sorry, {telescope} {survey} {instrument} is not implemented yet!')
-                    # st.write(f'Sorry, ./data/fields/{telescope}_{instrument}_{survey}.fits is not implemented yet!')
+                    st.write(f'Sorry, ./data/fields/{telescope}_{instrument}_{survey}.fits is not implemented yet!')
 
     min_v, max_v = np.min(mins), np.max(maxs)
     # print(mins, min_v)
