@@ -14,6 +14,14 @@ For now, you can use SuViZ for 6 tasks, each one available by clicking in the to
 - See the resolution and image quality on a TNG galaxy
 - Visualise the area and localization of the various surveys.
 
+<br/><br/>
+
+![Image quality](./data/galaxies.png)
+
+![Image quality](./data/fields.png)
+
+![Image quality](./data/filters.gif)
+
 ## To do:
 - add a readme or ipynb on how the fields and galaxy are simulated (and verify it's ok...)
 - Add LSST galaxy field (need to find sigma noise)
