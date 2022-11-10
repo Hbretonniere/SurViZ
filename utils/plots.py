@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.image as mpimg
 from astropy.io import fits
 import streamlit as st
+import seaborn as sns
 
 import sys
 sys.path.append('../utils/')
@@ -10,6 +11,7 @@ from utils.plot_surveys import *
 
 
 def plot_bands(info, telescopes, instruments, bands):
+    sns.reset_orig()
     log = st.checkbox('logarithmic scale')
 
     plt.rcParams.update({"font.size": 22})
@@ -46,7 +48,7 @@ def plot_bands(info, telescopes, instruments, bands):
     return fig
 
 def plot_mirrors(info, telescopes):
-
+    sns.reset_orig()
     fig, ax = plt.subplots(figsize=(10, 10))
     ax.set_aspect("equal")
     ds = []
@@ -87,7 +89,7 @@ def plot_mirrors(info, telescopes):
 
 # @st.cache
 def plot_fovs(info, telescope):
-    
+    sns.reset_orig()
     fig, ax = plt.subplots(figsize=(8, 8))
     ax.set_aspect("equal")
 
@@ -141,6 +143,7 @@ from astropy.visualization import ZScaleInterval
 
 def plot_fields(telescopes, surveys, instruments, nb_to_plot, bands=None):
     plt.rcParams.update({"font.size": 10})
+    sns.reset_orig()
 
     nb_lines = int(np.ceil(nb_to_plot / 2))
     fig, ax  = plt.subplots(nb_lines, 2, figsize=(10, nb_lines * 5))
@@ -191,6 +194,7 @@ def plot_fields(telescopes, surveys, instruments, nb_to_plot, bands=None):
 
 
 def plot_galaxies(info, telescopes, instruments, nb_to_plot, bands=None):
+    sns.reset_orig()
     same_size = st.checkbox('Same size image')
     plt.rcParams.update({"font.size": 10})
 
@@ -234,7 +238,7 @@ def plot_galaxies(info, telescopes, instruments, nb_to_plot, bands=None):
 # import proplot
 
 def plot_surveys(telescopes, selected_surveys):
-
+    sns.set()
     # Ecliptic plane
     lon_ecl = np.linspace(0, 360, 100)
     lat_ecl = np.zeros(100)
@@ -259,6 +263,8 @@ def plot_surveys(telescopes, selected_surveys):
                 ax = plot_HST_cosmos_Survey(fig, ax)
             elif f'{telescope}-{survey}' == 'Rubin-LSST':
                 ax = plot_Rubin_LSST_Survey(fig, ax)
+            else:
+                st.markdown(f'Sorry, {telescope} {survey} is not yet available... Stay Tuned!')
 
             nb_to_plot += 1
     # if 'HST' in telescopes:
