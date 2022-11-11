@@ -7,7 +7,7 @@ st.set_page_config(
     page_icon="👋",
     layout="centered")
 
-st.write("## 👋 Welcome to SurViZ, your best tool to compare and explore galaxy SurVeys! \n ")
+st.write("## 👋 Welcome to SurViZ, your best tool to compare and explore galaxy SurVeys! \n Developed by __Hubert Bretonnière__: https://github.com/Hbretonniere/SurViZ ")
 
 st.markdown(
     """
@@ -19,11 +19,11 @@ st.markdown(
 
     - With 🪞 Mirror , you will explore the size of the telescopes' primary mirror, and there field of view.
 
-    - With ✨ Fields Of galaxies, you will explore the surveys and instruments' depths in a simulated galaxy field.
-
     - With 🌌 Galaxy, you will explore the the surveys and instruments'image quality (resolution and PSF) in a TNG galaxy.
 
-    - With 🗺️ Surveys, you will visualise the sizes and positions of the various surveys.
+    - With ✨ Fields Of galaxies, you will explore the surveys and instruments' depths in a simulated galaxy field.
+
+    - With 🗺️ Survey_footprint, you will visualise the sizes and positions of the various surveys.
     \n  """
 )
 

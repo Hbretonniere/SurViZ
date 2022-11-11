@@ -5,9 +5,10 @@ from telescopes.main_info import info
 from utils.plots import plot_bands
 from telescopes.references import filters_refs
 
-st.markdown('# 🎨 Filters visualisation \n You can see here the filters of the different instruments. Note that for now, the shape and sensitivity are not correct: the y-axis is arbitrary, and the differences are just here for a better visualisation ')
+st.markdown('# 🎨 Filters visualisation \n ')
 description = st.expander("README")
 description.markdown(filters_refs)
+st.markdown('You can see here the filters of the different instruments. Note that for now, the shape and sensitivity are not correct: the y-axis is arbitrary, and the differences are just here for a better visualisation')
 telescopes = st.sidebar.multiselect(
         "Select the telescopes",
         ["Euclid", "JWST", "HST", "Rubin", "SDSS"],
