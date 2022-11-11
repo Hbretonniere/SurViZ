@@ -15,15 +15,15 @@ st.markdown(
 
     - With 🔭 General info, you will have a short description of the telescopes, their scientific goals, instruments and surveys.
     
-    - With 🎨 Bands, you will explore the bands of each telescopes' instruments.
+    - With 🎨 Filters, you will explore the bands of each telescopes' instruments.
 
     - With 🪞 Mirror , you will explore the size of the telescopes' primary mirror, and there field of view.
 
     - With 🌌 Galaxy, you will explore the the surveys and instruments'image quality (resolution and PSF) in a TNG galaxy.
 
-    - With ✨ Fields Of galaxies, you will explore the surveys and instruments' depths in a simulated galaxy field.
+    - With ✨ Galaxy fields, you will explore the surveys and instruments' depths in a simulated galaxy field.
 
-    - With 🗺️ Survey_footprint, you will visualise the sizes and positions of the various surveys.
+    - With 🗺️ Survey footprint, you will visualise the sizes and positions of the various surveys.
     \n  """
 )
 
