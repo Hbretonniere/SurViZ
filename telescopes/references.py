@@ -38,3 +38,11 @@ References:
     - SDSS-I: https://classic.sdss.org/dr7/coverage/index.html
     
     """
+
+image_quality_refs = """
+References:
+    """
+
+image_depth_refs = """
+References:
+"""
