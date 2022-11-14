@@ -142,7 +142,7 @@ def plot_fovs(info, telescope):
 
 from astropy.visualization import ZScaleInterval
 
-def plot_fields(telescopes, surveys, instruments, nb_to_plot, bands=None):
+def plot_fields(telescopes, surveys, instruments, info, nb_to_plot, bands=None):
     plt.rcParams.update({"font.size": 10})
     sns.reset_orig()
 
@@ -182,13 +182,13 @@ def plot_fields(telescopes, surveys, instruments, nb_to_plot, bands=None):
     contrast2 = st.checkbox('Other Contrast')
     if contrast2:
         min_v, max_v = min_2, max_2
-    # (min_v, max_v) = st.slider('contrast', min_v - min_v/2, max_v+ max_v/2, (min_v, max_v), step=min_v/10)
     for telescope in telescopes:
         for survey in surveys[telescope]:
             for instrument in instruments[telescope][survey]:
                 # img = fits.open(f'./data/{telescope}_{instrument}_{survey}.fits')[0].data
                 ax[k].imshow(images[telescope][survey], cmap='bone', vmin=min_v, vmax=max_v)
-                ax[k].set_title(f'{telescope}, {survey} {instrument}', fontsize=10)
+                filter = info[telescope]['surveys'][survey]['instruments'][instrument]['main_band']
+                ax[k].set_title(f"{telescope}, {survey} {instrument} ({filter} filter)", fontsize=10)
                 k += 1
     if nb_to_plot % 2 != 0:
         ax[-1].set_visible(False)
