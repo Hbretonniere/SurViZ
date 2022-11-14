@@ -3,8 +3,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 from telescopes.main_info import info
 from utils.plots import plot_fields
+from telescopes.references import image_depth_refs
 
-st.markdown('# 🎨 Filters visualisation \n You can see here the filters of the different instruments. Note that for now, the shape and sensitivity are not correct: the y-axis is arbitrary, and the differences are just here for a better visualisation ')
+st.markdown('# ✨ Galaxy field  \n ')
+description = st.expander("README")
+
+description.markdown('For each survey, you can see the same galaxy field, simulated with galsim. Each galaxy is simulated with the appropriate pixel scale and PSF. The flux is computed with the appropriate zero-point of the instrument, and we then add a Gaussian noise centered on zero, with an std estimated for each survey. \n ' + image_depth_refs)
+
 telescopes = st.sidebar.multiselect(
         "Select the telescopes",
         list(info.keys()),
@@ -38,5 +43,5 @@ for telescope in telescopes:
             selected_instruments[telescope][survey] = survey_instrument
             nb_to_plot += len(survey_instrument)
 
-fig = plot_fields(telescopes, selected_surveys, selected_instruments, nb_to_plot)
+fig = plot_fields(telescopes, selected_surveys, selected_instruments, info, nb_to_plot)
 st.pyplot(fig)
