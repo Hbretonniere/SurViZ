@@ -7,11 +7,13 @@ from telescopes.instruments import SDSS_imaging_camera
 
 Euclid_Wide = {
                'instruments':{"VIS":Euclid_VIS,
-                              "NIR":Euclid_NIR}}
+                              "NIR":Euclid_NIR},
+                'std_noise':0.003} # approx from Euclid morpho challenge data
 
 Euclid_Deep = {
                'instruments':{"VIS":Euclid_VIS,
-                              "NIR":Euclid_NIR}}
+                              "NIR":Euclid_NIR},
+                'std_noise':0.0004}
 
 JWST_Jades = {
               'instruments':{"NIRCAM":JWST_NIRCAM}

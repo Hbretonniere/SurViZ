@@ -2,8 +2,7 @@ Euclid_VIS = {
     "pix_scale":0.1,
     "ls":'-',
     "depth":25.9, #23.9,#25.2,
-    "fwhm":0.17,
-    "major_band":"VIS",
+    "main_band":"VIS",
     "bands":{
         "VIS": {
             "zp":25.9, "min_max":[550, 900], 'fwhm':0.17}
@@ -14,10 +13,10 @@ Euclid_NIR = {
     "pix_scale":0.3,
     "ls":'--',
     "fwhm":0.2, ##### VERIFY THIS, https://ui.adsabs.harvard.edu/abs/2020A%26A...644A..31E/abstract say somthing else
-    "major_band":"J",
+    "main_band":"J",
     "bands":{
         "Y": {
-            "zp":25.04, "min_max":[920, 1046], 'fwhm':0.2}, # http://arxiv.org/abs/2203.01650
+            "zp":25.04, "min_max":[920, 1146], 'fwhm':0.2}, # http://arxiv.org/abs/2203.01650
         "J": {
             "zp":25.26, "min_max":[1146, 1372], 'fwhm':0.2},
         "H": {
@@ -29,10 +28,10 @@ JWST_NIRCAM = {
     'pix_scale':0.031,
     'ls':'-',
     'fwhm':0.06,
-    'major_band':'f200W',
+    'main_band':'f200W',
     'bands':{
         'F070W':{
-            "zp":29.8, "min_max":[621, 781], 'fwhm':0.03},  #zp is the one for f200w, psf fwhm are good
+            "zp":28.7, "min_max":[621, 781], 'fwhm':0.03},  #zp is the one for f200w, psf fwhm are good
         'F090W':{
             "zp":None, "min_max":[795, 1005], 'fwhm':0.034},
         'F115W':{
@@ -111,6 +110,7 @@ HST_ACS={
     'pix_scale':0.03,
     'ls':'-',
     'fwhm':0.067,
+    'main_band':'F606W',
     'bands':{
         'F220W':{
             "zp":23.5, "min_max":[185.4, 298.1], 'fwhm':0.08}, # PSFs are approximated by a table giving PSF/lambda (https://hst-docs.stsci.edu/wfc3ihb/chapter-6-uvis-izping-with-wfc3/6-6-uvis-optical-performance()
@@ -143,12 +143,12 @@ Rubin_Wide_field_imager = {
     'ls':'-',
     'depth':24.5,
     'fwhm':0.8, #verified
-    'bands':{"u":{"zp":23.39, "min_max":[350, 400], 'fwhm':0.92}, # zps look to small, need to check.
+    'bands':{"u":{"zp":23.39, "min_max":[320, 400], 'fwhm':0.92}, # zps look to small, need to check.
             "g":{"zp":24.51, "min_max":[400, 552], 'fwhm':0.87},
             "r":{"zp":24.49, "min_max":[552, 691], 'fwhm':0.83},
             "i":{"zp":24.37, "min_max":[691, 818], 'fwhm':0.80},
             "z":{"zp":24.21, "min_max":[818, 922], 'fwhm':0.78},
-            "y":{"zp":23.77, "min_max":[948, 1060], 'fwhm':0.76},
+            "y":{"zp":23.77, "min_max":[950, 1080], 'fwhm':0.76},
             }
                         }
 
