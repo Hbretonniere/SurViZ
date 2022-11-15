@@ -66,8 +66,8 @@ def plot_HST_cosmos_Survey(fig, ax):
 
 def plot_Cosmos_Web_Survey(fig, ax):
     cosmos_rad = eq2gal(150.11916667,2.20583333)
-    cosmos = Circle((cosmos_rad[0], cosmos_rad[1]), rad(np.sqrt(0.6/(2*np.pi))), edgecolor='black', facecolor='red', alpha=0.5, label=r'Cosmos-Web (0.6deg$^2$)')
-    zoom_cosmos_web = Circle((cosmos_rad[0], cosmos_rad[1]), rad(np.sqrt(0.6/(2*np.pi))), edgecolor='black', facecolor='red',alpha=0.5)
+    cosmos = Circle((cosmos_rad[0], cosmos_rad[1]), rad(np.sqrt(0.54/(2*np.pi))), edgecolor='black', facecolor='red', alpha=0.5, label=r'Cosmos-Web (0.54deg$^2$)')
+    zoom_cosmos_web = Circle((cosmos_rad[0], cosmos_rad[1]), rad(np.sqrt(0.54/(2*np.pi))), edgecolor='black', facecolor='red',alpha=0.5)
     ax.add_patch(cosmos)
     return ax, zoom_cosmos_web
 
