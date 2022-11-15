@@ -22,7 +22,7 @@ def plot_Euclid_Deep_Survey(fig, ax):
 
 
     edfs_rad = eq2gal(61.241, -48.42300000)
-    edfs = Circle((edfs_rad[0], edfs_rad[1]), rad(np.sqrt(23/(2*np.pi))), ls='--', edgecolor='black', facecolor='blue', label='Euclid Deep Survey')
+    edfs = Circle((edfs_rad[0], edfs_rad[1]), rad(np.sqrt(23/(2*np.pi))), ls='--', edgecolor='black', facecolor='blue', label=r'Euclid Deep Survey (53 deg$^2$)')
     ax.add_patch(edfs)
     return ax
 
@@ -54,20 +54,20 @@ def plot_Euclid_Wide_Survey(fig, ax):
     x_hole_south = np.concatenate((l_ecl_gal[:12], l_ecl_gal[-12:]))
     y_hole_south = np.concatenate((b_ecl_gal[:12]+0.18, b_ecl_gal[-12:]+0.18))
     ax.plot(x_hole_south, y_hole_south, color='blue')
-    ax.fill_between(x_hole_south, y_hole_south,  b_ecl_gal[-12]+0.18, color='blue', alpha=0.5, label='Euclid Wide Survey')
+    ax.fill_between(x_hole_south, y_hole_south,  b_ecl_gal[-12]+0.18, color='blue', alpha=0.5, label=r'Euclid Wide Survey (15 000deg$^2$)')
     return ax
 
 def plot_HST_cosmos_Survey(fig, ax):
     cosmos_rad = eq2gal(150.11916667,2.20583333)
     cosmos = Circle((cosmos_rad[0], cosmos_rad[1]), rad(np.sqrt(2/(2*np.pi))), edgecolor='black', facecolor='orange', alpha=0.5, label='HST Cosmos')
-    zoom_cosmos = Circle((cosmos_rad[0], cosmos_rad[1]), rad(np.sqrt(2/(2*np.pi))), edgecolor='black', facecolor='orange', alpha=0.5, label='HST Cosmos')
+    zoom_cosmos = Circle((cosmos_rad[0], cosmos_rad[1]), rad(np.sqrt(2/(2*np.pi))), edgecolor='black', facecolor='orange', alpha=0.5, label=r'HST Cosmos (2eg$^2$)')
     ax.add_patch(cosmos)
     return ax, zoom_cosmos
 
 def plot_Cosmos_Web_Survey(fig, ax):
     cosmos_rad = eq2gal(150.11916667,2.20583333)
-    cosmos = Circle((cosmos_rad[0], cosmos_rad[1]), rad(np.sqrt(0.6/(2*np.pi))), edgecolor='black', facecolor='red', alpha=0.5, label='Cosmos-Web')
-    zoom_cosmos_web = Circle((cosmos_rad[0], cosmos_rad[1]), rad(np.sqrt(0.6/(2*np.pi))), edgecolor='black', facecolor='red',alpha=0.5,  label='Cosmos-Web')
+    cosmos = Circle((cosmos_rad[0], cosmos_rad[1]), rad(np.sqrt(0.6/(2*np.pi))), edgecolor='black', facecolor='red', alpha=0.5, label=r'Cosmos-Web (0.6deg$^2$)')
+    zoom_cosmos_web = Circle((cosmos_rad[0], cosmos_rad[1]), rad(np.sqrt(0.6/(2*np.pi))), edgecolor='black', facecolor='red',alpha=0.5)
     ax.add_patch(cosmos)
     return ax, zoom_cosmos_web
 
@@ -80,6 +80,6 @@ def plot_Rubin_LSST_Survey(fig, ax):
     end=100
     start2=0
     end2=22
-    ax.fill_between(l_ecl_gal[start:end], b_ecl_gal[start:end]+0.2, rad(-90), color='green', alpha=0.5, hatch="/", label='Rubin LSST')
+    ax.fill_between(l_ecl_gal[start:end], b_ecl_gal[start:end]+0.2, rad(-90), color='green', alpha=0.5, hatch="/", label=r'Rubin LSST (18 000deg$^2$)')
     ax.fill_between(l_ecl_gal[start2:end2], b_ecl_gal[start2:end2]+0.2, rad(-90), color='green', alpha=0.5, hatch="/")
     return ax
