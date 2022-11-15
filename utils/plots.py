@@ -297,9 +297,7 @@ def plot_surveys(telescopes, selected_surveys):
             zoom.set_yticklabels([np.round(42.121-sy, 1), np.round(42.121,2), np.round(42.121+sy, 2)])
             zoom.set_xlabel('RA')
             zoom.set_ylabel('DEC')
-
+            zoom.annotate('', xy=(0, 0), xycoords='axes fraction', xytext=(-0.44, -0.235), arrowprops=dict(arrowstyle="<-", color='black', lw=2))
 
     plt.legend(bbox_to_anchor = (1, -0.1), ncol=2, fontsize=20)
-    zoom.annotate('', xy=(0, 0), xycoords='axes fraction', xytext=(-0.44, -0.235),
-    arrowprops=dict(arrowstyle="<-", color='black', lw=2))
     return fig
