@@ -10,7 +10,7 @@ sys.path.append('../utils/')
 from utils.plot_surveys import *
 
 
-def plot_bands(info, telescopes, instruments, bands, fill=True, log=False):
+def plot_bands(info, telescopes, instruments, bands, selected_survey, fill=True, log=False):
     sns.reset_orig()
     plt.rcParams.update({"font.size": 22})
 
@@ -19,16 +19,13 @@ def plot_bands(info, telescopes, instruments, bands, fill=True, log=False):
         j = i+1
         k = 0
         for instrument in instruments[telescope]:
+            
             ax.plot([], [], ls=info[telescope]['instruments'][instrument]['ls'], color=info[telescope]['color'], label=f'{telescope} {instrument}')
             for i, band in enumerate(bands[telescope][instrument]):                
                 k += 1
                 band_info = info[telescope]['instruments'][instrument]['bands'][band]
                 min_, max_ = band_info["min_max"]
                 
-                steep = (max_ - min_) / 15
-
-                # plt.plot([min_-steep, min_+steep], [0, 10-j-k/10], color=info[telescope]['color'], ls=info[telescope]['instruments'][instrument]['ls'], alpha=0.7)
-                # plt.plot([max_-steep, max_+steep], [10-j-k/10, 0], color=info[telescope]['color'], ls=info[telescope]['instruments'][instrument]['ls'], alpha=0.7)
                 ax.hlines(10-j-k/10, min_, max_, color=info[telescope]['color'], ls=info[telescope]['instruments'][instrument]['ls'], alpha=0.7, lw=3)
                 ax.vlines([min_, max_], ymin=0, ymax=[10-j-k/10, 10-j-k/10], color=info[telescope]['color'], ls=info[telescope]['instruments'][instrument]['ls'], alpha=0.7, lw=3)
                 if fill:

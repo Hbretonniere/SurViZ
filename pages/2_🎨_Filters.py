@@ -31,7 +31,7 @@ else:
         fill = st.checkbox('Filled style')
     with col2:
         log = st.checkbox('Logarithmic scale')
-
+    selected_surveys = {}
     for telescope in telescopes:
         selected_bands[telescope] = {}
         # SELECTION OF THE INSTRUMENT
@@ -41,12 +41,23 @@ else:
                     list(info[telescope]['instruments'].keys()),
                     default=[list(info[telescope]['instruments'].keys())[0]])
         selected_instruments[telescope] = telescope_instrument
-
+        restrict_to_survey = None
+        if telescope == 'JWST':
+            restrict_to_survey = st.sidebar.checkbox('Restrict to a specific survey')
         for instrument in selected_instruments[telescope]:
+            if restrict_to_survey:
+                selected_survey = st.sidebar.multiselect(
+                'Select the survey',
+                list(info[telescope]['surveys'].keys()),
+                default=[list(info[telescope]['surveys'].keys())[0]])
+                available_filters = info[telescope]['surveys'][selected_survey[0]]['filters']
+            else:
+                available_filters = list(info[telescope]['instruments'][instrument]['bands'].keys())
+
             instrument_bands =  st.sidebar.multiselect(
                     f" Select the filters ({instrument})",
                     list(info[telescope]['instruments'][instrument]['bands'].keys()),
-                    default=list(info[telescope]['instruments'][instrument]['bands'].keys()))
+                    default=available_filters)
             selected_bands[telescope][instrument] = instrument_bands
 
     fig = plot_bands(info, telescopes, selected_instruments, selected_bands, fill, log)
