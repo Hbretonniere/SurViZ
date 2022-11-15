@@ -8,7 +8,7 @@ from telescopes.references import image_depth_refs
 st.markdown('# ✨ Galaxy field  \n ')
 description = st.expander("README")
 
-description.markdown('For each survey, you can see the same galaxy field, simulated with galsim. Each galaxy is simulated with the appropriate pixel scale and PSF. The flux is computed with the appropriate zero-point of the instrument, and we then add a Gaussian noise centered on zero, with an std estimated for each survey. \n ' + image_depth_refs)
+description.markdown('For each survey, you can see the same galaxy field, simulated with galsim. Each galaxy is simulated with the appropriate pixel scale and PSF. The flux is computed with the appropriate zero-point of the instrument, and we then add a Gaussian noise centered on zero, with an std estimated for each survey. \n The routine used to generate the fields can be found in utils/diverse_utils. It is not executed live for computing time reasons.' + image_depth_refs)
 
 telescopes = st.sidebar.multiselect(
         "Select the telescopes",
