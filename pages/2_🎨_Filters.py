@@ -12,7 +12,7 @@ st.markdown('You can see here the filters of the different instruments. Note tha
 telescopes = st.sidebar.multiselect(
         "Select the telescopes",
         ["Euclid", "JWST", "HST", "Rubin", "SDSS"],
-        default=["Euclid"]#, "HST"]
+        default=["Euclid", 'Rubin']#, "HST"]
     )
 
 selected_bands = {}
