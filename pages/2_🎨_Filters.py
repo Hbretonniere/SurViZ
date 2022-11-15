@@ -42,15 +42,16 @@ else:
                     default=[list(info[telescope]['instruments'].keys())[0]])
         selected_instruments[telescope] = telescope_instrument
         restrict_to_survey = None
+        selected_survey = None
         if telescope == 'JWST':
             restrict_to_survey = st.sidebar.checkbox('Restrict to a specific survey')
         for instrument in selected_instruments[telescope]:
             if restrict_to_survey:
-                selected_survey = st.sidebar.multiselect(
+                selected_survey = st.sidebar.radio(
                 'Select the survey',
                 list(info[telescope]['surveys'].keys()),
-                default=[list(info[telescope]['surveys'].keys())[0]])
-                available_filters = info[telescope]['surveys'][selected_survey[0]]['filters']
+                index=0)
+                available_filters = info[telescope]['surveys'][selected_survey]['filters']
             else:
                 available_filters = list(info[telescope]['instruments'][instrument]['bands'].keys())
 
@@ -60,5 +61,5 @@ else:
                     default=available_filters)
             selected_bands[telescope][instrument] = instrument_bands
 
-    fig = plot_bands(info, telescopes, selected_instruments, selected_bands, fill, log)
+    fig = plot_bands(info, telescopes, selected_instruments, selected_bands, selected_survey, fill, log)
     st.pyplot(fig)
