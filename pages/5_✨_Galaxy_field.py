@@ -5,6 +5,8 @@ from telescopes.main_info import info
 from utils.plots import plot_fields
 from telescopes.references import image_depth_refs
 
+st.image('surviz_black_long.png')
+
 st.markdown('# ✨ Galaxy field  \n ')
 description = st.expander("README")
 

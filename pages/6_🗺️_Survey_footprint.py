@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 from telescopes.main_info import info
 from utils.plots import plot_surveys
 
+st.image('surviz_black_long.png')
+
 st.markdown('# Surveys visualisation \n You can explore here the surveys footprints. The shapes and exact positions are not perfect, but estimated from public data.')
 telescopes = st.sidebar.multiselect(
         "Select the telescopes",

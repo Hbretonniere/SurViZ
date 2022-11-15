@@ -6,6 +6,8 @@ from telescopes.main_info import info
 from utils.plots import plot_mirrors, plot_fovs
 from telescopes.references import mirrors_refs
 
+st.image('surviz_black_long.png')
+
 st.markdown('# 🪞 Mirrors and Filed of View visualisation')
 description = st.expander("README")
 description.markdown(mirrors_refs)

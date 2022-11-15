@@ -1,12 +1,16 @@
 import matplotlib.pyplot as plt
 import streamlit as st
 import matplotlib.image as mpimg
+from utils.diverse_utils import add_logo
+
 
 st.set_page_config(
     page_title="Home page",
     page_icon="👋",
     layout="centered")
 
+# add_logo
+st.image('surviz_black_long.png')
 st.write("## 👋 Welcome to SurViZ, your best tool to compare and explore galaxy SurVeys! \n Developed by __Hubert Bretonnière__: https://github.com/Hbretonniere/SurViZ \n The page is still in development. Please reach me in the github repo if you have any comments or suggestions.")
 
 st.markdown(

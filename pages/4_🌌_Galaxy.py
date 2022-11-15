@@ -5,6 +5,8 @@ from telescopes.main_info import info
 from utils.plots import plot_galaxies
 from telescopes.references import image_quality_refs
 
+st.image('surviz_black_long.png')
+
 st.markdown('# 🌌 Galaxy visualisation \n')
 description = st.expander("README")
 description.markdown('For each survey, the galaxy is simulated from an Illustris-TNG galaxy, and rescaled to the pixel-scale of the instrument, then convolved by the aproximate PSF. \n We do not add noise, considering that the galaxy is very near by. To see the impact of the depth in the different surveys, see the Galaxy Field tab. \n The routine used to generate the galaxies can be found in utils/diverse_utils. It is not executed live for computing time reasons. ' + image_quality_refs)
