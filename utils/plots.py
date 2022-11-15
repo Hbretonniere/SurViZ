@@ -183,7 +183,7 @@ def plot_fields(telescopes, surveys, instruments, info, nb_to_plot, bands=None):
     if contrast2:
         min_v, max_v = min_2, max_2
     for telescope in telescopes:
-        if telescope == 'HST':
+        if (telescope == 'HST') or (telescope == 'SDSS'):
             warning = 'Warning: The noise level is unsure (need to be checked)'
         else:
             warning = ""
