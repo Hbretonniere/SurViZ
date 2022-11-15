@@ -1,3 +1,7 @@
+![Image quality](./surviz_black.png)
+
+<br/><br/>
+
 # Welcome to SurViZ, a platform to compare qualitatively various astrophysical missions! 
 
 The platform is hosted with streamlit, and you can visit it here: [https://hbretonniere-surviz--home-page-9r8djm.streamlit.app/](https://hbretonniere-surviz--home-page-9r8djm.streamlit.app/)
@@ -26,6 +30,8 @@ For now, you can use SuViZ for 6 tasks, each one available by clicking in the to
 ![Image quality](./data/filters.gif)
 
 ## To do:
+- 
+- Make filters gaussian instead of rectangles ?
 - add a readme or ipynb on how the fields and galaxy are simulated (and verify it's ok...)
 - Add LSST galaxy field (need to find sigma noise)
 - add SDSS footprint and verify the info (SDSS-I or more ?)
