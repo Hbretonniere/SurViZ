@@ -137,7 +137,7 @@ HST_ACS={
         'F658N':{
             "zp":None, "min_max":[658.4-8.74/2, 658.4+8.74/2], 'fwhm':None},
         'F775W':{
-            "zp":None, "min_max":[769.3-102.34/2, 7169.3+102.43/2], 'fwhm':None},
+            "zp":None, "min_max":[769.3-102.34/2, 769.3+102.43/2], 'fwhm':None},
         'F850LP':{
             "zp":None, "min_max":[905.4-127/2, 905.4+127/2], 'fwhm':None},
         'F892N':{

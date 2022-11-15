@@ -21,11 +21,13 @@ JWST_Jades = {
 
 JWST_Cosmos_Web = {
               'instruments':{"NIRCAM":JWST_NIRCAM,
-                            "MIRI":JWST_MIRI}
+                            "MIRI":JWST_MIRI},
+              'std_noise':0.000595
              }
 
 HST_Cosmos = {
-              'instruments':{"ACS":HST_ACS}
+              'instruments':{"ACS":HST_ACS},
+              'std_noise':0.0042
              }
 
 LSST = {
@@ -33,5 +35,6 @@ LSST = {
              }
 
 SDSS_I = {
-              'instruments':{"Imaging_camera":SDSS_imaging_camera}
+              'instruments':{"Imaging_camera":SDSS_imaging_camera},
+              'std_noise':0.093 # estimated from online data 
              }

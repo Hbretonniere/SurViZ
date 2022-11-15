@@ -41,8 +41,31 @@ References:
 
 image_quality_refs = """
 References:
+- Euclid:
+    - zero points: http://arxiv.org/abs/2203.01650 (NIR), None (VIS)
+    - FWHM: http://arxiv.org/abs/2209.12906 (NIR), https://ui.adsabs.harvard.edu/abs/2010SPIE.7731E..1JC/abstract (VIS) 
+- JWST:
+    - FWHM: https://jwst-docs.stsci.edu/jwst-near-infrared-camera/nircam-performance/nircam-point-spread-functions (NIRCAM)
+    - zero-points: Mirage, https://github.com/spacetelescope/mirage/blob/master/mirage/config/NIRCam_zeropoints.list (NIRCAM)
     """
 
 image_depth_refs = """
 References:
+- Euclid: 
+    - zero points: http://arxiv.org/abs/2203.01650 (NIR), None (VIS)
+    - FWHM: http://arxiv.org/abs/2209.12906 (NIR), https://ui.adsabs.harvard.edu/abs/2010SPIE.7731E..1JC/abstract (VIS) 
+    - noise level: estimated from Euclid Morpho Challenge simulations (Wide and Deep)
+- JWST:
+    - FWHM: https://jwst-docs.stsci.edu/jwst-near-infrared-camera/nircam-performance/nircam-point-spread-functions (NIRCAM)
+    - zero-points: Mirage, https://github.com/spacetelescope/mirage/blob/master/mirage/config/NIRCam_zeropoints.list (NIRCAM)
+    - noise level: internal communication (JADES)
+- SDSS:
+    - zero points: https://www.sdss.org/dr12/algorithms/magnitudes/
+    - FWHM : aprrox from https://arxiv.org/abs/1111.6619
+    - noise level: computed from online data (SDSS-I, must verify this...)
+- HST:
+    - zero points: https://acszeropoints.stsci.edu/ 
+    - FWHM: https://hst-docs.stsci.edu/wfc3ihb/chapter-6-uvis-izping-with-wfc3/6-6-uvis-optical-performance
+    - std: need to compute
+    
 """
