@@ -1,3 +1,4 @@
 astropy
 matplotlib
 seaborn
+galsim
