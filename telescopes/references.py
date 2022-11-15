@@ -40,7 +40,9 @@ References:
     """
 
 image_quality_refs = """
+
 References:
+Simulated galaxy image: https://www.tng-project.org/data/
 - Euclid:
     - zero points: http://arxiv.org/abs/2203.01650 (NIR), None (VIS)
     - FWHM: http://arxiv.org/abs/2209.12906 (NIR), https://ui.adsabs.harvard.edu/abs/2010SPIE.7731E..1JC/abstract (VIS) 
