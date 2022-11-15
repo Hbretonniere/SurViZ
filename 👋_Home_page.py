@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 import streamlit as st
 import matplotlib.image as mpimg
-from utils.diverse_utils import add_logo
 
 
 st.set_page_config(

@@ -4,9 +4,7 @@ import matplotlib.pyplot as plt
 from telescopes.main_info import info
 from utils.plots import plot_bands
 from telescopes.references import filters_refs
-from utils.diverse_utils import add_logo
 
-# add_logo()
 st.image('surviz_black_long.png')
 
 
