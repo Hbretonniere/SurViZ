@@ -10,27 +10,32 @@ st.image('surviz_black_long.png')
 st.markdown('# 🌌 Galaxy visualisation \n')
 description = st.expander("README")
 description.markdown('For each survey, the galaxy is simulated from an Illustris-TNG galaxy, and rescaled to the pixel-scale of the instrument, then convolved by the aproximate PSF. \n We do not add noise, considering that the galaxy is very near by. To see the impact of the depth in the different surveys, see the Galaxy Field tab. \n The routine used to generate the galaxies can be found in utils/diverse_utils. It is not executed live for computing time reasons. ' + image_quality_refs)
+
 telescopes = st.sidebar.multiselect(
         "Select telescopes to display",
         list(info.keys()),
         default=["Euclid", 'JWST', 'SDSS']#, "HST"]
     )
 
-nb_to_plot = 0
-selected_surveys = {}
-selected_instruments = {}
-for telescope in telescopes:
-    selected_instruments[telescope] = {}
+if len(telescopes) == 0:
+    st.markdown('## Please select at least one telescope')
 
-    # SELECTION OF THE SURVEY
-    st.sidebar.markdown(f'## {telescope}')
+else:
+    nb_to_plot = 0
+    selected_surveys = {}
+    selected_instruments = {}
+    for telescope in telescopes:
+        selected_instruments[telescope] = {}
 
-    telescope_instrument =  st.sidebar.multiselect(
-            f"Select instruments",
-            list(info[telescope]['instruments'].keys()),
-            default=list(info[telescope]['instruments'].keys())[0])
-    selected_instruments[telescope] = telescope_instrument
-    nb_to_plot += len(telescope_instrument)
+        # SELECTION OF THE SURVEY
+        st.sidebar.markdown(f'## {telescope}')
 
-fig = plot_galaxies(info, telescopes, selected_instruments, nb_to_plot)
-st.pyplot(fig)
+        telescope_instrument =  st.sidebar.multiselect(
+                f"Select instruments",
+                list(info[telescope]['instruments'].keys()),
+                default=list(info[telescope]['instruments'].keys())[0])
+        selected_instruments[telescope] = telescope_instrument
+        nb_to_plot += len(telescope_instrument)
+
+    fig = plot_galaxies(info, telescopes, selected_instruments, nb_to_plot)
+    st.pyplot(fig)
