@@ -18,14 +18,16 @@ Euclid_Deep = {
                 'area':53}
 
 JWST_Jades = {
-              'instruments':{"NIRCAM":JWST_NIRCAM}
+              'instruments':{"NIRCAM":JWST_NIRCAM},
+              'filters':['F090W', 'F115W', 'F150W', 'F200W', 'F277W', 'F335M', 'F356W', 'F410M', 'F444W']
              }
 
 JWST_Cosmos_Web = {
               'instruments':{"NIRCAM":JWST_NIRCAM,
                             "MIRI":JWST_MIRI},
               'std_noise':0.000595,
-              'area':0.6
+              'area':0.6,
+              'filters':['F115W', 'F150W', 'F277W', 'F444W']
              }
 
 HST_Cosmos = {
