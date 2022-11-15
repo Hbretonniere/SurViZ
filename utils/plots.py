@@ -183,12 +183,16 @@ def plot_fields(telescopes, surveys, instruments, info, nb_to_plot, bands=None):
     if contrast2:
         min_v, max_v = min_2, max_2
     for telescope in telescopes:
+        if telescope == 'HST':
+            warning = 'Warning: The noise level is unsure (need to be checked)'
+        else:
+            warning = ""
         for survey in surveys[telescope]:
             for instrument in instruments[telescope][survey]:
                 # img = fits.open(f'./data/{telescope}_{instrument}_{survey}.fits')[0].data
                 ax[k].imshow(images[telescope][survey], cmap='bone', vmin=min_v, vmax=max_v)
                 filter = info[telescope]['surveys'][survey]['instruments'][instrument]['main_band']
-                ax[k].set_title(f"{telescope}, {survey} {instrument} ({filter} filter)", fontsize=10)
+                ax[k].set_title(f"{telescope}, {survey} {instrument} ({filter} filter), \n {warning}", fontsize=10)
                 k += 1
     if nb_to_plot % 2 != 0:
         ax[-1].set_visible(False)
@@ -254,6 +258,7 @@ def plot_surveys(telescopes, selected_surveys):
 
     plt.grid()
     nb_to_plot = 0
+    cosmos_patches = []
     for telescope in telescopes:
         for survey in selected_surveys[telescope]:
             print(f'{telescope}-{survey}')
@@ -262,16 +267,39 @@ def plot_surveys(telescopes, selected_surveys):
             elif f'{telescope}-{survey}' == 'Euclid-Wide-Survey':
                 ax = plot_Euclid_Wide_Survey(fig, ax)
             elif f'{telescope}-{survey}' == 'HST-HST-Cosmos':
-                ax = plot_HST_cosmos_Survey(fig, ax)
+                ax, cosmos_patch = plot_HST_cosmos_Survey(fig, ax)
+                cosmos_patches.append(cosmos_patch)
             elif f'{telescope}-{survey}' == 'Rubin-LSST':
                 ax = plot_Rubin_LSST_Survey(fig, ax)
+            elif f'{telescope}-{survey}' == 'JWST-Cosmos-Web':
+                ax, cosmos_patch = plot_Cosmos_Web_Survey(fig, ax)
+                cosmos_patches.append(cosmos_patch)
             else:
                 st.markdown(f'Sorry, {telescope} {survey} is not yet available... Stay Tuned!')
 
             nb_to_plot += 1
-    # if 'HST' in telescopes:
-    #     zoom = st.checkbox('Zoom in Cosmos')
-    #     if zoom:
-            # ax.set_xlim(rad(270), rad(240))
-    plt.legend()
+    if ('HST' in telescopes) | ('JWST' in telescopes):
+        cosmos_zoom = st.checkbox('Zoom on Cosmos')
+        if cosmos_zoom:
+            zoom = ax.inset_axes([0.9, 0.9, 0.3, 0.5])#, transform=ax.transData)
+            sx = 1
+            sy = 1
+            [zoom.add_patch(patch) for patch in cosmos_patches]
+            zoom.set_xlim(2.149-rad(sx), 2.149+rad(sx))
+            zoom.set_ylim(.73-rad(sy), .73+rad(sy))
+            xticks = list(zoom.get_xticks())
+            yticks = list(zoom.get_yticks())
+            zoom_xticks = [xticks[0], (xticks[-1] + xticks[0]) / 2, xticks[-1]]
+            zoom_yticks = [yticks[0], (yticks[-1] + yticks[0]) / 2, yticks[-1]]
+            zoom.set_xticks(zoom_xticks)
+            zoom.set_yticks(zoom_yticks)
+            zoom.set_xticklabels([np.round(123.178-sx, 1), np.round(123.178,2), np.round(123.178+sx, 2)])
+            zoom.set_yticklabels([np.round(42.121-sy, 1), np.round(42.121,2), np.round(42.121+sy, 2)])
+            zoom.set_xlabel('RA')
+            zoom.set_ylabel('DEC')
+
+
+    plt.legend(bbox_to_anchor = (1, -0.1), ncol=2, fontsize=20)
+    zoom.annotate('', xy=(0, 0), xycoords='axes fraction', xytext=(-0.44, -0.235),
+    arrowprops=dict(arrowstyle="<-", color='black', lw=2))
     return fig

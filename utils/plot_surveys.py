@@ -59,9 +59,17 @@ def plot_Euclid_Wide_Survey(fig, ax):
 
 def plot_HST_cosmos_Survey(fig, ax):
     cosmos_rad = eq2gal(150.11916667,2.20583333)
-    cosmos = Circle((cosmos_rad[0], cosmos_rad[1]), rad(np.sqrt(2/(2*np.pi))), edgecolor='black', facecolor='red', label='HST Cosmos')
+    cosmos = Circle((cosmos_rad[0], cosmos_rad[1]), rad(np.sqrt(2/(2*np.pi))), edgecolor='black', facecolor='orange', alpha=0.5, label='HST Cosmos')
+    zoom_cosmos = Circle((cosmos_rad[0], cosmos_rad[1]), rad(np.sqrt(2/(2*np.pi))), edgecolor='black', facecolor='orange', alpha=0.5, label='HST Cosmos')
     ax.add_patch(cosmos)
-    return ax
+    return ax, zoom_cosmos
+
+def plot_Cosmos_Web_Survey(fig, ax):
+    cosmos_rad = eq2gal(150.11916667,2.20583333)
+    cosmos = Circle((cosmos_rad[0], cosmos_rad[1]), rad(np.sqrt(0.6/(2*np.pi))), edgecolor='black', facecolor='red', alpha=0.5, label='Cosmos-Web')
+    zoom_cosmos_web = Circle((cosmos_rad[0], cosmos_rad[1]), rad(np.sqrt(0.6/(2*np.pi))), edgecolor='black', facecolor='red',alpha=0.5,  label='Cosmos-Web')
+    ax.add_patch(cosmos)
+    return ax, zoom_cosmos_web
 
 def plot_Rubin_LSST_Survey(fig, ax):
     lon_ecl = np.linspace(0, 360, 100)
