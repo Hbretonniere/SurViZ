@@ -24,7 +24,10 @@ st.markdown(
     - With ✨ Galaxy fields, you will explore the surveys and instruments' depths in a simulated galaxy field.
 
     - With 🗺️ Survey footprint, you will visualise the sizes and positions of the various surveys.
-    \n  """
+    \n  
+    
+    More information can be found by clicking in the READMEs of each tab.
+    """
 )
 
 fig = plt.figure()#figsize=(15, 15))
