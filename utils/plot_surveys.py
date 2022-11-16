@@ -3,83 +3,107 @@ import numpy as np
 import sys
 sys.path.append('../utils/')
 
-from utils.diverse_utils import eq2gal, ecl2gal
+from utils.diverse_utils import init_sky, projection_dec, projection_ra #eq2gal, ecl2gal
+
 
 def rad(x):
     return x*np.pi/180
 
 def plot_Euclid_Deep_Survey(fig, ax):
 
-    edfn_rad = eq2gal(269.73291667, 66.01769444)
-#
-    edfn = Circle((edfn_rad[0], edfn_rad[1]), rad(np.sqrt(20/(2*np.pi))), ls='--', edgecolor='black', facecolor='blue')
+    edfn_ra = np.array([269.73])
+    edfn_dec = np.array([66.01])
+    edfn = Circle((ax.projection_ra(edfn_ra), ax.projection_dec(edfn_dec)), np.sqrt(20/(np.pi))*np.pi/180, ls='--', edgecolor='black', facecolor='blue', label='Euclid Deep')
     ax.add_patch(edfn)
 
-    fornax_rad = eq2gal(52.93583333, -28.08850000)
-    fornax = Circle((fornax_rad[0], fornax_rad[1]), rad(np.sqrt(10/(2*np.pi))), ls='--', edgecolor='black', facecolor='blue')
+    fornax_ra = np.array([52.93583333]) 
+    fornax_dec = np.array([-28.08850000])    
+    fornax = Circle((ax.projection_ra(fornax_ra), ax.projection_dec(fornax_dec)), rad(np.sqrt(10/(np.pi))), ls='--', edgecolor='black', facecolor='blue')
     ax.add_patch(fornax)
-    # plt.scatter(fornax_rad[0], fornax_rad[1], s=30, c='red')
 
+    edfs_ra= np.array([61.241])
+    edfs_dec = np.array([-48.42300000])
+    edfs = Circle((ax.projection_ra(edfs_ra), ax.projection_dec(edfs_dec)), rad(np.sqrt(10/(np.pi))), ls='--', edgecolor='black', facecolor='blue')
 
-    edfs_rad = eq2gal(61.241, -48.42300000)
-    edfs = Circle((edfs_rad[0], edfs_rad[1]), rad(np.sqrt(23/(2*np.pi))), ls='--', edgecolor='black', facecolor='blue', label=r'Euclid Deep Survey (53 deg$^2$)')
     ax.add_patch(edfs)
     return ax
 
-def plot_Euclid_Wide_Survey(fig, ax):
+def shift(key, array):
+    return array[-key:] + array[:-key]
+
+def eq2plot(y, shift=85):
+    if (360-shift) >= y >= 0:
+        x = -(y - shift)
+    elif 360 > y > (360-shift):
+        x = 360 - y + shift
+    # print(x)
+    return rad(x)
+
+def gal2plot(y, shift=102):
+    if (360-shift) >= y >= 0:
+        x = -(y - shift)
+    elif 360 > y > (360-shift):
+        x = 360 - y + shift
+    # print(x)
+    return rad(x)
+
+def plot_Euclid_Wide_Survey(fig, ax, ecl_ra, ecl_dec, gal_ra, gal_dec):
+
+    # North Hole
+    s, e = 10, 26
+    margin = np.linspace(50, 20, e-s)
+    # ax.plot(ax.projection_ra(gal_ra[s:e]), ax.projection_dec(gal_dec[s:e])-rad(margin), color='blue')
+    ax.fill(ax.projection_ra(gal_ra[s:e]), ax.projection_dec(gal_dec[s:e])-rad(margin), alpha=0.3, color='blue')
     
-    lon_ecl = np.linspace(0, 360, 100)
-    lat_ecl = np.zeros(100)
+    # South Hole
+    s, e = 55, 75
+    margin = np.linspace(45, 25, e-s)
+    # ax.plot(ax.projection_ra(gal_ra[s:e]), ax.projection_dec(gal_dec[s:e])+rad(margin), color='blue')
+    ax.fill(ax.projection_ra(gal_ra[s:e]), ax.projection_dec(gal_dec[s:e])+rad(margin), alpha=0.3, color='blue')
+    
+    # South East
+    s, e, margin = 10, 84, 9.8
+    # ax.plot(ax.projection_ra(ecl_ra[s:e]), ax.projection_dec(ecl_dec[s:e])-rad(margin), color='blue')
+    ax.fill_between(ax.projection_ra(ecl_ra[s:e]), ax.projection_dec(ecl_dec[s:e])-rad(10), rad(-90), alpha=0.3, color='blue')
+    
+    s, e, margin = 32, 61, 28
+    # ax.plot(ax.projection_ra(gal_ra[s:e]), ax.projection_dec(gal_dec[s:e])-rad(margin), color='blue')
+    
+    ax.fill_between(ax.projection_ra(gal_ra[s:e]), ax.projection_dec(gal_dec[s:e])-rad(margin), rad(-90), alpha=0.3, color='blue')
 
-    l_ecl_gal, b_ecl_gal = ecl2gal(lon_ecl, lat_ecl)
-    #north
-    x_north_line = np.concatenate(([rad(180)], l_ecl_gal[30:71], [rad(-180)]))
-    y_north_line = np.concatenate(([b_ecl_gal[30]+0.18], b_ecl_gal[30:71]+0.18, [b_ecl_gal[70]+0.18]))
-    ax.plot(x_north_line, y_north_line, c='blue')
-    ax.fill_between(x_north_line, y_north_line, rad(90), interpolate=True, color='blue', alpha=0.5)
-
-    x_hole_north = np.concatenate(([l_ecl_gal[61]], l_ecl_gal[37:62]))
-    y_hole_north = np.concatenate(([b_ecl_gal[61]-0.18], b_ecl_gal[37:62]-0.18))
-    ax.plot(x_hole_north, y_hole_north, c='blue')
-    ax.plot([l_ecl_gal[37], l_ecl_gal[61]], [b_ecl_gal[37]-0.18, b_ecl_gal[61]-0.18] , c='blue')
-    ax.fill_between(x_hole_north, y_hole_north, b_ecl_gal[61]-0.18, color='blue', alpha=0.5)
-
-
-    # #south
-    x_south_line = np.concatenate(([rad(180)], l_ecl_gal[-20:], l_ecl_gal[:20], [rad(-180)]))
-    y_south_line = np.concatenate(([b_ecl_gal[-20]-0.18], b_ecl_gal[-20:]-0.18, b_ecl_gal[:20]-0.18, [rad(-29.8)]))
-    ax.plot(x_south_line, y_south_line, c='blue')
-    ax.fill_between(x_south_line, y_south_line, rad(-90), interpolate=True, color='blue', alpha=0.5)
-
-    x_hole_south = np.concatenate((l_ecl_gal[:12], l_ecl_gal[-12:]))
-    y_hole_south = np.concatenate((b_ecl_gal[:12]+0.18, b_ecl_gal[-12:]+0.18))
-    ax.plot(x_hole_south, y_hole_south, color='blue')
-    ax.fill_between(x_hole_south, y_hole_south,  b_ecl_gal[-12]+0.18, color='blue', alpha=0.5, label=r'Euclid Wide Survey (15 000deg$^2$)')
+    # North West
+    s, e, margin = 100, 190, 12
+    # ax.plot(ax.projection_ra(ecl_ra[s:e]), ax.projection_dec(ecl_dec[s:e])+rad(margin), color='blue')
+    ax.fill_between(ax.projection_ra(ecl_ra[s:e]), ax.projection_dec(ecl_dec[s:e])+rad(margin), rad(90), alpha=0.3, color='blue')
+    
     return ax
 
 def plot_HST_cosmos_Survey(fig, ax):
-    cosmos_rad = eq2gal(150.11916667,2.20583333)
-    cosmos = Circle((cosmos_rad[0], cosmos_rad[1]), rad(np.sqrt(2/(2*np.pi))), edgecolor='black', facecolor='orange', alpha=0.5, label='HST Cosmos')
-    zoom_cosmos = Circle((cosmos_rad[0], cosmos_rad[1]), rad(np.sqrt(2/(2*np.pi))), edgecolor='black', facecolor='orange', alpha=0.5, label=r'HST Cosmos (2eg$^2$)')
+    cosmos_ra = np.array([150.11916667])
+    cosmos_dec= np.array([2.20583333])
+
+    cosmos = Circle((ax.projection_ra(cosmos_ra), ax.projection_dec(cosmos_dec)), rad(np.sqrt(2/(np.pi))), edgecolor='black', facecolor='orange', alpha=0.5, label=r'HST cosmos (2deg$^2$)')
+    zoom_cosmos = Circle((ax.projection_ra(cosmos_ra), ax.projection_dec(cosmos_dec)), rad(np.sqrt(2/(np.pi))), edgecolor='black', facecolor='orange', alpha=0.5, label=r'HST cosmos (2deg$^2$)')
     ax.add_patch(cosmos)
     return ax, zoom_cosmos
 
-def plot_Cosmos_Web_Survey(fig, ax):
-    cosmos_rad = eq2gal(150.11916667,2.20583333)
-    cosmos = Circle((cosmos_rad[0], cosmos_rad[1]), rad(np.sqrt(0.54/(2*np.pi))), edgecolor='black', facecolor='red', alpha=0.5, label=r'Cosmos-Web (0.54deg$^2$)')
-    zoom_cosmos_web = Circle((cosmos_rad[0], cosmos_rad[1]), rad(np.sqrt(0.54/(2*np.pi))), edgecolor='black', facecolor='red',alpha=0.5)
+def plot_JWST_CEERS_Survey(fig, ax):
+    ceers_rad = [96, 59] #eq2gal(14.28, 53)
+    ceers = Circle((ceers_rad[0], ceers_rad[1]), rad(np.sqrt((1/6)/(2*np.pi))), edgecolor='black', ls='--', facecolor='red', alpha=0.5, label=r'JWST CEERS (0.02 deg$^2$)')
+    zoom_ceers = Circle((ceers_rad[0], ceers_rad[1]), rad(np.sqrt((1/6)/(2*np.pi))), edgecolor='black', facecolor='red', alpha=0.5)
+    ax.add_patch(ceers)
+    return ax, zoom_ceers
+
+def plot_cosmos_Web_Survey(fig, ax):
+    cosmos_ra = np.array([150.11916667])
+    cosmos_dec= np.array([2.20583333])
+
+    cosmos = Circle((ax.projection_ra(cosmos_ra), ax.projection_dec(cosmos_dec)), rad(np.sqrt(0.6/(np.pi))), edgecolor='black', facecolor='red', alpha=0.5, label=r'Cosmos-Web (0.6deg$^2$)')
+    zoom_cosmos_web = Circle((ax.projection_ra(cosmos_ra), ax.projection_dec(cosmos_dec)), rad(np.sqrt(0.6/(np.pi))), edgecolor='black', facecolor='red', alpha=0.5)
     ax.add_patch(cosmos)
     return ax, zoom_cosmos_web
 
 def plot_Rubin_LSST_Survey(fig, ax):
-    lon_ecl = np.linspace(0, 360, 100)
-    lat_ecl = np.zeros(100)
 
-    l_ecl_gal, b_ecl_gal = ecl2gal(lon_ecl, lat_ecl)
-    start=22
-    end=100
-    start2=0
-    end2=22
-    ax.fill_between(l_ecl_gal[start:end], b_ecl_gal[start:end]+0.2, rad(-90), color='green', alpha=0.5, hatch="/", label=r'Rubin LSST (18 000deg$^2$)')
-    ax.fill_between(l_ecl_gal[start2:end2], b_ecl_gal[start2:end2]+0.2, rad(-90), color='green', alpha=0.5, hatch="/")
+    ax.fill_between(np.linspace(-180, 180), rad(30), rad(-90), alpha=0.3, color='green', label='Rubin LSST')
     return ax

@@ -242,18 +242,19 @@ def plot_galaxies(info, telescopes, instruments, nb_to_plot, bands=None):
 
 def plot_surveys(telescopes, selected_surveys):
     sns.set()
-    # Ecliptic plane
-    lon_ecl = np.linspace(0, 360, 100)
-    lat_ecl = np.zeros(100)
 
-    fig= plt.figure(figsize=(14,7))
-    ax = plt.subplot(111, projection='aitoff')
-    # plt.xticks(ticks=np.radians([-150, -120, -90, -60, -30, 0, \
-    #                          30, 60, 90, 120, 150]),
-    #        labels=['150°', '120°', '90°', '60°', '30°', '0°', \
-    #                '330°', '300°', '270°', '240°', '210°'])
+    # fig = plt.figure(figsize=(14,7))
+    fig, ax, ecliptic, galactic = init_sky()
+    ecliptic_ra_deg = np.concatenate((ecliptic.ra.degree[160:], ecliptic.ra.degree[:160], ))
+    ecliptic_dec_deg = np.concatenate(( ecliptic.dec.degree[160:], ecliptic.dec.degree[:160],))
+    galactic_ra_deg = np.concatenate((galactic.ra.degree[14:], galactic.ra.degree[:14]))
+    galactic_dec_deg = np.concatenate((galactic.dec.degree[14:], galactic.dec.degree[:14]))
+    ax.plot(ax.projection_ra(ecliptic_ra_deg), ax.projection_dec(ecliptic_dec_deg), color='black', alpha=0.5, ls='--', lw=0.7)
+    ax.plot(ax.projection_ra(galactic_ra_deg), ax.projection_dec(galactic_dec_deg), color='black', alpha=0.5, lw=0.7)
+    lines = ax.get_lines()
+    legend1 = plt.legend([lines[i] for i in [0,1]], ['Ecliptic', 'Galactic'], fontsize=15, bbox_to_anchor = (1, 1.2))
+    ax.add_artist(legend1)
 
-    plt.grid()
     nb_to_plot = 0
     cosmos_patches = []
     for telescope in telescopes:
@@ -262,14 +263,17 @@ def plot_surveys(telescopes, selected_surveys):
             if f'{telescope}-{survey}' == 'Euclid-Deep-Survey':
                 ax = plot_Euclid_Deep_Survey(fig, ax)
             elif f'{telescope}-{survey}' == 'Euclid-Wide-Survey':
-                ax = plot_Euclid_Wide_Survey(fig, ax)
+                ax = plot_Euclid_Wide_Survey(fig, ax, ecliptic_ra_deg, ecliptic_dec_deg, galactic_ra_deg, galactic_dec_deg)
             elif f'{telescope}-{survey}' == 'HST-HST-Cosmos':
                 ax, cosmos_patch = plot_HST_cosmos_Survey(fig, ax)
                 cosmos_patches.append(cosmos_patch)
             elif f'{telescope}-{survey}' == 'Rubin-LSST':
                 ax = plot_Rubin_LSST_Survey(fig, ax)
             elif f'{telescope}-{survey}' == 'JWST-Cosmos-Web':
-                ax, cosmos_patch = plot_Cosmos_Web_Survey(fig, ax)
+                ax, cosmos_patch = plot_cosmos_Web_Survey(fig, ax)
+                cosmos_patches.append(cosmos_patch)
+            elif f'{telescope}-{survey}' == 'JWST-CEERS':
+                ax, cosmos_patch = plot_JWST_CEERS_Survey(fig, ax)
                 cosmos_patches.append(cosmos_patch)
             else:
                 st.markdown(f'Sorry, {telescope} {survey} is not yet available... Stay Tuned!')
@@ -278,23 +282,24 @@ def plot_surveys(telescopes, selected_surveys):
     if ('HST' in telescopes) | ('JWST' in telescopes):
         cosmos_zoom = st.checkbox('Zoom on Cosmos')
         if cosmos_zoom:
-            zoom = ax.inset_axes([0.9, 0.9, 0.3, 0.5])#, transform=ax.transData)
+            zoom = ax.inset_axes([0.05, 1.15, 0.2, 0.4])#, transform=ax.transData)
             sx = 1
             sy = 1
             [zoom.add_patch(patch) for patch in cosmos_patches]
-            zoom.set_xlim(2.149-rad(sx), 2.149+rad(sx))
-            zoom.set_ylim(.73-rad(sy), .73+rad(sy))
+            zoom.set_xlim(rad(-40)-rad(sx), rad(-40)+rad(sx))
+            zoom.set_ylim(rad(2)-rad(sy), rad(2)+rad(sy))
             xticks = list(zoom.get_xticks())
             yticks = list(zoom.get_yticks())
             zoom_xticks = [xticks[0], (xticks[-1] + xticks[0]) / 2, xticks[-1]]
             zoom_yticks = [yticks[0], (yticks[-1] + yticks[0]) / 2, yticks[-1]]
             zoom.set_xticks(zoom_xticks)
             zoom.set_yticks(zoom_yticks)
-            zoom.set_xticklabels([np.round(123.178-sx, 1), np.round(123.178,2), np.round(123.178+sx, 2)])
-            zoom.set_yticklabels([np.round(42.121-sy, 1), np.round(42.121,2), np.round(42.121+sy, 2)])
+            zoom.set_xticklabels([np.round(150.12+sx, 2), np.round(150.12, 2), np.round(150.22-sx, 2)])
+            zoom.set_yticklabels([np.round(2.20-sy, 2), np.round(2.20, 2), np.round(2.20+sy, 2)])
             zoom.set_xlabel('RA')
             zoom.set_ylabel('DEC')
-            zoom.annotate('', xy=(0, 0), xycoords='axes fraction', xytext=(-0.44, -0.235), arrowprops=dict(arrowstyle="<-", color='black', lw=2))
+            zoom.annotate('', xy=(0.6, 0), xycoords='axes fraction', xytext=(1.7, -1.55), arrowprops=dict(arrowstyle="<-", color='gray', alpha=0.9, lw=2))
 
     plt.legend(bbox_to_anchor = (1, -0.1), ncol=2, fontsize=20)
+    
     return fig
