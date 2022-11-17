@@ -83,12 +83,12 @@ def plot_Euclid_Wide_Survey(fig, ax, ecl_ra, ecl_dec, gal_ra, gal_dec):
     
     return ax
 
-def plot_HST_cosmos_Survey(fig, ax):
+def plot_HST_cosmos_Survey(fig, ax, show_name=True):
     cosmos_ra = np.array([150.11916667])
     cosmos_dec= np.array([2.20583333])
 
-    cosmos = Circle((ax.projection_ra(cosmos_ra), ax.projection_dec(cosmos_dec)), rad(np.sqrt(2/(np.pi))), edgecolor='black', facecolor='orange', alpha=0.5, label=r'HST cosmos (2deg$^2$)')
-    zoom_cosmos = Circle((ax.projection_ra(cosmos_ra), ax.projection_dec(cosmos_dec)), rad(np.sqrt(2/(np.pi))), edgecolor='black', facecolor='orange', alpha=0.5, label=r'HST cosmos (2deg$^2$)')
+    cosmos = Circle((ax.projection_ra(cosmos_ra), ax.projection_dec(cosmos_dec)), rad(np.sqrt(2/(np.pi))), edgecolor='black', facecolor='orange', alpha=0.5, hatch='/', label=r'HST cosmos (2deg$^2$)')
+    zoom_cosmos = Circle((ax.projection_ra(cosmos_ra), ax.projection_dec(cosmos_dec)), rad(np.sqrt(2/(np.pi))), edgecolor='black', facecolor='orange', alpha=0.5, hatch='/', label=r'HST cosmos (2deg$^2$)')
     ax.add_patch(cosmos)
     return ax, zoom_cosmos
 

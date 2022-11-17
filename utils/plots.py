@@ -242,7 +242,9 @@ def plot_galaxies(info, telescopes, instruments, nb_to_plot, bands=None):
 
 def plot_surveys(telescopes, selected_surveys):
     sns.set()
-
+    col1, col2 = st.columns(2)
+    with col1:
+        show_name = st.checkbox('Show survey names')
     # fig = plt.figure(figsize=(14,7))
     fig, ax, ecliptic, galactic = init_sky()
     ecliptic_ra_deg = np.concatenate((ecliptic.ra.degree[160:], ecliptic.ra.degree[:160], ))
@@ -257,15 +259,16 @@ def plot_surveys(telescopes, selected_surveys):
 
     nb_to_plot = 0
     cosmos_patches = []
+
     for telescope in telescopes:
         for survey in selected_surveys[telescope]:
             print(f'{telescope}-{survey}')
             if f'{telescope}-{survey}' == 'Euclid-Deep-Survey':
-                ax = plot_Euclid_Deep_Survey(fig, ax)
+                ax = plot_Euclid_Deep_Survey(fig, ax, show_name)
             elif f'{telescope}-{survey}' == 'Euclid-Wide-Survey':
                 ax = plot_Euclid_Wide_Survey(fig, ax, ecliptic_ra_deg, ecliptic_dec_deg, galactic_ra_deg, galactic_dec_deg)
             elif f'{telescope}-{survey}' == 'HST-HST-Cosmos':
-                ax, cosmos_patch = plot_HST_cosmos_Survey(fig, ax)
+                ax, cosmos_patch = plot_HST_cosmos_Survey(fig, ax, show_name)
                 cosmos_patches.append(cosmos_patch)
             elif f'{telescope}-{survey}' == 'Rubin-LSST':
                 ax = plot_Rubin_LSST_Survey(fig, ax)
@@ -276,13 +279,14 @@ def plot_surveys(telescopes, selected_surveys):
                 ax, cosmos_patch = plot_JWST_CEERS_Survey(fig, ax)
                 cosmos_patches.append(cosmos_patch)
             elif f'{telescope}-{survey}' == 'HST-HST-CANDELS':
-                ax = plot_HST_CANDELS_Survey(fig, ax)
+                ax = plot_HST_CANDELS_Survey(fig, ax, show_name)
             else:
                 st.markdown(f'Sorry, {telescope} {survey} is not yet available... Stay Tuned!')
 
             nb_to_plot += 1
     if ('HST' in telescopes) | ('JWST' in telescopes):
-        cosmos_zoom = st.checkbox('Zoom on Cosmos')
+        with col2:
+            cosmos_zoom = st.checkbox('Zoom on Cosmos')
         if cosmos_zoom:
             zoom = ax.inset_axes([0.05, 1.15, 0.2, 0.4])#, transform=ax.transData)
             sx = 1
