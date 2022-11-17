@@ -1,17 +1,27 @@
+
 import matplotlib.pyplot as plt
 import streamlit as st
 import matplotlib.image as mpimg
 
+"""
+This is the main page, that you have to run with "streamlit run" to launch the app locally.
+Streamlit automatically create the tabs in the left sidebar from the .py files located in /pages
+Here we just have the home page, with a short description of the tabs, and some images
+
+"""
 
 st.set_page_config(
     page_title="Home page",
     page_icon="👋",
     layout="centered")
 
-# add_logo
+# SurViZ logo
 st.image('surviz_black_long.png')
+
+# Main Description
 st.write("## 👋 Welcome to SurViZ, your best tool to compare and explore galaxy SurVeys! \n Developed by __Hubert Bretonnière__: https://github.com/Hbretonniere/SurViZ \n The page is still in development. Please reach me in the github repo if you have any comments or suggestions.")
 
+# Description of the features. 
 st.markdown(
     """
     ### Select on the left panel what you want to explore:
@@ -33,7 +43,4 @@ st.markdown(
     """
 )
 
-fig = plt.figure()#figsize=(15, 15))
-plt.imshow(mpimg.imread("data/logos/logos.jpeg"))#), aspect="auto")
-plt.axis('off')
-st.pyplot(fig)
+st.image('data/logos/logos.jpeg')
