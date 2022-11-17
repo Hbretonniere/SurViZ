@@ -112,38 +112,38 @@ def plot_HST_CANDELS_Survey(fig, ax, show_name=True):
     # rad_goods-s = 37000 pix = 558'' = 0.3deg
     goods_s_ra = np.array([53])
     goods_s_dec= np.array([-27.8])
-    goods_s = Circle((ax.projection_ra(goods_s_ra), ax.projection_dec(goods_s_dec)), rad(np.sqrt(0.3/(np.pi))), edgecolor='black', facecolor='red', alpha=0.5, label=r'HST CANDELS (2.82deg$^2$)')
+    goods_s = Circle((ax.projection_ra(goods_s_ra), ax.projection_dec(goods_s_dec)), rad(np.sqrt(0.3/(np.pi))), edgecolor='black', facecolor='orange', alpha=0.5, label=r'HST CANDELS (2.82deg$^2$)')
     ax.add_patch(goods_s)
 
     # rad_goods-n = same good s
     goods_n_ra = np.array([189])
     goods_n_dec= np.array([62])
-    goods_n = Circle((ax.projection_ra(goods_n_ra), ax.projection_dec(goods_n_dec)), rad(np.sqrt(0.3/(np.pi))), edgecolor='black', facecolor='red', alpha=0.5)
+    goods_n = Circle((ax.projection_ra(goods_n_ra), ax.projection_dec(goods_n_dec)), rad(np.sqrt(0.3/(np.pi))), edgecolor='black', facecolor='orange', alpha=0.5)
     ax.add_patch(goods_n)
 
     # rad EGS = 22673 = 0.12deg
     EGS_ra = np.array([214.8])
     EGS_dec= np.array([52.8])
-    EGS = Circle((ax.projection_ra(EGS_ra), ax.projection_dec(EGS_dec)), rad(np.sqrt(0.12/(np.pi))), edgecolor='black', facecolor='red', alpha=0.5)
+    EGS = Circle((ax.projection_ra(EGS_ra), ax.projection_dec(EGS_dec)), rad(np.sqrt(0.12/(np.pi))), edgecolor='black', facecolor='orange', alpha=0.5)
     ax.add_patch(EGS)
 
     # rad UDS = 19829 = 0.16deg
     UDS_ra = np.array([34])
     UDS_dec= np.array([-5.2])
-    UDS = Circle((ax.projection_ra(UDS_ra), ax.projection_dec(UDS_dec)), rad(np.sqrt(0.11/(np.pi))), edgecolor='black', facecolor='red', alpha=0.5)
+    UDS = Circle((ax.projection_ra(UDS_ra), ax.projection_dec(UDS_dec)), rad(np.sqrt(0.11/(np.pi))), edgecolor='black', facecolor='orange', alpha=0.5)
     ax.add_patch(UDS)
 
     # rad UDS = 19829 = 0.16deg
     cosmos_ra = np.array([150.11916667])
     cosmos_dec= np.array([2.20583333])
-    cosmos = Circle((ax.projection_ra(cosmos_ra), ax.projection_dec(cosmos_dec)), rad(np.sqrt(2/(np.pi))), edgecolor='black', facecolor='red', alpha=0.5, label=r'Cosmos-Web (0.6deg$^2$)')
+    cosmos = Circle((ax.projection_ra(cosmos_ra), ax.projection_dec(cosmos_dec)), rad(np.sqrt(2/(np.pi))), edgecolor='black', facecolor='orange', alpha=0.5)
     ax.add_patch(cosmos)
 
     if show_name:
-        ax.text(ax.projection_ra(goods_s_ra), ax.projection_dec(goods_s_dec)+rad(1),'GOODS-S', color='red')
-        ax.text(ax.projection_ra(goods_n_ra), ax.projection_dec(goods_n_dec)+rad(1),'GOODS-N', color='red')
-        ax.text(ax.projection_ra(UDS_ra), ax.projection_dec(UDS_dec)+rad(1),'UDS', color='red')
-        ax.text(ax.projection_ra(EGS_ra), ax.projection_dec(EGS_dec)+rad(1),'EGS', color='red')
-        ax.text(ax.projection_ra(cosmos_ra), ax.projection_dec(cosmos_dec)+rad(1.5),'COSMOS', color='red')
+        ax.text(ax.projection_ra(goods_s_ra), ax.projection_dec(goods_s_dec)+rad(1),'GOODS-S', color='darkorange')
+        ax.text(ax.projection_ra(goods_n_ra), ax.projection_dec(goods_n_dec)+rad(1),'GOODS-N', color='darkorange')
+        ax.text(ax.projection_ra(UDS_ra), ax.projection_dec(UDS_dec)+rad(1),'UDS', color='darkorange')
+        ax.text(ax.projection_ra(EGS_ra), ax.projection_dec(EGS_dec)+rad(1),'EGS', color='darkorange')
+        ax.text(ax.projection_ra(cosmos_ra), ax.projection_dec(cosmos_dec)+rad(1.5),'COSMOS', color='darkorange')
 
     return ax
