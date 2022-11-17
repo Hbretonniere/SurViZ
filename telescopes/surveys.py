@@ -30,11 +30,23 @@ JWST_Cosmos_Web = {
               'filters':['F115W', 'F150W', 'F277W', 'F444W']
              }
 
+JWST_CEERS = {
+              'instruments':{"NIRCAM":JWST_NIRCAM,
+                            "MIRI":JWST_MIRI},
+              'std_noise':None,
+              'area':0.03,
+              'filters':['F115W', 'F150W', 'F277W', 'F444W']
+             }
+
 HST_Cosmos = {
               'instruments':{"ACS":HST_ACS},
               'std_noise':0.0042,
               'area':2
              }
+
+HST_CANDELS = {'instruments':{"ACS":HST_ACS},
+              'std_noise':None,
+              'area':2.82}
 
 LSST = {
               'instruments':{"Wide-field-imager":Rubin_Wide_field_imager},

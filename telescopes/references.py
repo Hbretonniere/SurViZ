@@ -33,10 +33,15 @@ References:
 """
 
 footprint_refs = """
+
 References:
+Projection use utils from https://desiutil.readthedocs.io/en/latest/_modules/desiutil/plots.html
 - SDSS:
     - SDSS-I: https://classic.sdss.org/dr7/coverage/index.html
-    
+- JWST:
+    - CEERS: https://ceers.github.io/obs.html
+- HST:
+    - CANDELS: https://www.researchgate.net/figure/World-Coordinate-System-Information-for-Each-CANDELS-HST-Mosaic_tbl4_230951842
     """
 
 image_quality_refs = """
