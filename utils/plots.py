@@ -280,6 +280,8 @@ def plot_surveys(telescopes, selected_surveys):
                 cosmos_patches.append(cosmos_patch)
             elif f'{telescope}-{survey}' == 'HST-HST-CANDELS':
                 ax = plot_HST_CANDELS_Survey(fig, ax, show_name)
+            elif f'{telescope}-{survey}' == 'SDSS-SDSS-I':
+                ax = plot_SDSS_I_Survey(fig, ax)
             else:
                 st.markdown(f'Sorry, {telescope} {survey} is not yet available... Stay Tuned!')
 

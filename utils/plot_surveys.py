@@ -58,7 +58,7 @@ def plot_Euclid_Wide_Survey(fig, ax, ecl_ra, ecl_dec, gal_ra, gal_dec):
     s, e = 10, 26
     margin = np.linspace(50, 20, e-s)
     # ax.plot(ax.projection_ra(gal_ra[s:e]), ax.projection_dec(gal_dec[s:e])-rad(margin), color='blue')
-    ax.fill(ax.projection_ra(gal_ra[s:e]), ax.projection_dec(gal_dec[s:e])-rad(margin), alpha=0.3, color='blue')
+    ax.fill(ax.projection_ra(gal_ra[s:e]), ax.projection_dec(gal_dec[s:e])-rad(margin), alpha=0.3, color='blue', label='Euclid Wide')
     
     # South Hole
     s, e = 55, 75
@@ -150,5 +150,19 @@ def plot_HST_CANDELS_Survey(fig, ax, show_name=True):
         ax.text(ax.projection_ra(UDS_ra), ax.projection_dec(UDS_dec)+rad(1),'UDS', color='darkorange')
         ax.text(ax.projection_ra(EGS_ra), ax.projection_dec(EGS_dec)+rad(1),'EGS', color='darkorange')
         ax.text(ax.projection_ra(cosmos_ra), ax.projection_dec(cosmos_dec)+rad(1.5),'COSMOS', color='darkorange')
+
+    return ax
+
+def plot_SDSS_I_Survey(fig, ax):
+    ax.fill_between(ax.projection_ra(np.linspace(120, 240, 2)), 0, rad(70), color='purple', hatch='/', alpha=0.5, label='SDSS-I')
+    
+    ax.fill_between(ax.projection_ra(np.linspace(320, 360, 2)), rad(1), -rad(1), color='purple', hatch='/', alpha=0.5)
+    ax.fill_between(ax.projection_ra(np.linspace(0, 60, 2)), rad(1), -rad(1), color='purple', hatch='/', alpha=0.5)
+    
+    ax.fill_between(ax.projection_ra(np.linspace(0, 30, 2)), np.array([rad(11), rad(8)]), [rad(13), rad(10)], color='purple', hatch='/', alpha=0.5)
+    ax.fill_between(ax.projection_ra(np.linspace(320, 360, 2)), np.array([rad(17), rad(13)]), [rad(15), rad(11)], color='purple', hatch='/', alpha=0.5)
+
+    ax.fill_between(ax.projection_ra(np.linspace(0, 60, 2)), np.array([rad(-8.45), rad(-3)]), [rad(-10.45), rad(-5)], color='purple', hatch='/', alpha=0.5)
+    ax.fill_between(ax.projection_ra(np.linspace(320, 360, 2)), np.array([rad(-12), rad(-8.45)]), [rad(-14), rad(-10.45)], color='purple', hatch='/', alpha=0.5)
 
     return ax
