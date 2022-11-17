@@ -9,23 +9,28 @@ from utils.diverse_utils import init_sky, projection_dec, projection_ra #eq2gal,
 def rad(x):
     return x*np.pi/180
 
-def plot_Euclid_Deep_Survey(fig, ax):
+def plot_Euclid_Deep_Survey(fig, ax, show_name=True):
 
     edfn_ra = np.array([269.73])
     edfn_dec = np.array([66.01])
-    edfn = Circle((ax.projection_ra(edfn_ra), ax.projection_dec(edfn_dec)), np.sqrt(20/(np.pi))*np.pi/180, ls='--', edgecolor='black', facecolor='blue', label='Euclid Deep')
+    edfn = Circle((ax.projection_ra(edfn_ra), ax.projection_dec(edfn_dec)), np.sqrt(20/(np.pi))*np.pi/180, alpha=0.8, ls='--', edgecolor='black', facecolor='blue', label='Euclid Deep')
     ax.add_patch(edfn)
 
     fornax_ra = np.array([52.93583333]) 
     fornax_dec = np.array([-28.08850000])    
-    fornax = Circle((ax.projection_ra(fornax_ra), ax.projection_dec(fornax_dec)), rad(np.sqrt(10/(np.pi))), ls='--', edgecolor='black', facecolor='blue')
+    fornax = Circle((ax.projection_ra(fornax_ra), ax.projection_dec(fornax_dec)), rad(np.sqrt(10/(np.pi))), alpha=0.8, ls='--', edgecolor='black', facecolor='blue')
     ax.add_patch(fornax)
 
     edfs_ra= np.array([61.241])
     edfs_dec = np.array([-48.42300000])
-    edfs = Circle((ax.projection_ra(edfs_ra), ax.projection_dec(edfs_dec)), rad(np.sqrt(10/(np.pi))), ls='--', edgecolor='black', facecolor='blue')
-
+    edfs = Circle((ax.projection_ra(edfs_ra), ax.projection_dec(edfs_dec)), rad(np.sqrt(10/(np.pi))), alpha=0.8, ls='--', edgecolor='black', facecolor='blue')
     ax.add_patch(edfs)
+
+    if show_name:
+        ax.text(ax.projection_ra(edfs_ra), ax.projection_dec(edfs_dec)+rad(3),'EDFS', color='darkblue')
+        ax.text(ax.projection_ra(fornax_ra), ax.projection_dec(fornax_dec)-rad(8),'FORNAX', color='darkblue')
+        ax.text(ax.projection_ra(edfn_ra), ax.projection_dec(edfn_dec)+rad(3),'EDFN', color='darkblue')
+
     return ax
 
 def shift(key, array):
