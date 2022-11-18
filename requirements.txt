@@ -3,3 +3,4 @@ matplotlib
 seaborn
 galsim
 opencv-python-headless
+scipy
