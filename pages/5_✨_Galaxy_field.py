@@ -1,11 +1,3 @@
-import streamlit as st
-import numpy as np
-import matplotlib.pyplot as plt
-from telescopes.main_info import info
-from utils.plots import plot_fields
-from telescopes.references import image_depth_refs
-
-
 """
 Visualisation of the survey depth
 
@@ -36,6 +28,17 @@ The structure is as follow. To read Euclid's NIR's zero point:
 The galaxy simulation procedure are done in sim_field(...) and sim_and_save_fields(...) in /utils/diverse_utils
 The plotting is done by plot_fields in /utils/plot_galaxies.py
 """
+
+
+import streamlit as st
+import numpy as np
+import matplotlib.pyplot as plt
+from telescopes.main_info import info
+from utils.plots import plot_fields
+from telescopes.references import image_depth_refs
+
+
+
 
 # SurViZ logo
 st.image('surviz_black_long.png')
