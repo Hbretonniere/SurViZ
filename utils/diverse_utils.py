@@ -9,16 +9,32 @@ from astropy.io import fits
 from types import MethodType
 import matplotlib.pyplot as plt
 from astropy.coordinates import ICRS
+import cv2
+from scipy.signal import convolve2d
+
 
 def MagToFlux(zp, mag):
+    """
+    Convert a magnitude to the corresponding total flux, depending on 
+    the AB zero-point magntiude of the instrument
+    
+    Parameters
+    ----------
+        - zp : float, the zero-point magnitude of the instrument
+        - mag : float: the magnitude of the object
+    
+    Returns
+    ----------
+    
+        - Flux: the corresponding flux
+
+    """
+
     Flux = np.power(10, ((zp - mag)*0.4))
     return Flux
 
-ra_center = 120
-
 
 def init_sky(projection='mollweide', ra_center=110,
-             galactic_plane_color='red', ecliptic_plane_color='red',
              ax=None):
     """
     Adapted from https://desiutil.readthedocs.io/en/latest/_modules/desiutil/plots.html
@@ -33,12 +49,6 @@ def init_sky(projection='mollweide', ra_center=110,
     ra_center : :class:`float`, optional
         Projection is centered at this RA in degrees. Default is +120°, which avoids splitting
         the DESI northern and southern regions.
-    galactic_plane_color : color name, optional
-        Draw a solid curve representing the galactic plane using the specified color, or do
-        nothing when ``None``.
-    ecliptic_plane_color : color name, optional
-        Draw a dotted curve representing the ecliptic plane using the specified color, or do
-        nothing when ``None``.
     ax : :class:`~matplotlib.axes.Axes`, optional
         Axes to use for drawing this map, or create new axes if ``None``.
 
@@ -122,9 +132,8 @@ def init_sky(projection='mollweide', ra_center=110,
     #
     # Galactic plane.
     #
-    if galactic_plane_color is not None:
-        galactic_l = np.linspace(0, 2 * np.pi, 100)
-        galactic = SkyCoord(l=galactic_l*u.radian, b=np.zeros_like(galactic_l)*u.radian,
+    galactic_l = np.linspace(0, 2 * np.pi, 100)
+    galactic = SkyCoord(l=galactic_l*u.radian, b=np.zeros_like(galactic_l)*u.radian,
                             frame='galactic').transform_to(ICRS)
         #
         # Project to map coordinates and display.  Use a scatter plot to
@@ -135,9 +144,8 @@ def init_sky(projection='mollweide', ra_center=110,
     #
     # Ecliptic plane.
     #
-    if ecliptic_plane_color is not None:
-        ecliptic_l = np.linspace(0, 2 * np.pi, 200)
-        ecliptic = SkyCoord(lon=ecliptic_l*u.radian, lat=np.zeros_like(ecliptic_l)*u.radian, distance=1 * u.Mpc,
+    ecliptic_l = np.linspace(0, 2 * np.pi, 200)
+    ecliptic = SkyCoord(lon=ecliptic_l*u.radian, lat=np.zeros_like(ecliptic_l)*u.radian, distance=1 * u.Mpc,
                             frame='heliocentrictrueecliptic').transform_to(ICRS)
     #
     # Set RA labels.
@@ -162,7 +170,7 @@ def init_sky(projection='mollweide', ra_center=110,
 
 
 
-def projection_ra(self, ra):
+def projection_ra(self, ra, ra_center=110):
     r"""
     From https://desiutil.readthedocs.io/en/latest/_modules/desiutil/plots.html
 
@@ -199,7 +207,7 @@ def projection_ra(self, ra):
     return np.radians(r)
 
 
-def projection_dec(self, dec):
+def projection_dec(self, dec, ra_center=110):
     """
     From https://desiutil.readthedocs.io/en/latest/_modules/desiutil/plots.html
 
@@ -220,6 +228,18 @@ def projection_dec(self, dec):
 
 
 def create_psf(fwhm, pxscale):
+    """
+    Create the image of a PSF, based on a FWHM
+
+    Parameters
+    ----------
+        fwhm: float, the full width half maximum of the PSF
+        pxscale: float, the pixel scale of the instrument
+
+    Returns
+    ----------
+        PSF: (256, 256) numpy array, the 2d image of the PSF
+    """
 
     N = 256
     X = np.linspace(-127, 127, N)
@@ -241,152 +261,208 @@ def create_psf(fwhm, pxscale):
     # This einsum call calculates (x-mu)T.Sigma-1.(x-mu) in a vectorized
     # way across all the input variables.
     fac = np.einsum('...k,kl,...l->...', pos-mu, Sigma_inv, pos-mu)
+    PSF = np.exp(-fac/ 2) / N
+    return PSF
+
+
+def sim_field(pxscale, fwhm, noise_level, zp):
+
+    """
+    Simulate a field of galaxies with Galsim
+
+    Parameters
+    ----------
+        - cat:         
+        - pxscale:     float, the pixel scale of the instrument
+        - fwhm:        float, the full width half maximum of the PSF
+        - noise level: float, the standard deviation of the background sky noise
+        - zp:          float, the AB zero-point magnitude of the instrument
     
-    return np.exp(-fac/ 2) / N #* np.exp(-fac2/ 2) / N2
+    Returns
+    ----------
+        - full_image:  numpy array, the galaxy flux field
 
-
-def ecl2gal(lon_ecl, lat_ecl):
-    '''
-    # adapted from https://astronomy.stackexchange.com/questions/39404/how-to-plot-celestial-equator-in-galactic-coordinates-why-does-my-plot-appear
-
-    Transforms ecliptic coordinates to galactic ones.
-    Then prepares them for matplotlib aitoff projection.
-    '''
+    """
     
-    ecl = SkyCoord(lon_ecl, lat_ecl, unit=u.deg, frame='barycentricmeanecliptic')
-    gal = ecl.transform_to('galactic')
-
-    # Minus appears because of “mapping from the inside” issue
-    l_gal, b_gal = -gal.l.wrap_at('180d').radian, gal.b.radian
-    
-    return l_gal, b_gal
-
-def eq2gal(ra, dec):
-    
-    '''
-    # adapted from https://astronomy.stackexchange.com/questions/39404/how-to-plot-celestial-equator-in-galactic-coordinates-why-does-my-plot-appear
-
-    Transforms equatorial coordinates to galactic ones.
-    Then prepares them for matplotlib aitoff projection. 
-    '''
-    
-    eq = SkyCoord(ra, dec, unit=u.deg)
-    gal = eq.galactic
-
-    # Minus appears because of “mapping from the inside” issue
-    l_gal, b_gal = -gal.l.wrap_at('180d').radian, gal.b.radian
-    
-    return l_gal, b_gal
-
-
-
-def sim_field(cat, pxscale, fwhm, noise_level, zp):
-
+    # Charge the catalogue name of galaxy parameters (double Sérsic catalog)
     catName = glob.glob('../data/vis_0*')[0]
+
+    # Transform to galsim like catalog
     cat = galsim.Catalog(catName) 
-    ### NOISE LEVEL IN MICROJANSKY
+
+    # The catalog contains a field of 314000 galaxies, which is to large for what we want
+    # To reduce it, we divide the size of the field by 40^2, and thus also the density of sources and positions
     divideFor = 40
-    NumGal = 314*1000/(divideFor**2)  # 314709 in the list
+    NumGal = 314000/(divideFor**2)  # 314709 in the list
     image_size_x = int(25000/divideFor)
     image_size_y = int(25000/divideFor)
+
+    # Create the blank image of the full field
     full_image = galsim.ImageF(image_size_x, image_size_y)
-    for i in range(int(NumGal)):
-        if i == 184:
+
+    # Loop through the galaxies
+    for gal_idx in range(int(NumGal)):
+
+        # There's a too big galaxy (too long to simualte)
+        if gal_idx == 184:
             continue
+        
+        # Create the stamp for the individual galaxy
         stamp_size = 1000
         stamp_gal = galsim.ImageF(stamp_size, stamp_size, scale=pxscale)
-        gal_idx = i
+
+        # Extract all the necessary parameters (parameter shapes, position and fluxes)
         float_ix = cat.getFloat(gal_idx, 1) / divideFor
         float_iy = cat.getFloat(gal_idx, 2) / divideFor
-        radiusBulge = cat.getFloat(i, 5)
-        radiusDisk = cat.getFloat(i, 8)*1.678
-        bt = cat.getFloat(i, 4)
-        ell_B = cat.getFloat(i, 6)
-        ell_D = cat.getFloat(i, 9)
+        radiusBulge = cat.getFloat(gal_idx, 5)
+        radiusDisk = cat.getFloat(gal_idx, 8)*1.678
+        bt = cat.getFloat(gal_idx, 4)
+        ell_B = cat.getFloat(gal_idx, 6)
+        ell_D = cat.getFloat(gal_idx, 9)
         q = bt*ell_B + (1-bt)*ell_D
-        mag = cat.getFloat(i, 3)
+        mag = cat.getFloat(gal_idx, 3)
         Flux = MagToFlux(zp, mag)
-        PA = cat.getFloat(i, 7)
-        ix = int(cat.getFloat(i, 1) / divideFor)
-        iy = int(cat.getFloat(i, 2) / divideFor)
-        dx = float_ix - ix
-        dy = float_iy - iy
-        offset = galsim.PositionD(dx, dy)
+        PA = cat.getFloat(gal_idx, 7)
+        ix = int(cat.getFloat(gal_idx, 1) / divideFor)
+        iy = int(cat.getFloat(gal_idx, 2) / divideFor)
+        
+        # Simulate the bulge component
         bulge = galsim.Sersic(4, radiusBulge, flux=1.0)
+
+        # Shear to the wanted ellipticity
         b_shear = galsim.Shear(q=ell_B, beta=galsim.Angle(PA, galsim.radians))
         bulge = bulge.shear(b_shear)
         
+        # Simulate the disk component
         disk = galsim.Sersic(1, radiusDisk, flux=1.0)
+        
+        # Shear it to the wanted ellipticity
         d_shear = galsim.Shear(q=ell_D, beta=galsim.Angle(PA, galsim.radians))
         disk = disk.shear(d_shear)
+
+        # SUm the two components
         gal = bulge + disk
+
+        # Create the PSF
         psf = galsim.Gaussian(flux=1., fwhm=fwhm)
+
+        # Convolve the galaxy and the PSF
         gal = galsim.Convolve(psf, gal)
+
+        # Calibrate the flux of the galaxy
         gal = gal.withFlux(Flux)
+
+        # Draw the profile on the stamp
         try:
             stamp = gal.drawImage(stamp_gal, method='no_pixel')
         except Exception:
-            print(i, radiusBulge, radiusDisk)
+            print(gal_idx, radiusBulge, radiusDisk)
             continue
+        
+        # Place the stamp in the corresponding place of the full image 
         stamp.setCenter(ix, iy)
         bounds = stamp.bounds & full_image.bounds
         full_image[bounds] += stamp[bounds]
+
+        # Add the gaussian background noise
         full_image += np.random.normal(0, noise_level, (image_size_x, image_size_y))
+
     return full_image.array
 
-def sim_and_save(cat, telescope, instrument, survey):
-    "Example: sim_and_save('HST', 'ACS', 'HST-Cosmos')"
+def sim_and_save_field(info, telescope, instrument, survey):
+    """ 
+    Simulate and save a galaxy field
+    Note that for now, the band is fixed, selected with the "main_band" info ot the instrument
 
-    sys.path.append('../')
-    from telescopes.main_info import info
+    Parameters
+    ----------
+        - info:       dictionary, the dictionary containing all the information of the telescopes
+        - telescope:  string, the name of the telescope
+        - instrument: string, the name of the instrument
+        - survey:     string, the name of the survey
+    
+    Returns
+    -------
+        None, just save the image with the appropriate name
+    
+    """
+
+    # Get the dictionary of the telescope's survey's instrument
     instrument_info = info[telescope]['surveys'][survey]['instruments'][instrument]
+
+    # Because for now we simulate only one band, select the "main_band" name
     band = instrument_info['main_band']
-    image = sim_field(cat, instrument_info['pix_scale'],
+
+    # Simulate the field with the appropriate image quality and depth
+    image = sim_field(instrument_info['pix_scale'],
                 instrument_info['bands'][band]['fwhm'],
                 info[telescope]['surveys'][survey]['std_noise'],
                 instrument_info['bands'][band]['zp'])
     
+    # write the fits image with the appropriate name
     fits.writeto(f'../data/fields/{telescope}_{instrument}_{survey}.fits', image, overwrite=True)
 
-def create_and_save_gal(info, telescope, instrument, show=False):
-    import cv2
-    from scipy.signal import convolve2d
 
+def create_and_save_gal(info, telescope, instrument, show=False):
+
+    """ 
+    Simulate and save a galaxy from a TNG image
+    Note that for now, the band is fixed, selected with the "main_band" info ot the instrument
+    The image is noiseless, and thus does not depend of the survey, just the instrument
+
+    The native pixel scale is defined as 0.03 arcsec per pixel. This is arbitrary,
+    we just need to have this value to be the smallest of all our surveys.
+    This way, all the image will be degraded at the good scale, relative to the original one
+
+    Parameters
+    ----------
+        - info:       dictionary, the dictionary containing all the information of the telescopes
+        - telescope:  string, the name of the telescope
+        - instrument: string, the name of the instrument
+        - show:       bool, if true, imshow the galaxy
+    
+    Returns
+    -------
+        None, just save the image with the appropriate name
+    """
+
+    # We do not need a specific survey. the first is ok
     survey = list(info[telescope]['surveys'].keys())[0]
+
+    # Get the dictionary of the telescope's survey's instrument
     instrument_info = info[telescope]['surveys'][survey]['instruments'][instrument]
+    
+    # Get the pixels scale
     pixel_scale = instrument_info['pix_scale']
 
+    # Because for now we simulate only one band, select the "main_band" name
     band = instrument_info['main_band']
+    
+    # Get the fwhm
     fwhm = instrument_info['bands'][band]['fwhm']
-    print(pixel_scale, fwhm)
-    img = np.load('../data/tng_gal.npy')[10:-1, 10:-10]
+
+    # Load the file with the Illustris-TNG profile
+    img = np.load('../data/tng_gal.npy')[10:-10, 10:-10]
+
+    # Define the resolution of the image
+    # by multiplying the size of the original image (in pixel)
+    # by the ratio of the original and telescope pixel scale
+
     s = int(237 * 0.03/pixel_scale)
     size = (s, s)
-    psf = create_psf(fwhm, pixel_scale)
-    psfed = convolve2d(img, psf, mode='same')
+    
+    # resize the image
     res = cv2.resize(psfed, dsize=size, interpolation=cv2.INTER_CUBIC)
+
+    # Create the PSF
+    psf = create_psf(fwhm, pixel_scale)
+
+    # Convolve the image by the PSF
+    psfed = convolve2d(res, psf, mode='same')
+
+    if show:
+        plt.figure()
+        plt.imshow(res, cmap='bone')
+    
+    # Save the image with the appropriate name
     np.save(f'../data/individual_gals/gal_{telescope}_{instrument}.npy', res)
-
-
-def add_logo():
-    st.markdown(
-        """
-        <style>
-            [data-testid="stSidebarNav"] {
-                background-image: url(https://imgur.com/a/MjaKHak);
-                background-repeat: no-repeat;
-                padding-top: 120px;
-                background-position: 10px 20px;
-            }
-            [data-testid="stSidebarNav"]::before {
-                content: "SurViZ";
-                margin-left: 20px;
-                margin-top: 20px;
-                font-size: 30px;
-                position: relative;
-                top: 100px;
-            }
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
