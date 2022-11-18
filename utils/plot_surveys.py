@@ -7,25 +7,38 @@ from utils.diverse_utils import init_sky, projection_dec, projection_ra #eq2gal,
 
 
 def rad(x):
+    " from degree to radian"
     return x*np.pi/180
 
-def plot_Euclid_Deep_Survey(fig, ax, show_name=True):
 
+def plot_Euclid_Deep_Survey(fig, ax, show_name=True):
+    """
+    Plot the three Euclid deep fields
+    """
+
+    ### Euclid Deep Field North (EDFN)
+    # Define the ra dec
     edfn_ra = np.array([269.73])
     edfn_dec = np.array([66.01])
+
+    # Create a circle at the appropriate ra dec (taking into account the plt shift)
     edfn = Circle((ax.projection_ra(edfn_ra), ax.projection_dec(edfn_dec)), np.sqrt(20/(np.pi))*np.pi/180, alpha=0.8, ls='--', edgecolor='black', facecolor='blue', label='Euclid Deep')
+    # Plot the patch
     ax.add_patch(edfn)
 
+    ### Euclid Fornax
     fornax_ra = np.array([52.93583333]) 
     fornax_dec = np.array([-28.08850000])    
     fornax = Circle((ax.projection_ra(fornax_ra), ax.projection_dec(fornax_dec)), rad(np.sqrt(10/(np.pi))), alpha=0.8, ls='--', edgecolor='black', facecolor='blue')
     ax.add_patch(fornax)
 
+    ### Euclid Deep Field South
     edfs_ra= np.array([61.241])
     edfs_dec = np.array([-48.42300000])
     edfs = Circle((ax.projection_ra(edfs_ra), ax.projection_dec(edfs_dec)), rad(np.sqrt(10/(np.pi))), alpha=0.8, ls='--', edgecolor='black', facecolor='blue')
     ax.add_patch(edfs)
 
+    # If show name, plot the three names above the circles
     if show_name:
         ax.text(ax.projection_ra(edfs_ra), ax.projection_dec(edfs_dec)+rad(3),'EDFS', color='darkblue')
         ax.text(ax.projection_ra(fornax_ra), ax.projection_dec(fornax_dec)-rad(8),'FORNAX', color='darkblue')
@@ -33,50 +46,52 @@ def plot_Euclid_Deep_Survey(fig, ax, show_name=True):
 
     return ax
 
-def shift(key, array):
-    return array[-key:] + array[:-key]
-
-def eq2plot(y, shift=85):
-    if (360-shift) >= y >= 0:
-        x = -(y - shift)
-    elif 360 > y > (360-shift):
-        x = 360 - y + shift
-    # print(x)
-    return rad(x)
-
-def gal2plot(y, shift=102):
-    if (360-shift) >= y >= 0:
-        x = -(y - shift)
-    elif 360 > y > (360-shift):
-        x = 360 - y + shift
-    # print(x)
-    return rad(x)
 
 def plot_Euclid_Wide_Survey(fig, ax, ecl_ra, ecl_dec, gal_ra, gal_dec):
+    """
+    Plot the Euclid Wide Survey
+
+    This is a bit acrobatic... 
+    
+    We try to match the survey using the galactic and ecliptic plane,
+    and thus define 4 regions: 
+        - north of ecliptic
+        - south of ecliptic,
+        - between ecliptic and galactic (north)
+        - between ecliptic and galactic (south)
+    """
 
     # North Hole
+    # Define where the hole starts reagrding the galactic plane,
     s, e = 10, 26
+
+    # Margin between the start of the survey and the plane
+    # (i.e. size) of the galactic extinction. It seems to match better
+    # Euclid Survey if this margin is not constant
     margin = np.linspace(50, 20, e-s)
-    # ax.plot(ax.projection_ra(gal_ra[s:e]), ax.projection_dec(gal_dec[s:e])-rad(margin), color='blue')
+
+    # The region is defined as the area defined by this curve,
+    # while it should taje into account the ecliptic plane too, it works quite good enough
     ax.fill(ax.projection_ra(gal_ra[s:e]), ax.projection_dec(gal_dec[s:e])-rad(margin), alpha=0.3, color='blue', label='Euclid Wide')
     
     # South Hole
+    # Same than North
     s, e = 55, 75
     margin = np.linspace(45, 25, e-s)
-    # ax.plot(ax.projection_ra(gal_ra[s:e]), ax.projection_dec(gal_dec[s:e])+rad(margin), color='blue')
     ax.fill(ax.projection_ra(gal_ra[s:e]), ax.projection_dec(gal_dec[s:e])+rad(margin), alpha=0.3, color='blue')
     
     # South East
+    # for this region we need to define two sub region
+    # First, one below the ecliptic
     s, e, margin = 10, 84, 9.8
-    # ax.plot(ax.projection_ra(ecl_ra[s:e]), ax.projection_dec(ecl_dec[s:e])-rad(margin), color='blue')
     ax.fill_between(ax.projection_ra(ecl_ra[s:e]), ax.projection_dec(ecl_dec[s:e])-rad(10), rad(-90), alpha=0.3, color='blue')
-    
+    # Second, below the galactic
     s, e, margin = 32, 61, 28
-    # ax.plot(ax.projection_ra(gal_ra[s:e]), ax.projection_dec(gal_dec[s:e])-rad(margin), color='blue')
-    
     ax.fill_between(ax.projection_ra(gal_ra[s:e]), ax.projection_dec(gal_dec[s:e])-rad(margin), rad(-90), alpha=0.3, color='blue')
+    # Note that it creates a hole in the survey because of the resolution of the curves, they don t overlap perfectly
 
     # North West
+    # works quite well with just above the ecliptic, but could be a bit better
     s, e, margin = 100, 190, 12
     # ax.plot(ax.projection_ra(ecl_ra[s:e]), ax.projection_dec(ecl_dec[s:e])+rad(margin), color='blue')
     ax.fill_between(ax.projection_ra(ecl_ra[s:e]), ax.projection_dec(ecl_dec[s:e])+rad(margin), rad(90), alpha=0.3, color='blue')
