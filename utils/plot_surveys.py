@@ -29,7 +29,7 @@ def plot_Euclid_Deep_Survey(fig, ax, show_name=True):
     ### Euclid Fornax
     fornax_ra = np.array([52.93583333]) 
     fornax_dec = np.array([-28.08850000])    
-    fornax = Circle((ax.projection_ra(fornax_ra), ax.projection_dec(fornax_dec)), rad(np.sqrt(10/(np.pi))), alpha=0.8, ls='--', edgecolor='black', facecolor='blue')
+    fornax = Circle((ax.projection_ra(fornax_ra), ax.projection_dec(fornax_dec)), rad(np.sqrt(10/(np.pi))), alpha=0.5, ls='--', edgecolor='black', facecolor='blue')
     ax.add_patch(fornax)
 
     ### Euclid Deep Field South
@@ -105,6 +105,9 @@ def plot_HST_cosmos_Survey(fig, ax, show_name=True):
     cosmos = Circle((ax.projection_ra(cosmos_ra), ax.projection_dec(cosmos_dec)), rad(np.sqrt(2/(np.pi))), edgecolor='black', facecolor='orange', alpha=0.5, hatch='/', label=r'HST cosmos (2deg$^2$)')
     zoom_cosmos = Circle((ax.projection_ra(cosmos_ra), ax.projection_dec(cosmos_dec)), rad(np.sqrt(2/(np.pi))), edgecolor='black', facecolor='orange', alpha=0.5, hatch='/', label=r'HST cosmos (2deg$^2$)')
     ax.add_patch(cosmos)
+
+    if show_name:
+        ax.text(ax.projection_ra(cosmos_ra), ax.projection_dec(cosmos_dec)+rad(5),'COSMOS', color='darkorange')
     return ax, zoom_cosmos
 
 def plot_JWST_CEERS_Survey(fig, ax):
@@ -114,13 +117,16 @@ def plot_JWST_CEERS_Survey(fig, ax):
     ax.add_patch(ceers)
     return ax, zoom_ceers
 
-def plot_cosmos_Web_Survey(fig, ax):
+def plot_cosmos_Web_Survey(fig, ax, show_name):
     cosmos_ra = np.array([150.11916667])
     cosmos_dec= np.array([2.20583333])
 
     cosmos = Circle((ax.projection_ra(cosmos_ra), ax.projection_dec(cosmos_dec)), rad(np.sqrt(0.6/(np.pi))), edgecolor='black', facecolor='red', alpha=0.5, label=r'Cosmos-Web (0.6deg$^2$)')
     zoom_cosmos_web = Circle((ax.projection_ra(cosmos_ra), ax.projection_dec(cosmos_dec)), rad(np.sqrt(0.6/(np.pi))), edgecolor='black', facecolor='red', alpha=0.5)
     ax.add_patch(cosmos)
+    if show_name:
+        ax.text(ax.projection_ra(cosmos_ra), ax.projection_dec(cosmos_dec)-rad(7),'COSMOS-Web', color='red')
+
     return ax, zoom_cosmos_web
 
 def plot_Rubin_LSST_Survey(fig, ax):
@@ -160,11 +166,11 @@ def plot_HST_CANDELS_Survey(fig, ax, show_name=True):
     ax.add_patch(cosmos)
 
     if show_name:
-        ax.text(ax.projection_ra(goods_s_ra), ax.projection_dec(goods_s_dec)+rad(1),'GOODS-S', color='darkorange')
+        ax.text(ax.projection_ra(goods_s_ra), ax.projection_dec(goods_s_dec)+rad(2),'GOODS-S', color='darkorange')
         ax.text(ax.projection_ra(goods_n_ra), ax.projection_dec(goods_n_dec)+rad(1),'GOODS-N', color='darkorange')
         ax.text(ax.projection_ra(UDS_ra), ax.projection_dec(UDS_dec)+rad(1),'UDS', color='darkorange')
         ax.text(ax.projection_ra(EGS_ra), ax.projection_dec(EGS_dec)+rad(1),'EGS', color='darkorange')
-        ax.text(ax.projection_ra(cosmos_ra), ax.projection_dec(cosmos_dec)+rad(1.5),'COSMOS', color='darkorange')
+        ax.text(ax.projection_ra(cosmos_ra), ax.projection_dec(cosmos_dec)+rad(5),'COSMOS', color='darkorange')
 
     return ax
 

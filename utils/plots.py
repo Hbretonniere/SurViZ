@@ -554,7 +554,7 @@ def plot_surveys(telescopes, surveys):
                 ax = plot_Rubin_LSST_Survey(fig, ax)
 
             elif f'{telescope}-{survey}' == 'JWST-Cosmos-Web':
-                ax, cosmos_patch = plot_cosmos_Web_Survey(fig, ax)
+                ax, cosmos_patch = plot_cosmos_Web_Survey(fig, ax, show_name)
                 cosmos_patches.append(cosmos_patch)
 
             elif f'{telescope}-{survey}' == 'JWST-CEERS':
@@ -572,7 +572,9 @@ def plot_surveys(telescopes, surveys):
                 st.markdown(f'Sorry, {telescope} {survey} is not yet available... Stay Tuned!')
 
     # possibility to zoom in cosmos regions if cosmos is plotted
-    if ('HST-HST-Cosmos' in surveys) | ('JWST-Cosmos-Web' in telescopes):
+    print(list(surveys.values()))
+    print([x for x in list(surveys.values())[:]])
+    if any(('HST-Cosmos') in x for x in list(surveys.values())) or any(('Cosmos-Web') in x for x in list(surveys.values())):
         # Create the button to zoom in
         with col2:
             cosmos_zoom = st.checkbox('Zoom on Cosmos')
