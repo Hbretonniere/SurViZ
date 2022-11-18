@@ -2,4 +2,4 @@ astropy
 matplotlib
 seaborn
 galsim
-opencv-python
+opencv-python-headless
