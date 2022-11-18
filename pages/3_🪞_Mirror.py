@@ -1,10 +1,4 @@
 
-import streamlit as st
-import numpy as np
-from telescopes.main_info import info
-from utils.plots import plot_mirrors, plot_fovs
-from telescopes.references import mirrors_refs
-
 """
 Visualisation of the mirrors and fields of view
 The user have to select the telescopes he want to display. For each selected telescope,
@@ -18,6 +12,14 @@ To read the FOV:
 
 The plotting is done by plot_mirrors and plot_fov in /utils/plot.py
 """
+
+
+import streamlit as st
+import numpy as np
+from telescopes.main_info import info
+from utils.plots import plot_mirrors, plot_fovs
+from telescopes.references import mirrors_refs
+
 
 # Display SurViZ logo
 st.image('surviz_black_long.png')

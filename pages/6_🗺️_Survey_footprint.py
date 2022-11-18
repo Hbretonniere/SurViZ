@@ -1,11 +1,3 @@
-import streamlit as st
-import numpy as np
-import matplotlib.pyplot as plt
-from telescopes.main_info import info
-from utils.plots import plot_surveys
-from telescopes.references import footprint_refs
-
-
 """
 Visualisation of the surveys footprint
 The user have to select the telescopes he want to display. For each selected telescope,
@@ -16,6 +8,14 @@ For now, we have a plotting routine for each survey, as it is hard to automatize
 Each footprint is computed in /utils/plot_surveys.py
 The plotting is done by plot_surveys in /utils/plot.py
 """
+
+import streamlit as st
+import numpy as np
+import matplotlib.pyplot as plt
+from telescopes.main_info import info
+from utils.plots import plot_surveys
+from telescopes.references import footprint_refs
+
 
 # SurViZ logo
 st.image('surviz_black_long.png')

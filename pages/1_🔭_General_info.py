@@ -1,11 +1,3 @@
-import streamlit as st
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
-import sys
-from telescopes.main_info import info
-from utils.general_description import description
-
-
 """
 General information about the mission. 
 By default, all telescopes are selected.
@@ -16,6 +8,15 @@ For each telescope name, you have a key for the Instruments and the Surveys. Thi
 loop through the information, have a standardized format and an easier readability of the dictionary.
 
 """
+
+
+import streamlit as st
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+import sys
+from telescopes.main_info import info
+from utils.general_description import description
+
 
 telescopes = st.sidebar.multiselect(
         "Select telescopes to display",

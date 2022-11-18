@@ -1,11 +1,3 @@
-import streamlit as st
-import numpy as np
-import matplotlib.pyplot as plt
-from telescopes.main_info import info
-from utils.plots import plot_bands
-from telescopes.references import filters_refs
-
-
 """
 Visualisation of the filters
 The user have to select the telescopes he want to display. For each selected telescope,
@@ -22,6 +14,15 @@ For some, you can also restrict to a survey, become some surveys do not use the 
 
 The plotting is done by plot_bands in /utils/plot.py
 """
+
+
+import streamlit as st
+import numpy as np
+import matplotlib.pyplot as plt
+from telescopes.main_info import info
+from utils.plots import plot_bands
+from telescopes.references import filters_refs
+
 
 # SurViZ logo
 st.image('surviz_black_long.png')

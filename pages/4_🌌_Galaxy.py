@@ -1,11 +1,3 @@
-import streamlit as st
-import numpy as np
-import matplotlib.pyplot as plt
-from telescopes.main_info import info
-from utils.plots import plot_galaxies
-from telescopes.references import image_quality_refs
-
-
 """
 Visualisation of the image qualities on a galaxy.
 
@@ -34,6 +26,14 @@ The structure is as follow. To read Euclid's NIR's pixel scale
 The galaxy simulation procedure is done in create_and_save_gal(...) in /utils/diverse_utils
 The plotting is done by plot_galaxies in /utils/plot_galaxies.py
 """
+
+import streamlit as st
+import numpy as np
+import matplotlib.pyplot as plt
+from telescopes.main_info import info
+from utils.plots import plot_galaxies
+from telescopes.references import image_quality_refs
+
 
 # SurViZ logo
 st.image('surviz_black_long.png')
