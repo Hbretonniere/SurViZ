@@ -2,4 +2,4 @@ astropy
 matplotlib
 seaborn
 galsim
-cv2
+opencv-python
