@@ -3,17 +3,20 @@ import matplotlib.pyplot as plt
 import streamlit as st
 import matplotlib.image as mpimg
 
+st.set_page_config(
+    page_title="Home page",
+    page_icon="👋",
+    layout="centered")
+
+
 """
+
 This is the main page, that you have to run with "streamlit run" to launch the app locally.
 Streamlit automatically create the tabs in the left sidebar from the .py files located in /pages
 Here we just have the home page, with a short description of the tabs, and some images
 
 """
 
-st.set_page_config(
-    page_title="Home page",
-    page_icon="👋",
-    layout="centered")
 
 # SurViZ logo
 st.image('surviz_black_long.png')
@@ -43,4 +46,5 @@ st.markdown(
     """
 )
 
+# Mission logos
 st.image('data/logos/logos.jpeg')
