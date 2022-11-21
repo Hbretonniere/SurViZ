@@ -9,10 +9,12 @@ The platform is hosted with streamlit, and you can visit it here: [https://hbret
 The project is under construction, feel free to make comments, remarks, or help us adding new missions or features! 
 
 <br/><br/>
+For a more quantitative comparison of some of the surveys, you can use galcheat, by Boucaud et al. : [https://github.com/aboucaud/galcheat](https://github.com/aboucaud/galcheat)
+
+<br/><br/>
 
 For now, you can use SuViZ for 6 tasks, each one available by clicking in the top left buttons of the main page:
 
-<br/><br/>
 
 - General infos about the missions (need to be more complete...)
 - Explore the filters of the telescopes and instruments
