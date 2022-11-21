@@ -21,7 +21,7 @@ st.set_page_config(
 st.image('surviz_black_long.png')
 
 # Main Description
-st.write("## 👋 Welcome to SurViZ, your best tool to compare and explore galaxy SurVeys! \n Developed by __Hubert Bretonnière__: https://github.com/Hbretonniere/SurViZ \n The page is still in development. Please reach me in the github repo if you have any comments or suggestions.")
+st.write("## 👋 Welcome to SurViZ, your best tool to compare and explore galaxy SurVeys! \n Developed by __Hubert Bretonnière__: https://github.com/Hbretonniere/SurViZ \n The page is still in development. Please reach me in the github repo if you have any comments or suggestions. \n For a more quantitative comparison of some of the surveys, you can visit and use galcheat (https://github.com/aboucaud/galcheat)")
 
 # Description of the features. 
 st.markdown(
