@@ -196,7 +196,7 @@ def plot_fovs(info, telescopes):
     ax.set_aspect("equal")
 
     # Hard code the x and y limits (Rubin is huge...)
-    if "Rubin" in telescope:
+    if "Rubin" in telescopes:
         lims = 120
     else:
         lims = 30

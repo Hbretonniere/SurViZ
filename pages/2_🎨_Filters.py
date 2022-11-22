@@ -37,7 +37,7 @@ st.markdown('You can see here the filters of the different instruments. Note tha
 # Multi Select the telescopes. Default Euclid, Rubin/LSST
 telescopes = st.sidebar.multiselect(
         "Select the telescopes",
-        ["Euclid", "JWST", "HST", "Rubin", "SDSS"],
+        list(info.keys()),
         default=["Euclid", 'Rubin']
     )
 

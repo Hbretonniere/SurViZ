@@ -179,10 +179,9 @@ SDSS_imaging_camera = {
                         }
 
 Chandra_HRC = {
-    'pix_scale':None, #verified
+    'pix_scale':0.13,
     'ls':'-',
-    'fwhm':None, #median verified,
     'main_band':None,
-    'bands':{"None":{"zp":None, "min_max":[None, None], 'fwhm':None},
+    'bands':{"X-ray":{"zp":None, "min_max":[0.124, 12], 'fwhm':0.4},  # refs https://cxc.harvard.edu/proposer/POG/html/chap7.html
             }
-                        }
+            }
