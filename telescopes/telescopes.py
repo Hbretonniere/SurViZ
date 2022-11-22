@@ -3,10 +3,11 @@ from telescopes.surveys import JWST_Jades, JWST_Cosmos_Web, JWST_CEERS
 from telescopes.surveys import HST_Cosmos, HST_CANDELS
 from telescopes.surveys import LSST
 from telescopes.surveys import SDSS_I
-from telescopes.instruments import Euclid_VIS, Euclid_NIR, JWST_NIRCAM, JWST_MIRI, HST_ACS, Rubin_Wide_field_imager, SDSS_imaging_camera
+from telescopes.surveys import Chandra_Deep_north
+from telescopes.instruments import Euclid_VIS, Euclid_NIR, JWST_NIRCAM, JWST_MIRI, HST_ACS, Rubin_Wide_field_imager, SDSS_imaging_camera, Chandra_HRC
 
 Euclid = {"marker":'o',
-          "fov": [34, 34],
+          "fov": [45, 45], #0.57deg^2
           "color": "blue",
           "mirror": 1.2,
           "surveys": {"Wide-Survey":Euclid_Wide,
@@ -28,7 +29,7 @@ JWST = {"marker":'X',
                         'MIRI':JWST_MIRI}}
 
 HST = {"marker":'x',
-        "fov": [3.3, 3.3],
+        "fov": [3.3, 3.3], #202''
         "mirror": 2.4,
         "color": "orange",
         "surveys":{"HST-Cosmos":HST_Cosmos,
@@ -36,7 +37,7 @@ HST = {"marker":'x',
         "instruments":{"ACS":HST_ACS}}
 
 Rubin = {"marker":"D",
-        "fov": [210, 210],
+        "fov": [210, 210], #3.5deg*3.5deg
         "mirror": 8.4,
         "color": "green",
         "major_band":"z",
@@ -45,12 +46,21 @@ Rubin = {"marker":"D",
         }
 
 SDSS = {"marker":".",
-        "fov": [150, 150],
+        "fov": [150, 150], #2.5deg*2.5deg
         "mirror": 2.5,
         "color": "purple",
         "surveys":{"SDSS-I":SDSS_I},
         "instruments":{"Imaging_camera":SDSS_imaging_camera},
         }
+
+Chandra = {"marker":"O",
+        "fov": [15, 15],
+        "mirror": 1.23, #carefull, x rays are different regardind the mirrors
+        "color": "gray",
+        "surveys":{"Deep-North":Chandra_Deep_north},
+        "instruments":{"Imaging_camera":Chandra_HRC},
+        }
+# . https://cxc.harvard.edu/cdo/about_chandra/
         # "HST": {"marker":'x',
 #                 "fov": [3.3, 3.3],
 #                 "mirror": 2.4,

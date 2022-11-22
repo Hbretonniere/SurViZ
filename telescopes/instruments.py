@@ -177,3 +177,12 @@ SDSS_imaging_camera = {
             "z '":{"zp":24.21, "min_max":[913-95/3, 913+95/2], 'fwhm':1.15},
             }
                         }
+
+Chandra_HRC = {
+    'pix_scale':None, #verified
+    'ls':'-',
+    'fwhm':None, #median verified,
+    'main_band':None,
+    'bands':{"None":{"zp":None, "min_max":[None, None], 'fwhm':None},
+            }
+                        }

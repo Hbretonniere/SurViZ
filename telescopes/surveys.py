@@ -3,7 +3,7 @@ from telescopes.instruments import JWST_NIRCAM, JWST_MIRI
 from telescopes.instruments import HST_ACS
 from telescopes.instruments import Rubin_Wide_field_imager
 from telescopes.instruments import SDSS_imaging_camera
-
+from telescopes.instruments import Chandra_HRC
 
 Euclid_Wide = {
                'instruments':{"VIS":Euclid_VIS,
@@ -55,4 +55,10 @@ LSST = {
 SDSS_I = {
               'instruments':{"Imaging_camera":SDSS_imaging_camera},
               'std_noise':0.093 # estimated from online data 
+             }
+
+
+Chandra_Deep_north = {
+              'instruments':{"HRC":Chandra_HRC},
+              'std_noise':None # estimated from online data 
              }

@@ -1,8 +1,9 @@
-from telescopes.telescopes import Euclid, JWST, HST, Rubin, SDSS
+from telescopes.telescopes import Euclid, JWST, HST, Rubin, SDSS, Chandra
 
 
 info = {"Euclid":Euclid,
         "JWST":JWST,
         "HST":HST,
         "Rubin":Rubin,
-        "SDSS":SDSS}
+        "SDSS":SDSS,
+        "Chandra":Chandra}
