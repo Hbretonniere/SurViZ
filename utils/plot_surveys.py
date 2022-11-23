@@ -187,3 +187,14 @@ def plot_SDSS_I_Survey(fig, ax):
     ax.fill_between(ax.projection_ra(np.linspace(320, 360, 2)), np.array([rad(-12), rad(-8.45)]), [rad(-14), rad(-10.45)], color='purple', hatch='/', alpha=0.5)
 
     return ax
+
+def plot_Chandra_Deep_North_Survey(fig, ax, show_name):
+    #12 36 48.0 +62 13 00
+    deep_ra = np.array([189.2])
+    deep_dec= np.array([62.2])
+    CDN = Circle((ax.projection_ra(deep_ra), ax.projection_dec(deep_dec)), rad(np.sqrt(0.11/(np.pi))), edgecolor='gray', facecolor='gray', alpha=0.5, label='Chandra')
+    ax.add_patch(CDN)
+    if show_name:
+        ax.text(ax.projection_ra(deep_ra), ax.projection_dec(deep_dec)+rad(-5),'Deep Field North', color='gray')
+
+    return ax

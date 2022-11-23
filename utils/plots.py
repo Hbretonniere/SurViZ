@@ -535,7 +535,7 @@ def plot_surveys(telescopes, surveys):
 
         # Loop through the surveys
         for survey in surveys[telescope]:
-            
+            # st.markdown(f'{telescope}-{survey}')
             # for each scenario, call the appropriate function defined
             # in utils/plot_surveys. This is a bit stupid, there must be a better way to do it...
 
@@ -566,7 +566,9 @@ def plot_surveys(telescopes, surveys):
 
             elif f'{telescope}-{survey}' == 'SDSS-SDSS-I':
                 ax = plot_SDSS_I_Survey(fig, ax)
-
+            
+            elif  f'{telescope}-{survey}' == 'Chandra-Deep-North':
+                ax = plot_Chandra_Deep_North_Survey(fig, ax, show_name)
             # Warning if the survey is not yes defined
             else:
                 st.markdown(f'Sorry, {telescope} {survey} is not yet available... Stay Tuned!')

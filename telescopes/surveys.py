@@ -58,7 +58,7 @@ SDSS_I = {
              }
 
 
-Chandra_Deep_north = {
+Chandra_Deep_North = {
               'instruments':{"HRC":Chandra_HRC},
               'std_noise':None # estimated from online data 
              }

@@ -3,7 +3,7 @@ from telescopes.surveys import JWST_Jades, JWST_Cosmos_Web, JWST_CEERS
 from telescopes.surveys import HST_Cosmos, HST_CANDELS
 from telescopes.surveys import LSST
 from telescopes.surveys import SDSS_I
-from telescopes.surveys import Chandra_Deep_north
+from telescopes.surveys import Chandra_Deep_North
 from telescopes.instruments import Euclid_VIS, Euclid_NIR, JWST_NIRCAM, JWST_MIRI, HST_ACS, Rubin_Wide_field_imager, SDSS_imaging_camera, Chandra_HRC
 
 Euclid = {"marker":'o',
@@ -57,7 +57,7 @@ Chandra = {"marker":"O",
         "fov": [15, 15],
         "mirror": 1.23, #carefull, x rays are different regardind the mirrors
         "color": "gray",
-        "surveys":{"Deep-North":Chandra_Deep_north},
+        "surveys":{"Deep-North":Chandra_Deep_North},
         "instruments":{"Imaging_camera":Chandra_HRC},
         }
 # . https://cxc.harvard.edu/cdo/about_chandra/
