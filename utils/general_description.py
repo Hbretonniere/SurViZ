@@ -33,4 +33,14 @@ description = {'Euclid':{'general_description':
                 },
   'Surveys':{'SDSS-I':'First phase from 2000 to 2005.',
             }
+},
+'Chandra':{'general_description':
+ "The Chandra X-ray Observatory is a space telescope developed by the NASA and launched in 1999. \n With an imaging camera and an imaging spectrometer, Chandra's main objectives were/are the study of hot regions of the Universe such as supernovae, galaxy clusters of matter orbiting black-holes. With the observation of the bullet Cluster, it also gave one of the most famous proof in favor of the cold dark matter hypothesis.",
+ 'Instruments':{'HSC':"High Resolution Camera (HRC): HRC is a camera looking in the 0.1-10kev (0.12-12nm) energy range.",
+                'ACIS':"Advanced CCD Imaging Spectrometer (ACIS)"},
+  'Surveys':{'Deep N Survey':'Chandra Deep Filed North Survey.',
+             'Deep S Survey':'Chandra Deep Filed South Survey.',
+             'GOODS':'The Great Observatories Origins Deep Survey',
+             '...':'...'
+  }
 }}
