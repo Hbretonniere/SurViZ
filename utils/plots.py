@@ -523,7 +523,7 @@ def plot_surveys(telescopes, surveys):
 
     # create a separate legend for the ecliptic and galactic plane
     lines = ax.get_lines()
-    legend1 = plt.legend([lines[i] for i in [0,1]], ['Ecliptic', 'Galactic'], fontsize=15, bbox_to_anchor = (1, 1.2))
+    legend1 = plt.legend([lines[i] for i in [0,1]], ['Ecliptic', 'Galactic'], fontsize=15, bbox_to_anchor = (0.9, 1))
     ax.add_artist(legend1)
 
     
@@ -558,7 +558,7 @@ def plot_surveys(telescopes, surveys):
                 cosmos_patches.append(cosmos_patch)
 
             elif f'{telescope}-{survey}' == 'JWST-CEERS':
-                ax, cosmos_patch = plot_JWST_CEERS_Survey(fig, ax)
+                ax, cosmos_patch = plot_JWST_CEERS_Survey(fig, ax, show_name)
                 cosmos_patches.append(cosmos_patch)
 
             elif f'{telescope}-{survey}' == 'HST-HST-CANDELS':

@@ -110,11 +110,14 @@ def plot_HST_cosmos_Survey(fig, ax, show_name=True):
         ax.text(ax.projection_ra(cosmos_ra), ax.projection_dec(cosmos_dec)+rad(5),'COSMOS', color='darkorange')
     return ax, zoom_cosmos
 
-def plot_JWST_CEERS_Survey(fig, ax):
-    ceers_rad = [96, 59] #eq2gal(14.28, 53)
-    ceers = Circle((ceers_rad[0], ceers_rad[1]), rad(np.sqrt((1/6)/(2*np.pi))), edgecolor='black', ls='--', facecolor='red', alpha=0.5, label=r'JWST CEERS (0.02 deg$^2$)')
-    zoom_ceers = Circle((ceers_rad[0], ceers_rad[1]), rad(np.sqrt((1/6)/(2*np.pi))), edgecolor='black', facecolor='red', alpha=0.5)
+def plot_JWST_CEERS_Survey(fig, ax, show_name):
+    ceers_ra = np.array([214])
+    ceers_dec = np.array([52]) #eq2gal(14.28, 53)
+    ceers = Circle((ceers_ra, ceers_dec), rad(np.sqrt((1/6)/(2*np.pi))), edgecolor='black', ls='--', facecolor='red', alpha=0.5, label=r'JWST CEERS (0.02 deg$^2$)')
+    zoom_ceers = Circle((ceers_ra, ceers_dec), rad(np.sqrt((1/6)/(2*np.pi))), edgecolor='black', facecolor='red', alpha=0.5)
     ax.add_patch(ceers)
+    if show_name:
+        ax.text(ax.projection_ra(ceers_ra), ax.projection_dec(ceers_dec)-rad(7),'CEERS', color='red')
     return ax, zoom_ceers
 
 def plot_cosmos_Web_Survey(fig, ax, show_name):
