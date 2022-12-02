@@ -66,4 +66,4 @@ for telescope in telescopes:
 fig = plot_surveys(telescopes, selected_surveys)
 
 # Plot the figure
-st.pyplot(fig, use_container_width=True)
+st.plotly_chart(fig)
