@@ -26,11 +26,19 @@ description.markdown(footprint_refs)
 st.markdown('# Surveys visualisation \n You can explore here the surveys footprints. The shapes and exact positions are not perfect, but estimated from public data.')
 
 # Multi Select the telescopes. Default Euclid (Wide)
+all = st.sidebar.checkbox('Plot all telescopes and surveys available')
+
+if all:
+    default_tel = list(info.keys())
+else:
+    default_tel = ["Euclid"]
+
+
 telescopes = st.sidebar.multiselect(
-        "Select the telescopes",
-        list(info.keys()),
-        default=["Euclid"]
-    )
+            "Select the telescopes",
+            list(info.keys()),
+            default=default_tel
+        )
 
 # Initialise the selected surveys. THey will be dictionary to keep all the information necessary
 selected_surveys = {}
@@ -41,10 +49,14 @@ for telescope in telescopes:
 
     # Selection of the survey. Default is the first survey listed in the dictionary
     st.sidebar.markdown(f'# {telescope}') # Write the telescope name to separate clearly that we are selecting the surveys of this telescope
+    if all:
+        default_surveys = list(info[telescope]['surveys'].keys())
+    else:
+        default_surveys = list(info[telescope]['surveys'].keys())[0]
     telescope_survey = st.sidebar.multiselect(
                 "Select the Surveys",
                 list(info[telescope]['surveys'].keys()),
-                default=list(info[telescope]['surveys'].keys())[0]
+                default=default_surveys
                 )
 
     # Add the selected surveys to the dictionary of this the current telescope
