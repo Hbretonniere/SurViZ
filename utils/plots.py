@@ -523,7 +523,7 @@ def plot_surveys(telescopes, surveys):
 
     # create a separate legend for the ecliptic and galactic plane
     lines = ax.get_lines()
-    legend1 = plt.legend([lines[i] for i in [0,1]], ['Ecliptic', 'Galactic'], fontsize=15, bbox_to_anchor = (0.9, 1))
+    legend1 = plt.legend([lines[i] for i in [0,1]], ['Ecliptic', 'Galactic'], fontsize=15, bbox_to_anchor = (0.1, 1.07))
     ax.add_artist(legend1)
 
     
