@@ -37,7 +37,7 @@ footprint_refs = """
 References:
 Projection use utils from https://desiutil.readthedocs.io/en/latest/_modules/desiutil/plots.html
 - SDSS:
-    - SDSS-I: https://classic.sdss.org/dr7/coverage/index.html
+    - SDSS-I: https://classic.sdss.org/dr7/coverage/index.html https://classic.sdss.org/dr7/start/aboutdr7.html
 - JWST:
     - CEERS: https://ceers.github.io/obs.html
 - HST:
