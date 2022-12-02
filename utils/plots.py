@@ -499,7 +499,7 @@ def plot_surveys(telescopes, surveys):
 
     # Button to display the name of the surveys or not
     with col1:
-        show_name = st.checkbox('Show survey names')
+        show_name = st.checkbox('Show survey names', value=True)
     
     # initialise the sky map with the good shift and projection (plt as a strange way of plotting the sky)
     # also returns the ra and dec of the galactic and ecliptic plane with the
@@ -574,8 +574,6 @@ def plot_surveys(telescopes, surveys):
                 st.markdown(f'Sorry, {telescope} {survey} is not yet available... Stay Tuned!')
 
     # possibility to zoom in cosmos regions if cosmos is plotted
-    print(list(surveys.values()))
-    print([x for x in list(surveys.values())[:]])
     if any(('HST-Cosmos') in x for x in list(surveys.values())) or any(('Cosmos-Web') in x for x in list(surveys.values())):
         # Create the button to zoom in
         with col2:
@@ -610,6 +608,6 @@ def plot_surveys(telescopes, surveys):
             zoom.annotate('', xy=(0.6, 0), xycoords='axes fraction', xytext=(1.7, -1.55), arrowprops=dict(arrowstyle="<-", color='gray', alpha=0.9, lw=2))
     
     # Legend for the surveys
-    plt.legend(bbox_to_anchor = (1, -0.1), ncol=2, fontsize=20)
+    plt.legend(bbox_to_anchor = (1, -0.1), ncol=2, fontsize=17)
     
     return fig

@@ -22,7 +22,7 @@ def plot_Euclid_Deep_Survey(fig, ax, show_name=True):
     edfn_dec = np.array([66.01])
 
     # Create a circle at the appropriate ra dec (taking into account the plt shift)
-    edfn = Circle((ax.projection_ra(edfn_ra), ax.projection_dec(edfn_dec)), np.sqrt(20/(np.pi))*np.pi/180, alpha=0.8, ls='--', edgecolor='black', facecolor='blue', label='Euclid Deep')
+    edfn = Circle((ax.projection_ra(edfn_ra), ax.projection_dec(edfn_dec)), np.sqrt(20/(np.pi))*np.pi/180, alpha=0.8, ls='--', edgecolor='black', facecolor='blue', label=r'Euclid Deep ($40\rm{deg}^2$)')
     # Plot the patch
     ax.add_patch(edfn)
 
@@ -72,7 +72,7 @@ def plot_Euclid_Wide_Survey(fig, ax, ecl_ra, ecl_dec, gal_ra, gal_dec):
 
     # The region is defined as the area defined by this curve,
     # while it should taje into account the ecliptic plane too, it works quite good enough
-    ax.fill(ax.projection_ra(gal_ra[s:e]), ax.projection_dec(gal_dec[s:e])-rad(margin), alpha=0.3, color='blue', label='Euclid Wide')
+    ax.fill(ax.projection_ra(gal_ra[s:e]), ax.projection_dec(gal_dec[s:e])-rad(margin), alpha=0.3, color='blue', label=r'Euclid Wide ($15 000 \rm{deg}^2$)')
     
     # South Hole
     # Same than North
@@ -131,7 +131,7 @@ def plot_cosmos_Web_Survey(fig, ax, show_name):
 
 def plot_Rubin_LSST_Survey(fig, ax):
 
-    ax.fill_between(np.linspace(-180, 180), rad(30), rad(-90), alpha=0.3, color='green', label='Rubin LSST')
+    ax.fill_between(np.linspace(-180, 180), rad(30), rad(-90), alpha=0.3, color='green', label=r'Rubin LSST ($18 000\rm{deg}^2$)')
     return ax
 
 def plot_HST_CANDELS_Survey(fig, ax, show_name=True):
@@ -195,6 +195,6 @@ def plot_Chandra_Deep_North_Survey(fig, ax, show_name):
     CDN = Circle((ax.projection_ra(deep_ra), ax.projection_dec(deep_dec)), rad(np.sqrt(0.11/(np.pi))), edgecolor='gray', facecolor='gray', alpha=0.5, label='Chandra')
     ax.add_patch(CDN)
     if show_name:
-        ax.text(ax.projection_ra(deep_ra), ax.projection_dec(deep_dec)+rad(-5),'Deep Field North', color='gray')
+        ax.text(ax.projection_ra(deep_ra)+rad(10), ax.projection_dec(deep_dec)+rad(-8),'Deep Field North', color='gray')
 
     return ax
