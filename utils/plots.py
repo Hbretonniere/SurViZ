@@ -525,7 +525,7 @@ def plot_surveys(telescopes, surveys):
     lines = ax.get_lines()
     legend1 = plt.legend([lines[0]], ['Ecliptic'], fontsize=15, bbox_to_anchor = (0.14, 1.05))
     ax.add_artist(legend1)
-    legend2 = plt.legend([lines[1]], ['Galactic'], fontsize=15, bbox_to_anchor = (1, 1.05))
+    legend2 = plt.legend([lines[1]], ['Galactic'], fontsize=15, bbox_to_anchor = (1.02, 1.05))
     ax.add_artist(legend2)
 
     

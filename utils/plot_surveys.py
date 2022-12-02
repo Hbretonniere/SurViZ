@@ -178,7 +178,7 @@ def plot_HST_CANDELS_Survey(fig, ax, show_name=True):
     return ax
 
 def plot_SDSS_I_Survey(fig, ax):
-    ax.fill_between(ax.projection_ra(np.linspace(120, 240, 2)), 0, rad(70), color='purple', hatch='/', alpha=0.5, label='SDSS-I')
+    ax.fill_between(ax.projection_ra(np.linspace(120, 240, 2)), 0, rad(70), color='purple', hatch='/', alpha=0.5, label=r'SDSS-I ($10886\rm{deg}^2$)')#
     
     ax.fill_between(ax.projection_ra(np.linspace(320, 360, 2)), rad(1), -rad(1), color='purple', hatch='/', alpha=0.5)
     ax.fill_between(ax.projection_ra(np.linspace(0, 60, 2)), rad(1), -rad(1), color='purple', hatch='/', alpha=0.5)
