@@ -1,17 +1,14 @@
 ![Image quality](./surviz_black.png)
 
-<br/><br/>
 
 # Welcome to SurViZ, a platform to compare qualitatively various astrophysical missions! 
 
-The platform is hosted with streamlit, and you can visit it here: [https://hbretonniere-surviz--home-page-9r8djm.streamlit.app/](https://hbretonniere-surviz--home-page-9r8djm.streamlit.app/)
+The platform is hosted with streamlit, and you can visit it here: [https://hbretonniere-surviz--home-page-9r8djm.streamlit.app/](https://hbretonniere-surviz--home-page-9r8djm.streamlit.app/)  
 
 The project is under construction, feel free to make comments, remarks, or help us adding new missions or features! 
 
-<br/><br/>
-For a more quantitative comparison of some of the surveys, you can use galcheat, by Boucaud et al. : [https://github.com/aboucaud/galcheat](https://github.com/aboucaud/galcheat)
+For a more quantitative comparison of some of the surveys, you can use galcheat, by Boucaud et al. : [https://github.com/aboucaud/galcheat](https://github.com/aboucaud/galcheat)  
 
-<br/><br/>
 
 For now, you can use SuViZ for 6 tasks, each one available by clicking in the top left buttons of the main page:
 
