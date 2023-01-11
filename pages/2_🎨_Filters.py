@@ -32,7 +32,9 @@ st.image('surviz_black_long.png')
 st.markdown('# 🎨 Filters visualisation \n ')
 description = st.expander("README")
 description.markdown(filters_refs)
-st.markdown('You can see here the filters of the different instruments. Note that for now, the shape and sensitivity are not correct: the y-axis is arbitrary, and the differences are just here for a better visualisation')
+st.markdown('You can see here the filters of the different instruments. Note that for now, shapes and sensitivities of each filter are not correct: the y-axis is arbitrary, and the differences in height are just here for a better visualisation')
+st.markdown('Select on the left panel the missions and instruments you want to display')
+
 
 # Multi Select the telescopes. Default Euclid, Rubin/LSST
 telescopes = st.sidebar.multiselect(
