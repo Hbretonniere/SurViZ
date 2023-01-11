@@ -78,6 +78,7 @@ JWST_NIRCAM = {
 JWST_MIRI = {'pix_scale':0.031,
     'ls':'--',
     'fwhm':0.40,
+    'main_band':'F1500M',
     'bands':{
         'F560W':{
             "zp":None, "min_max":[5600-120/2, 5600+120/2], 'fwhm':0.22},  #all good but zp

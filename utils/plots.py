@@ -321,7 +321,7 @@ def plot_fields(telescopes, surveys, instruments, info, nb_to_plot, bands=None):
                     images[telescope][survey] = np.diag(np.ones(128))
                     images[telescope][survey] += np.fliplr(images[telescope][survey])
 
-                    # Show an error message explaining that the imge is not yet avaiable
+                    # Show an error message explaining that the image is not yet avaiable
                     st.write(f'Sorry, {telescope} {survey} {instrument} is not implemented yet! Stay Tuned !')
                     # st.write(f'Sorry, ./data/fields/{telescope}_{instrument}_{survey}.fits is not implemented yet!')
 
