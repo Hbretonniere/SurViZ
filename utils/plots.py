@@ -80,7 +80,7 @@ def plot_bands(info, telescopes, instruments, bands, surveys, fill=True, log=Fal
     
     # x legend, depending on the number of instruments for better display
     ax.set_xlabel('Wavelength (nm)', fontsize=20)
-    plt.legend(bbox_to_anchor = (1, -0.1), ncol=max(1, len(instruments)//2), fontsize=20)
+    plt.legend(bbox_to_anchor = (1, 1.2), ncol=max(1, len(instruments)//2), fontsize=20)
 
     return fig
 
