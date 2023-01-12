@@ -1,7 +1,7 @@
 import numpy as np
 from astropy.coordinates import SkyCoord
 import astropy.units as u
-import galsim 
+# import galsim 
 import glob 
 import sys
 import streamlit as st
@@ -10,7 +10,7 @@ from types import MethodType
 import matplotlib.pyplot as plt
 from astropy.coordinates import ICRS
 import cv2
-from scipy.signal import convolve2d
+# from scipy.signal import convolve2d
 
 
 def MagToFlux(zp, mag):

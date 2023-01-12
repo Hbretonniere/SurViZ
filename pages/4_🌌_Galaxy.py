@@ -81,7 +81,7 @@ else:
         nb_to_plot += len(telescope_instrument)
 
     # Call the plot routine
-    fig = plot_galaxies(info, telescopes, selected_instruments, nb_to_plot)
+    fig = plot_galaxies(info, telescopes, selected_instruments, nb_to_plot, change_gal)
 
     # Plot the figure
     st.pyplot(fig)
