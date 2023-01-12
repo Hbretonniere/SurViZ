@@ -442,7 +442,7 @@ def create_and_save_gal(info, telescope, instrument, show=False):
     fwhm = instrument_info['bands'][band]['fwhm']
 
     # Load the file with the Illustris-TNG profile
-    img = np.load('../data/tng_gal.npy')[10:-10, 10:-10]
+    img = np.load('../data/tng_gal2.npy')[10:-10, 10:-10]
 
     # Define the resolution of the image
     # by multiplying the size of the original image (in pixel)
@@ -451,18 +451,18 @@ def create_and_save_gal(info, telescope, instrument, show=False):
     s = int(237 * 0.03/pixel_scale)
     size = (s, s)
     
-    # resize the image
-    res = cv2.resize(psfed, dsize=size, interpolation=cv2.INTER_CUBIC)
-
     # Create the PSF
     psf = create_psf(fwhm, pixel_scale)
 
     # Convolve the image by the PSF
-    psfed = convolve2d(res, psf, mode='same')
+    psfed = convolve2d(img, psf, mode='same')
+
+    # resize the image
+    res = cv2.resize(psfed, dsize=size, interpolation=cv2.INTER_CUBIC)
 
     if show:
         plt.figure()
         plt.imshow(res, cmap='bone')
     
     # Save the image with the appropriate name
-    np.save(f'../data/individual_gals/gal_{telescope}_{instrument}.npy', res)
+    np.save(f'../data/individual_galaxies/gal2_{telescope}_{instrument}.npy', res)

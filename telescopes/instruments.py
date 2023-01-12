@@ -157,6 +157,7 @@ Rubin_Wide_field_imager = {
     'ls':'-',
     'depth':24.5,
     'fwhm':0.8, #verified
+    'main_band':'i',
     'bands':{"u":{"zp":23.39, "min_max":[320, 400], 'fwhm':0.92}, # zps look to small, need to check.
             "g":{"zp":24.51, "min_max":[400, 552], 'fwhm':0.87},
             "r":{"zp":24.49, "min_max":[552, 691], 'fwhm':0.83},

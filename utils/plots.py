@@ -372,7 +372,7 @@ def plot_fields(telescopes, surveys, instruments, info, nb_to_plot, bands=None):
     return fig
 
 
-def plot_galaxies(info, telescopes, instruments, nb_to_plot, bands=None):
+def plot_galaxies(info, telescopes, instruments, nb_to_plot, change_gal, bands=None):
     """
     Plot the images of a galaxy as seen by the selected telescopes and instruments
     
@@ -421,22 +421,25 @@ def plot_galaxies(info, telescopes, instruments, nb_to_plot, bands=None):
 
         # Loop through the instruments
         for instrument in instruments[telescope]:
-
-                # If the image exist in the folders:
-                try:
-                    # load and keep the image
-                    images[telescope][instrument] = np.load(f'./data/individual_galaxies/gal_{telescope}_{instrument}.npy', allow_pickle=True)
-                    
-                    # Compute the size of the stamp in arcsec
-                    sizes.append(237 * 0.03/info[telescope]['instruments'][instrument]['pix_scale'])
+            if change_gal:
+                file_name = f'./data/individual_galaxies/gal2_{telescope}_{instrument}.npy'
+            else:
+                file_name = f'./data/individual_galaxies/gal_{telescope}_{instrument}.npy'
+            # If the image exist in the folders:
+            try:
+                # load and keep the image
+                images[telescope][instrument] = np.load(file_name, allow_pickle=True)
                 
-                # If the image does not exist, plot a black image with white cross
-                except OSError:
-                    images[telescope][instrument] = np.diag(np.ones(128))
-                    images[telescope][instrument] += np.fliplr(images[telescope][instrument])
-    
-                    st.write(f'Sorry, {telescope} {instrument} is not implemented yet!')
-                    # st.write(f'Sorry, ./data/individual_galaxies/gal_{telescope}_{instrument}.npy is not implemented yet!')
+                # Compute the size of the stamp in arcsec
+                sizes.append(237 * 0.03/info[telescope]['instruments'][instrument]['pix_scale'])
+            
+            # If the image does not exist, plot a black image with white cross
+            except OSError:
+                images[telescope][instrument] = np.diag(np.ones(128))
+                images[telescope][instrument] += np.fliplr(images[telescope][instrument])
+
+                st.write(f'Sorry, {telescope} {instrument} is not implemented yet!')
+                # st.write(f'Sorry, ./data/individual_galaxies/gal_{telescope}_{instrument}.npy is not implemented yet!')
 
     # Find the max size            
     max_size = np.max(sizes)

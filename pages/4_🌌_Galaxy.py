@@ -50,6 +50,8 @@ telescopes = st.sidebar.multiselect(
         default=["Euclid", 'JWST', 'SDSS']
     )
 
+change_gal = st.checkbox('Change galaxy')
+
 # Warning and stop if no telescope selected
 if len(telescopes) == 0:
     st.markdown('## Please select at least one telescope')
