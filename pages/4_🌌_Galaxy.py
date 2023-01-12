@@ -50,7 +50,11 @@ telescopes = st.sidebar.multiselect(
         default=["Euclid", 'JWST', 'SDSS']
     )
 
-change_gal = st.checkbox('Change galaxy')
+col1, col2 = st.columns(2)
+with col1:
+    same_size = st.checkbox('Same size')
+with col2:
+    change_gal = st.checkbox('Change galaxy')
 
 # Warning and stop if no telescope selected
 if len(telescopes) == 0:
@@ -81,7 +85,7 @@ else:
         nb_to_plot += len(telescope_instrument)
 
     # Call the plot routine
-    fig = plot_galaxies(info, telescopes, selected_instruments, nb_to_plot, change_gal)
+    fig = plot_galaxies(info, telescopes, selected_instruments, nb_to_plot, change_gal, same_size)
 
     # Plot the figure
     st.pyplot(fig)

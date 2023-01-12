@@ -372,7 +372,7 @@ def plot_fields(telescopes, surveys, instruments, info, nb_to_plot, bands=None):
     return fig
 
 
-def plot_galaxies(info, telescopes, instruments, nb_to_plot, change_gal, bands=None):
+def plot_galaxies(info, telescopes, instruments, nb_to_plot, change_gal, same_size, bands=None):
     """
     Plot the images of a galaxy as seen by the selected telescopes and instruments
     
@@ -398,7 +398,7 @@ def plot_galaxies(info, telescopes, instruments, nb_to_plot, change_gal, bands=N
     plt.rcParams.update({"font.size": 10})
 
     # Create the button for the same image size option
-    same_size = st.checkbox('Same size image')
+    # same_size = st.checkbox('Same size image')
 
     # We always want two columns: compute the number of lines corresponding
     nb_lines = int(np.ceil(nb_to_plot / 2))
