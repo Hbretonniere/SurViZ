@@ -372,7 +372,7 @@ def plot_fields(telescopes, surveys, instruments, info, nb_to_plot, bands=None):
     return fig
 
 
-def plot_galaxies(info, telescopes, instruments, nb_to_plot, change_gal, same_size, bands=None):
+def plot_galaxies(info, telescopes, instruments, nb_to_plot, change_gal, same_size, nbs=[2, 3, 4], nb=1, bands=None):
     """
     Plot the images of a galaxy as seen by the selected telescopes and instruments
     
@@ -412,8 +412,17 @@ def plot_galaxies(info, telescopes, instruments, nb_to_plot, change_gal, same_si
     # keep trace of the image sizes (in arcsec) to be able to rescale them all to the same area
     sizes = []
 
-    # First loop to load and find the maximum size
     images = {}
+
+    # if len(nbs) == 0:
+        # nbs = [1, 2]
+    if change_gal:
+        if len(nbs) == 0:
+            nbs = [1, 2, 3, 4]
+        nb = np.random.choice(nbs)
+        nbs.remove(nb)
+        
+    # First loop to load and find the maximum size
     for telescope in telescopes:
 
         # Nicely organized dictionary for further plotting        
@@ -421,10 +430,10 @@ def plot_galaxies(info, telescopes, instruments, nb_to_plot, change_gal, same_si
 
         # Loop through the instruments
         for instrument in instruments[telescope]:
-            if change_gal:
-                file_name = f'./data/individual_galaxies/gal2_{telescope}_{instrument}.npy'
-            else:
-                file_name = f'./data/individual_galaxies/gal_{telescope}_{instrument}.npy'
+            
+                # file_name = f'./data/individual_galaxies/gal2_{telescope}_{instrument}.npy'
+            # else:
+            file_name = f'./data/individual_galaxies/gal{nb}_{telescope}_{instrument}.npy'
             # If the image exist in the folders:
             try:
                 # load and keep the image

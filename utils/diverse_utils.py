@@ -10,7 +10,7 @@ from types import MethodType
 import matplotlib.pyplot as plt
 from astropy.coordinates import ICRS
 import cv2
-# from scipy.signal import convolve2d
+from scipy.signal import convolve2d
 
 
 def MagToFlux(zp, mag):
@@ -442,7 +442,7 @@ def create_and_save_gal(info, telescope, instrument, show=False):
     fwhm = instrument_info['bands'][band]['fwhm']
 
     # Load the file with the Illustris-TNG profile
-    img = np.load('../data/tng_gal2.npy')[10:-10, 10:-10]
+    img = np.load('../data/tng4_gal.npy')[10:-10, 10:-10]
 
     # Define the resolution of the image
     # by multiplying the size of the original image (in pixel)
@@ -465,4 +465,4 @@ def create_and_save_gal(info, telescope, instrument, show=False):
         plt.imshow(res, cmap='bone')
     
     # Save the image with the appropriate name
-    np.save(f'../data/individual_galaxies/gal2_{telescope}_{instrument}.npy', res)
+    np.save(f'../data/individual_galaxies/gal4_{telescope}_{instrument}.npy', res)

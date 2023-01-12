@@ -54,7 +54,7 @@ col1, col2 = st.columns(2)
 with col1:
     same_size = st.checkbox('Same size')
 with col2:
-    change_gal = st.checkbox('Change galaxy')
+    change_gal = st.button('Change galaxy')
 
 # Warning and stop if no telescope selected
 if len(telescopes) == 0:
