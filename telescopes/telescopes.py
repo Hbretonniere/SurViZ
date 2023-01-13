@@ -58,7 +58,7 @@ Chandra = {"marker":"O",
         "mirror": 1.23, #carefull, x rays are different regardind the mirrors
         "color": "gray",
         "surveys":{"Deep-North":Chandra_Deep_North},
-        "instruments":{"Imaging_camera":Chandra_HRC},
+        "instruments":{"HRC":Chandra_HRC},
         }
 # . https://cxc.harvard.edu/cdo/about_chandra/
         # "HST": {"marker":'x',

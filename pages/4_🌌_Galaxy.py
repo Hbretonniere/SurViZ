@@ -74,7 +74,6 @@ else:
 
         # Selection of the surveys. Default is the first listed in the dictionary
         st.sidebar.markdown(f'## {telescope}')
-
         telescope_instrument =  st.sidebar.multiselect(
                 f"Select instruments",
                 list(info[telescope]['instruments'].keys()),

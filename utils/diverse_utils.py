@@ -403,7 +403,7 @@ def sim_and_save_field(info, telescope, instrument, survey):
     fits.writeto(f'../data/fields/{telescope}_{instrument}_{survey}.fits', image, overwrite=True)
 
 
-def create_and_save_gal(info, telescope, instrument, show=False):
+def create_and_save_gal(info, telescope, instrument, idx, show=False):
 
     """ 
     Simulate and save a galaxy from a TNG image
@@ -442,7 +442,7 @@ def create_and_save_gal(info, telescope, instrument, show=False):
     fwhm = instrument_info['bands'][band]['fwhm']
 
     # Load the file with the Illustris-TNG profile
-    img = np.load('../data/tng4_gal.npy')[10:-10, 10:-10]
+    img = np.load(f'../data/tng{idx}_gal.npy')[10:-10, 10:-10]
 
     # Define the resolution of the image
     # by multiplying the size of the original image (in pixel)
@@ -465,4 +465,4 @@ def create_and_save_gal(info, telescope, instrument, show=False):
         plt.imshow(res, cmap='bone')
     
     # Save the image with the appropriate name
-    np.save(f'../data/individual_galaxies/gal4_{telescope}_{instrument}.npy', res)
+    np.save(f'../data/individual_galaxies/gal{idx}_{telescope}_{instrument}.npy', res)
