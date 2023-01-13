@@ -35,13 +35,15 @@ st.markdown(
     
     - With 🎨 Filters, you will explore the spectral bands of each telescopes' instruments.
 
-    - With 🪞 Mirror , you will explore the size of the telescopes' primary mirror, and their field of view.
+    - With 👁️ FOV, you will be able to explore the Filed of View of each telescope.
 
     - With 🌌 Galaxy, you will explore the surveys and instruments' image quality (resolution and PSF) in a TNG galaxy.
 
     - With ✨ Galaxy fields, you will explore the surveys and instruments' depths in a simulated galaxy field.
 
     - With 🗺️ Survey footprint, you will visualise the sizes and positions of the various surveys.
+
+    - With 🪞 Mirror , you will explore the size of the telescopes' primary mirror.
     \n  
     
     More information can be found by clicking in the READMEs of each tab.
