@@ -194,9 +194,11 @@ def plot_fovs(info, telescopes):
 
     # Ensure that a square appears as a square
     ax.set_aspect("equal")
-
-    # Hard code the x and y limits (Rubin is huge...)
-    if "Rubin" in telescopes:
+    
+    # Hard code the x and y limits (Rubin is huge..., Fermi even more)
+    if "Fermi" in telescopes:
+        lims = 5500
+    elif "Rubin" in telescopes:
         lims = 120
     else:
         lims = 30
@@ -583,6 +585,10 @@ def plot_surveys(telescopes, surveys):
             
             elif  f'{telescope}-{survey}' == 'Chandra-Deep-North':
                 ax = plot_Chandra_Deep_North_Survey(fig, ax, show_name)
+
+            elif  f'{telescope}-{survey}' == 'Fermi-All_sky':
+                ax = plot_Fermi_all_sky_Survey(fig, ax)
+
             # Warning if the survey is not yes defined
             else:
                 st.markdown(f'Sorry, {telescope} {survey} is not yet available... Stay Tuned!')

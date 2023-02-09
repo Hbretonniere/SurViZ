@@ -132,6 +132,11 @@ def plot_cosmos_Web_Survey(fig, ax, show_name):
 
     return ax, zoom_cosmos_web
 
+def plot_Fermi_all_sky_Survey(fig, ax):
+
+    ax.fill_between(np.linspace(-180, 180), rad(90), rad(-90), alpha=0.2, color='tomato', label=r'Fermi all sky ($41253\rm{deg}^2$)')
+    return ax
+
 def plot_Rubin_LSST_Survey(fig, ax):
 
     ax.fill_between(np.linspace(-180, 180), rad(30), rad(-90), alpha=0.3, color='green', label=r'Rubin LSST ($18 000\rm{deg}^2$)')

@@ -187,3 +187,11 @@ Chandra_HRC = {
     'bands':{"X-ray":{"zp":None, "min_max":[0.124, 12], 'fwhm':0.4},  # refs https://cxc.harvard.edu/proposer/POG/html/chap7.html
             }
             }
+
+Fermi_LAT = {
+    'pix_scale':None,
+    'ls':'-',
+    'main_band':'Gamma_ray',
+    'bands':{"Gamma_ray":{"zp":None, "min_max":[4.13e-9, 6.2e-5], 'fwhm':None},  # refs https://cxc.harvard.edu/proposer/POG/html/chap7.html
+            }
+            }

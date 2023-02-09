@@ -61,11 +61,13 @@ References:
 - Euclid: 
     - zero points: http://arxiv.org/abs/2203.01650 (NIR), None (VIS)
     - FWHM: http://arxiv.org/abs/2209.12906 (NIR), https://ui.adsabs.harvard.edu/abs/2010SPIE.7731E..1JC/abstract (VIS) 
-    - noise level: estimated from Euclid Morpho Challenge simulations (Wide and Deep)
+    - sensitivities: http://arxiv.org/abs/2209.12906
 - JWST:
     - FWHM: https://jwst-docs.stsci.edu/jwst-near-infrared-camera/nircam-performance/nircam-point-spread-functions (NIRCAM)
     - zero-points: Mirage, https://github.com/spacetelescope/mirage/blob/master/mirage/config/NIRCam_zeropoints.list (NIRCAM)
-    - noise level: internal communication (JADES)
+
+    - sensitivity: - cosmos web : https://ui.adsabs.harvard.edu/abs/2022arXiv221107865C/abstract
+                   - Internal communication (JADES)
 - SDSS:
     - zero points: https://www.sdss.org/dr12/algorithms/magnitudes/
     - FWHM : aprrox from https://arxiv.org/abs/1111.6619

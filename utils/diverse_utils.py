@@ -11,7 +11,20 @@ import matplotlib.pyplot as plt
 from astropy.coordinates import ICRS
 import cv2
 from scipy.signal import convolve2d
+from astropy.visualization import ZScaleInterval
+from scipy.stats import poisson
+from astropy.visualization import simple_norm
 
+
+def get_noise_rms(mag_depth, zp, n_sigma, aperture):
+    '''
+    mag_depth: float, magnitude limit at a certain aperture and sigma limit
+    zp:        float, zero point magnitude
+    n_sigma:   float, detection limit
+    aperture:  float, aperture fow which mag_depth is known in arcsec
+
+    '''
+    return 10**(-0.4*(mag_depth-zp))/(n_sigma*np.sqrt(aperture)) * 10**(-2)
 
 def MagToFlux(zp, mag):
     """
@@ -265,7 +278,7 @@ def create_psf(fwhm, pxscale):
     return PSF
 
 
-def sim_field(pxscale, fwhm, noise_level, zp):
+def sim_field(pxscale, fwhm, zp, sensitivity):
 
     """
     Simulate a field of galaxies with Galsim
@@ -364,12 +377,19 @@ def sim_field(pxscale, fwhm, noise_level, zp):
         bounds = stamp.bounds & full_image.bounds
         full_image[bounds] += stamp[bounds]
 
-        # Add the gaussian background noise
-        full_image += np.random.normal(0, noise_level, (image_size_x, image_size_y))
+    # Add the gaussian background noise
+    full_image = full_image.array
+    mag_depth, n_sigma, aperture, t_exp = sensitivity
+    full_image[full_image < 0] = 0
+    image_shot_noise = poisson.rvs(full_image * t_exp) / t_exp
+    # image_shot_noise = full_image
+    noise_rms = get_noise_rms(mag_depth, zp, n_sigma, aperture)
+    noise_img = np.random.normal(0, noise_rms, (image_size_x, image_size_y))
+    full_image = image_shot_noise + noise_img
 
-    return full_image.array
+    return full_image
 
-def sim_and_save_field(info, telescope, instrument, survey):
+def sim_and_save_field(info, telescope, instrument, survey, show=False, write=True):
     """ 
     Simulate and save a galaxy field
     Note that for now, the band is fixed, selected with the "main_band" info ot the instrument
@@ -396,11 +416,18 @@ def sim_and_save_field(info, telescope, instrument, survey):
     # Simulate the field with the appropriate image quality and depth
     image = sim_field(instrument_info['pix_scale'],
                 instrument_info['bands'][band]['fwhm'],
-                info[telescope]['surveys'][survey]['std_noise'],
-                instrument_info['bands'][band]['zp'])
-    
+                instrument_info['bands'][band]['zp'],
+                info[telescope]['surveys'][survey]['sensitivity'][instrument])
+    if show:
+        plt.figure()
+        # interval = ZScaleInterval()
+        # a = interval.get_limits(image)
+        norm = simple_norm(image, 'sqrt')
+        plt.imshow(image, norm=norm)  #vmin=a[0], vmax=a[1])
+        
     # write the fits image with the appropriate name
-    fits.writeto(f'../data/fields/{telescope}_{instrument}_{survey}.fits', image, overwrite=True)
+    if write:
+        fits.writeto(f'../data/fields/{telescope}_{instrument}_{survey}.fits', image, overwrite=True)
 
 
 def create_and_save_gal(info, telescope, instrument, idx, show=False):
