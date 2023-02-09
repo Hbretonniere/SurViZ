@@ -246,7 +246,8 @@ def plot_fovs(info, telescopes):
     # Add an indication of the scale
     ax.errorbar([-31/2, 31/2], [0, 0], yerr=[2, 2], c='darkred')
     ax.text(-2.2, 1, "31'", color='darkred')
-
+    ax.set_xlabel('arcmin')
+    ax.set_ylabel('arcmin')
     plt.title("Field Of View")
     plt.legend()
     return fig
