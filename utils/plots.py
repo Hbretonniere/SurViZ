@@ -116,7 +116,9 @@ def plot_mirrors(info, telescopes):
 
     # Loop through the telescopes
     for telescope in telescopes:
-
+        if telescope == "Fermi":
+            st.markdown('### Fermi has no mirror, the technology for gamma ray is different.')
+            continue
         # get the miror's diameter
         d = info[telescope]["mirror"]
 
