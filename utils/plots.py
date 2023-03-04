@@ -152,8 +152,8 @@ def plot_mirrors(info, telescopes):
     ax.set_ylim(-dmax / 2, dmax / 2)
 
     # Remove the axis ticks
-    ax.set_xticks([])
-    ax.set_yticks([])
+    # ax.set_xticks([])
+    # ax.set_yticks([])
 
     # Add a human stick figure (1.80)
     human_axes = ax.inset_axes(
