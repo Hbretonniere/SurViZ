@@ -37,6 +37,8 @@ st.markdown(
 
     - With 👁️ FOV, you will be able to explore the Filed of View of each telescope.
 
+    - With 📈characteristics, you will explore the capacity of the missions regarding filters, resolution and depth.
+    
     - With 🌌 Galaxy, you will explore the surveys and instruments' image quality (resolution and PSF) in a TNG galaxy.
 
     - With ✨ Galaxy fields, you will explore the surveys and instruments' depths in a simulated galaxy field.
