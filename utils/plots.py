@@ -6,6 +6,8 @@ import streamlit as st
 import seaborn as sns
 from utils.plot_surveys import *
 from astropy.visualization import ZScaleInterval
+import matplotlib.patches as mpatches
+
 
 def plot_bands(info, telescopes, instruments, bands, surveys, fill=True, log=False):
     """
@@ -633,4 +635,99 @@ def plot_surveys(telescopes, surveys):
     # Legend for the surveys
     plt.legend(bbox_to_anchor = (1, -0.1), ncol=2, fontsize=17)
     
+    return fig
+
+def plot_characteristics(info, telescopes, selected_instruments,
+                         selected_bands, selected_survey, y_log):
+    fig, ax = plt.subplots(figsize=(15, 10))
+    # Loop through the telescopes
+    colormap = plt.cm.cool
+    for i, telescope in enumerate(telescopes):
+        j = i+1  # used to plot all telescope's bands at a different hight (for better visualisation)
+        k = 0    # used to plot all band at a different hight (for better visualisation)
+        # instrument[telescope] = 
+        # Loop trough the instruments
+
+        # first loop to find min max zps
+        min_zp, max_zp = 1000, 0
+
+        for instrument in selected_instruments[telescope]:
+
+            for i, band in enumerate(selected_bands[telescope][instrument]):
+                info_band = info[telescope]['instruments'][instrument]['bands'][band]
+                zp = info_band['zp']
+                if not info_band['fwhm']:
+                    continue
+                if zp < min_zp: min_zp=zp
+                if zp > max_zp: max_zp=zp
+        # 
+        # Second loop for plot
+        for instrument in selected_instruments[telescope]:
+            ls = info[telescope]['instruments'][instrument]['ls']
+
+            # Empty plot for legend (to have a unique legend for the instrument)
+            if info[telescope]['marker'] == 'x':  # take of the fact that HST marker has no fill method
+                ax.scatter([], [], marker=info[telescope]['marker'], 
+                        color='black', linewidth=1, edgecolor='black',
+                        linestyle=ls, label=f'{telescope} {instrument}',
+                        s=200)
+            else:
+                ax.scatter([], [], marker=info[telescope]['marker'], 
+                        color='white', linewidth=1, edgecolor='black',
+                        linestyle=ls, label=f'{telescope} {instrument}',
+                        s=200)
+            px_scale = info[telescope]['instruments'][instrument]['pix_scale']
+            
+            for i, band in enumerate(selected_bands[telescope][instrument]):
+                info_band = info[telescope]['instruments'][instrument]['bands'][band]
+                center_band = np.mean(info_band['min_max'])
+                if not info_band['fwhm']:
+                    continue
+                ax.scatter(center_band, info_band['fwhm']*px_scale,
+                           marker=info[telescope]['marker'],
+                           c=info_band['zp'],
+                           cmap=colormap,
+                           s=200,
+                           linewidth=1, edgecolor='black',
+                           linestyle=ls,
+                           vmin=min_zp, vmax=max_zp)
+    sm = plt.cm.ScalarMappable(cmap=colormap,
+                            norm=plt.Normalize(vmin=min_zp, vmax=max_zp))
+    cb = plt.colorbar(sm, ax=ax)
+    cb.ax.tick_params(labelsize=20)
+    cb.ax.set_ylabel('AB magnitude')
+    plt.legend(fontsize=20)
+    plt.xlabel('Wavelength (nm)', fontsize=20)
+    plt.ylabel(r'Resolution (PSF FWHM $\times$ Pixel scale)', fontsize=20)
+    plt.xticks(fontsize=20)
+    plt.yticks(fontsize=20)
+    
+    # Arrow for the y-axis
+    arrow = mpatches.FancyArrowPatch((-0.18, 0.95), (-0.18, 0.05),
+                                 mutation_scale=100,
+                                 transform=ax.transAxes,
+                                 clip_on=False)
+    ax.add_patch(arrow)
+    ax.text(-0.192, 0.35,
+            'The lower the better',
+            transform=ax.transAxes,
+            rotation=90,
+            fontsize=20)
+    ax.add_patch(arrow)
+
+    # Arrow for the colorbar
+    arrow = mpatches.FancyArrowPatch((1.28, 0.95), (1.28, 0.05),
+                                 mutation_scale=100,
+                                 transform=ax.transAxes,
+                                 clip_on=False)
+    ax.add_patch(arrow)
+    ax.text(1.268, 0.35,
+            'The lower the better',
+            transform=ax.transAxes,
+            rotation=90,
+            fontsize=20)
+
+    if y_log:
+        ax.set_yscale('log')
+
     return fig
