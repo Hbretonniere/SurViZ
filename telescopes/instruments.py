@@ -56,7 +56,7 @@ JWST_NIRCAM = {
             "zp":26.25, "min_max":[1992, 2201], 'fwhm':0.071},
         'F212N':{"zp":24.06, "min_max":[2109, 2134], 'fwhm':0.072},
         'F250M':{"zp":25.92, "min_max":[2503-180/2, 2503-180/2], 'fwhm':0.084},
-        'F277W':{"zp":27.32, "min_max":[2762-683/2, 2762+683/2], 'fwhm':0.91},
+        'F277W':{"zp":27.32, "min_max":[2762-683/2, 2762+683/2], 'fwhm':0.091},
         'F300M':{"zp":26.30, "min_max":[2989-315/2, 2989+315/2], 'fwhm':0.1},
         'F323N':{"zp":23.63, "min_max":[3237-38/2, 3237+38/2], 'fwhm':0.108},
         'F335M':{"zp":None, "min_max":[3237-38/2, 3237+38/2], 'fwhm':None},
@@ -189,9 +189,9 @@ Chandra_HRC = {
             }
 
 Fermi_LAT = {
-    'pix_scale':None,
+    'pix_scale':6, #  ~ 0.1 degree
     'ls':'-',
     'main_band':'Gamma_ray',
-    'bands':{"Gamma_ray":{"zp":None, "min_max":[4.13e-9, 6.2e-5], 'fwhm':None},  # refs https://cxc.harvard.edu/proposer/POG/html/chap7.html
+    'bands':{"Gamma_ray":{"zp":None, "min_max":[4.13e-9, 6.2e-5], 'fwhm':1},  # refs fwhm random...
             }
             }
