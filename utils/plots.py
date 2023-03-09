@@ -639,16 +639,14 @@ def plot_surveys(telescopes, surveys):
 
 def plot_characteristics(info, telescopes, selected_instruments,
                          selected_bands, selected_survey, y_log):
-    fig, ax = plt.subplots(figsize=(15, 10))
-    # Loop through the telescopes
-    colormap = plt.cm.cool
-    for i, telescope in enumerate(telescopes):
-        j = i+1  # used to plot all telescope's bands at a different hight (for better visualisation)
-        k = 0    # used to plot all band at a different hight (for better visualisation)
-        # instrument[telescope] = 
-        # Loop trough the instruments
 
-        # first loop to find min max zps
+    fig, ax = plt.subplots(figsize=(15, 10))
+    colormap = plt.cm.cool
+
+    # Loop through the telescopes
+    # first loop to find min max zps
+    for i, telescope in enumerate(telescopes):
+        # Loop trough the instruments
         min_zp, max_zp = 1000, 0
 
         for instrument in selected_instruments[telescope]:
@@ -662,6 +660,7 @@ def plot_characteristics(info, telescopes, selected_instruments,
                 if zp > max_zp: max_zp=zp
         # 
         # Second loop for plot
+    for telescope in telescopes:
         for instrument in selected_instruments[telescope]:
             ls = info[telescope]['instruments'][instrument]['ls']
 
@@ -684,18 +683,18 @@ def plot_characteristics(info, telescopes, selected_instruments,
                 if not info_band['fwhm']:
                     continue
                 ax.scatter(center_band, info_band['fwhm']*px_scale,
-                           marker=info[telescope]['marker'],
-                           c=info_band['zp'],
-                           cmap=colormap,
-                           s=200,
-                           linewidth=1, edgecolor='black',
-                           linestyle=ls,
-                           vmin=min_zp, vmax=max_zp)
+                            marker=info[telescope]['marker'],
+                            c=info_band['zp'],
+                            cmap=colormap,
+                            s=200,
+                            linewidth=1, edgecolor='black',
+                            linestyle=ls,
+                            vmin=min_zp, vmax=max_zp)
     sm = plt.cm.ScalarMappable(cmap=colormap,
                             norm=plt.Normalize(vmin=min_zp, vmax=max_zp))
     cb = plt.colorbar(sm, ax=ax)
     cb.ax.tick_params(labelsize=20)
-    cb.ax.set_ylabel('AB magnitude')
+    cb.ax.set_ylabel('Zero point AB magnitude', fontsize=20)
     plt.legend(fontsize=20)
     plt.xlabel('Wavelength (nm)', fontsize=20)
     plt.ylabel(r'Resolution (PSF FWHM $\times$ Pixel scale)', fontsize=20)
@@ -712,20 +711,20 @@ def plot_characteristics(info, telescopes, selected_instruments,
             'The lower the better',
             transform=ax.transAxes,
             rotation=90,
-            fontsize=20)
+            fontsize=19)
     ax.add_patch(arrow)
 
     # Arrow for the colorbar
-    arrow = mpatches.FancyArrowPatch((1.28, 0.95), (1.28, 0.05),
+    arrow = mpatches.FancyArrowPatch((1.28, 0.05), (1.28, 0.95),
                                  mutation_scale=100,
                                  transform=ax.transAxes,
                                  clip_on=False)
     ax.add_patch(arrow)
-    ax.text(1.268, 0.35,
-            'The lower the better',
+    ax.text(1.268, 0.3,
+            'The Higher the better',
             transform=ax.transAxes,
             rotation=90,
-            fontsize=20)
+            fontsize=19)
 
     if y_log:
         ax.set_yscale('log')

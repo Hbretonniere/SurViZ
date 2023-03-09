@@ -76,5 +76,8 @@ References:
     - zero points: https://acszeropoints.stsci.edu/ 
     - FWHM: https://hst-docs.stsci.edu/wfc3ihb/chapter-6-uvis-izping-with-wfc3/6-6-uvis-optical-performance
     - std: need to compute
+
+- Rubin-LSST:
+    - https://github.com/aboucaud/galcheat/blob/main/galcheat/data/LSST.yaml and refs
     
 """
