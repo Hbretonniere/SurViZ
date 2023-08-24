@@ -132,6 +132,32 @@ def plot_cosmos_Web_Survey(fig, ax, show_name):
 
     return ax, zoom_cosmos_web
 
+def plot_JADES_Survey(fig, ax, show_name):
+    # rad_goods-s = 37000 pix = 558'' = 0.3deg
+    goods_s_ra = np.array([53])
+    goods_s_dec= np.array([-27.8])
+    goods_s = Circle((ax.projection_ra(goods_s_ra), ax.projection_dec(goods_s_dec)), rad(np.sqrt(0.3/(np.pi))), edgecolor='black', facecolor='darkgreen', alpha=0.5, label=r'JWST-JADES')
+    ax.add_patch(goods_s)
+
+    # rad_goods-n = same good s
+    goods_n_ra = np.array([189])
+    goods_n_dec= np.array([62])
+    goods_n = Circle((ax.projection_ra(goods_n_ra), ax.projection_dec(goods_n_dec)), rad(np.sqrt(0.3/(np.pi))), edgecolor='black', facecolor='darkgreen', alpha=0.5)
+    ax.add_patch(goods_n)
+
+    # rad EGS = 22673 = 0.12deg
+    EGS_ra = np.array([214.8])
+    EGS_dec= np.array([52.8])
+    EGS = Circle((ax.projection_ra(EGS_ra), ax.projection_dec(EGS_dec)), rad(np.sqrt(0.12/(np.pi))), edgecolor='black', facecolor='darkgreen', alpha=0.5)
+    ax.add_patch(EGS)
+
+    if show_name:
+        ax.text(ax.projection_ra(goods_s_ra)+rad(5), ax.projection_dec(goods_s_dec)-rad(5),'GOODS-S', color='darkgreen')
+        ax.text(ax.projection_ra(goods_n_ra)+rad(10), ax.projection_dec(goods_n_dec)-rad(7),'GOODS-N', color='darkgreen')
+        ax.text(ax.projection_ra(EGS_ra)+rad(9.5), ax.projection_dec(EGS_dec)-rad(6),'EGS', color='darkgreen')
+
+    return ax
+
 def plot_Fermi_all_sky_Survey(fig, ax):
 
     ax.fill_between(np.linspace(-180, 180), rad(90), rad(-90), alpha=0.2, color='tomato', label=r'Fermi all sky ($41253\rm{deg}^2$)')

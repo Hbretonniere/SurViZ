@@ -582,6 +582,10 @@ def plot_surveys(telescopes, surveys):
                 ax, cosmos_patch = plot_JWST_CEERS_Survey(fig, ax, show_name)
                 cosmos_patches.append(cosmos_patch)
 
+            elif f'{telescope}-{survey}' == 'JWST-Jades':
+                ax = plot_JADES_Survey(fig, ax, show_name)
+                # cosmos_patches.append(cosmos_patch)
+
             elif f'{telescope}-{survey}' == 'HST-HST-CANDELS':
                 ax = plot_HST_CANDELS_Survey(fig, ax, show_name)
 
