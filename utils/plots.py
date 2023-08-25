@@ -202,7 +202,7 @@ def plot_fovs(info, telescopes):
     # Hard code the x and y limits (Rubin is huge..., Fermi even more)
     if "Fermi" in telescopes:
         lims = 5500
-    elif "Rubin" in telescopes:
+    elif ("Rubin" in telescopes) | ("DES" in telescopes):
         lims = 120
     else:
         lims = 30

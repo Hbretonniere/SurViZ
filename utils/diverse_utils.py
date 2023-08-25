@@ -478,7 +478,11 @@ def create_and_save_gal(info, telescope, instrument, idx, show=False):
     s = int(237 * 0.03/pixel_scale)
     size = (s, s)
     
-    # Create the PSF
+    # if telescope == 'Fermi':
+        # psfed = img
+    # else:
+        # Create the PSF
+
     psf = create_psf(fwhm, pixel_scale)
 
     # Convolve the image by the PSF

@@ -9,7 +9,9 @@ References:
     - ACS: https://etc.stsci.edu/etcstatic/users_guide/appendix_b_acs.html
 - Rubin:
     - https://ui.adsabs.harvard.edu/abs/2009arXiv0912.0201L
-- SDSS: https://www.astro.princeton.edu/PBOOK/camera/camera.htm 
+- SDSS: https://www.astro.princeton.edu/PBOOK/camera/camera.htm
+
+- DES: https://noirlab.edu/science/programs/ctio/instruments/Dark-Energy-Camera/characteristics
 """
 
 mirrors_refs = """
@@ -54,6 +56,7 @@ Simulated galaxy image: https://www.tng-project.org/data/
 - JWST:
     - FWHM: https://jwst-docs.stsci.edu/jwst-near-infrared-camera/nircam-performance/nircam-point-spread-functions (NIRCAM)
     - zero-points: Mirage, https://github.com/spacetelescope/mirage/blob/master/mirage/config/NIRCam_zeropoints.list (NIRCAM)
+
     """
 
 image_depth_refs = """

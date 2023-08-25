@@ -43,4 +43,15 @@ description = {'Euclid':{'general_description':
              'GOODS':'**The Great Observatories Origins Deep Survey**',
              '...':'...'
   }
-}}
+},
+'Fermi':{'general_description':
+ "**??**",
+ 'Instruments':{},
+  'Surveys':{}
+},
+'DES':{'general_description':
+ "**The Dark Energy Survey is a cosmological mission searching to expend our knowledge about Dark Energy**",
+ 'Instruments':{},
+  'Surveys':{}
+}
+}

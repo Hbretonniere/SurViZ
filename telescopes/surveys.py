@@ -5,6 +5,13 @@ from telescopes.instruments import Rubin_Wide_field_imager
 from telescopes.instruments import SDSS_imaging_camera
 from telescopes.instruments import Chandra_HRC
 from telescopes.instruments import Fermi_LAT
+from telescopes.instruments import DES_DECam
+
+"""
+############################ 
+########   EUCLID   ########
+############################
+"""
 
 Euclid_Wide = {
                'instruments':{"VIS":Euclid_VIS,
@@ -21,6 +28,12 @@ Euclid_Deep = {
                 'sensitivity':{'VIS':[26.5, 10, 2, 93953],  # mag depth (0) for n_sigma (1) aperture of (2)
                                'NIR':[24.9, 10, 2, 93953/10]},  #approx exp time
                 'area':53}
+
+"""
+############################ 
+########    JWST    ########
+############################
+"""
 
 JWST_Jades = {
               'instruments':{"NIRCAM":JWST_NIRCAM},
@@ -44,6 +57,12 @@ JWST_CEERS = {
               'filters':['F115W', 'F150W', 'F277W', 'F444W']
              }
 
+"""
+############################ 
+########    HST     ########
+############################
+"""
+
 HST_Cosmos = {
               'instruments':{"ACS":HST_ACS},
               'sensitivity':{"ACS":[27.3, 5, 0.24, 2028]}, # f444w, 2 exposures
@@ -55,8 +74,31 @@ HST_CANDELS = {'instruments':{"ACS":HST_ACS},
               'std_noise':None,
               'area':2.82}
 
+"""
+############################ 
+########    LSST    ########
+############################
+"""
+
 LSST = {'instruments':{"Wide-field-imager":Rubin_Wide_field_imager},
         'area':18000}
+
+
+"""
+############################ 
+########    DES    ########
+############################
+"""
+
+DES = {'instruments':{"Dark-Energy-Camera":DES_DECam},
+        'area':50000}
+
+
+"""
+############################ 
+########    SDSS    ########
+############################
+"""
 
 SDSS_I = {'instruments':{"Imaging_camera":SDSS_imaging_camera},
           'sensitivity':{"Imaging_camera":[23, 5, 0.2, 55]}, # g' aperture and sigma aprroximated (unkown)
@@ -64,11 +106,23 @@ SDSS_I = {'instruments':{"Imaging_camera":SDSS_imaging_camera},
              }
 
 
+"""
+############################ 
+########  CHANDRA   ########
+############################
+"""
+
 Chandra_Deep_North = {
               'instruments':{"HRC":Chandra_HRC},
               'std_noise':None # estimated from online data 
              }
 
+
+"""
+############################ 
+########    FERMI    ########
+############################
+"""
 Fermi_all_sky = {
                 'instruments':{'LAT':Fermi_LAT}
 }

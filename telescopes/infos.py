@@ -1,17 +1,3 @@
-Euclid_Wide = {'depth':25.2,
-               'instruments':{"VIS":Euclid_VIS},
-                              "NIR":Euclid_NIR}
-
-
-Euclid = {"marker":'o',
-          "fov": [34, 34],
-          "color": "blue",
-          "mirror": 1.2,
-          "surveys":{"Wide Survey":Euclid_Wide}}
-
-
-
-
 infos = {
         "Euclid":{"marker":'o',
                   "fov": [34, 34],

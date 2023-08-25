@@ -167,6 +167,20 @@ Rubin_Wide_field_imager = {
             }
                         }
 
+DES_DECam = {
+    'pix_scale':0.26, #verified
+    'ls':'-.',
+    'depth':None,
+    'fwhm':None, #verified
+    'main_band':'g',
+    'bands':{"DES g":{"zp":None, "min_max":[398, 548], 'fwhm':0.87},
+            "DES r":{"zp":None, "min_max":[568, 716], 'fwhm':0.83},
+            "DES i":{"zp":None, "min_max":[710, 857], 'fwhm':0.80},
+            "DES z":{"zp":None, "min_max":[850, 1002], 'fwhm':0.78},
+            "DES Y":{"zp":None, "min_max":[953, 1065], 'fwhm':0.76},
+            }
+                        }
+
 SDSS_imaging_camera = {
     'pix_scale':0.4, #verified
     'ls':'-',

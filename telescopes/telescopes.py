@@ -5,7 +5,8 @@ from telescopes.surveys import LSST
 from telescopes.surveys import SDSS_I
 from telescopes.surveys import Chandra_Deep_North
 from telescopes.surveys import Fermi_all_sky
-from telescopes.instruments import Euclid_VIS, Euclid_NIR, JWST_NIRCAM, JWST_MIRI
+from telescopes.surveys import DES
+from telescopes.instruments import Euclid_VIS, Euclid_NIR, JWST_NIRCAM, JWST_MIRI, DES_DECam
 from telescopes.instruments import HST_ACS, Rubin_Wide_field_imager, SDSS_imaging_camera, Chandra_HRC, Fermi_LAT
 
 Euclid = {"marker":'o',
@@ -47,8 +48,17 @@ Rubin = {"marker":"D",
         "instruments":{"Wide_field_imager":Rubin_Wide_field_imager},
         }
 
+Blanco = {"marker":"s",
+        "fov": [132, 132], # 2.2deg*2.2deg
+        "mirror": 1,
+        "color": "cyan",
+        "major_band":'r',
+        "surveys":{"Dark Energy Survey":DES},
+        "instruments":{"Dark Energy Camera":DES_DECam},
+        }
+
 SDSS = {"marker":".",
-        "fov": [150, 150], #2.5deg*2.5deg
+        "fov": [120, 120], #2.5deg*2.5deg
         "mirror": 2.5,
         "color": "purple",
         "surveys":{"SDSS-I":SDSS_I},
