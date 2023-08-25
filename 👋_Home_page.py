@@ -35,7 +35,7 @@ st.markdown(
     
     - With 🎨 Filters, you will explore the spectral bands of each telescopes' instruments.
 
-    - With 👁️ FOV, you will be able to explore the Filed of View of each telescope.
+    - With 👁️ FOV, you will be able to explore the Field of View of each telescope.
 
     - With 📈characteristics, you will explore the capacity of the missions regarding filters, resolution and depth.
     
